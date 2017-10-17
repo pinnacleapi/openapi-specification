@@ -226,7 +226,30 @@ paths:
       tags:
         - Get Bets
       summary: Get Bets - v2
-      description: Returns bets.
+      description: |
+          Returns bets. 
+          
+          Examples:  
+          
+          
+          Get all settled bets for a period:
+          ```
+          https://api.pinnacle.com/v2/bets?betlist=SETTLED&fromDate=2015-12-28T00:00:00Z&toDate=2015-12-29T00:00:00Z
+          ```
+          
+             
+          Get bets by betIds:
+          
+          ```
+          https://api.pinnacle.com/v2/bets?betIds=775856112,775856113,775856114
+          ```
+          
+          Get bets by uniqueRequestIds:
+          
+          ```
+          https://api.pinnacle.com/v2/bets?uniqueRequestIds=62335222-dae4-479a-8c05-46440ccdd3bb,42335222-dae4-479a-8c05-46440ccdd3bb
+          ```
+          
       operationId: Bets_GetBetsByType
       consumes: []
       produces:
@@ -243,12 +266,19 @@ paths:
             - CANCELLED
         - name: fromDate
           in: query
-          description: Start date of the requested period. Required when betlist parameter is submitted. Difference between fromDate and toDdate can’t be more than 30 days. Expected format is ISO8601 - can be set to just date or date and time.
+          description: |
+            Start date of the requested period. Required when betlist parameter is submitted. Difference between fromDate and toDdate can’t be more than 30 days. Expected format is ISO8601 - can be set to just date or date and time.
+            
+            Note\: Querying settled bets (betlist =CANCELLED|SETTLED ) is by settlement date, time portion is ignored 
           required: false
           type: string
         - name: toDate
           in: query
-          description: 'End date of the requested period. Required when betlist parameter is submitted. Expected format is ISO8601 - can be set to just date or date and time.  toDate value is exclusive, meaning it cannot be equal to fromDate.'
+          description: |
+            End date of the requested period. Required when betlist parameter is submitted. Expected format is ISO8601 - can be set to just date or date and time.  toDate value is exclusive, meaning it cannot be equal to fromDate.
+            
+            
+            Note\: Querying settled bets (betlist =CANCELLED|SETTLED ) is by settlement date, time portion is ignored 
           required: false
           type: string
         - name: betids
