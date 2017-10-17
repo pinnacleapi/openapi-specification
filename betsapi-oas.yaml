@@ -2130,10 +2130,16 @@ definitions:
     type: string
     description: |
       Bet odds format.  
+      
       AMERICAN = American odds format, 
+      
       DECIMAL = Decimal (European) odds format, 
+      
       HONGKONG = Hong Kong odds format, 
-      INDONESIAN = Indonesian odds format, MALAY = Malaysian odds format 
+      
+      INDONESIAN = Indonesian odds format, 
+      
+      MALAY = Malaysian odds format 
     enum:
       - AMERICAN
       - DECIMAL
