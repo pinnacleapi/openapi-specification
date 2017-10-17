@@ -518,6 +518,18 @@ definitions:
     properties:
       code:
         type: string
+        description: |
+          INVALID_REQUEST_DATA  = Invalid request parameters (http status 400)  
+          INVALID_CREDENTIALS = Authorization failed, invalid credentials (http status 401)  
+          INVALID_AUTHORIZATION_HEADER = HTTP Authorization header is missing (http status 401) 
+          ACCOUNT_INACTIVE = Client's account is not active  (http status 403)  
+          NO_API_ACCESS = Account not permitted to access the API  (http status 403) 
+        enum:
+          - INVALID_REQUEST_DATA
+          - INVALID_CREDENTIALS
+          - INVALID_AUTHORIZATION_HEADER
+          - ACCOUNT_INACTIVE
+          - NO_API_ACCESS
       message:
         type: string
   PlaceBetResponseV2:
@@ -848,10 +860,13 @@ definitions:
     properties:
       ref:
         type: string
+        example: f5d9ba85-cc97-47a9-ad92-ea57d0ea2cc0
       code:
         type: string
+        example: UNEXPECTED_ERROR
       message:
         type: string
+        example: Internal error
   PlaceParlayBetRequest:
     type: object
     properties:
