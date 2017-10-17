@@ -378,8 +378,8 @@ definitions:
       fillType:
         type: string
         description: |
-            NORMAL - bet will be placed on specified stake. 
-            FILLANDKILL - If the stake is over the max limit, bet will be placed on max limit, otherwise it will be placed on specified stake. 
+            NORMAL - bet will be placed on specified stake.  
+            FILLANDKILL - If the stake is over the max limit, bet will be placed on max limit, otherwise it will be placed on specified stake.  
             FILLMAXLIMIT - bet will be places on max limit, stake amount will be ignored. Please note that maximum limits can change at any moment, which may result in risking more than anticipated. This option is replacement of isMaxStakeBet from v1/bets/place'
         enum:
           - NORMAL
