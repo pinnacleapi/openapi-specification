@@ -440,33 +440,34 @@ definitions:
         description: |
           If Status is PROCESSED_WITH_ERROR, errorCode will be in the response. 
           
-          ALL_BETTING_CLOSED = Betting is not allowed at this moment. This may happen during system maintenance, 
-          ALL_LIVE_BETTING_CLOSED = Live betting is not allowed at this moment. This may happen during system maintenance,
-          ABOVE_EVENT_MAX = Bet cannot be placed because client exceeded allowed maximum of risk on a line,
-          ABOVE_MAX_BET_AMOUNT = Stake is above allowed maximum amount, 
-          BELOW_MIN_BET_AMOUNT = Stake is below allowed minimum amount, 
-          BLOCKED_BETTING = Customer is an agent, 
-          BLOCKED_CLIENT = Client is no longer active, 
-          INSUFFICIENT_FUNDS = Bet is submitted by a client with insufficient funds, 
-          INVALID_COUNTRY = Client country is not allowed for betting, 
-          INVALID_EVENT = Invalid eventid, 
-          INVALID_ODDS_FORMAT = If a bet was submitted with the odds format that is not allowed for the client, 
-          LINE_CHANGED = Bet is submitted on a line that has changed, 
-          LISTED_PITCHERS_SELECTION_ERROR = If bet was submitted with pitcher1MustStart and/or pitcher2MustStart parameters in Place Bet request with values that are not allowed.,
-          OFFLINE_EVENT = Bet is submitted on a event that is offline or the submitted line is not offered at the moment due to points/handicap change or the submitted bet type is just not offered at the moment., 
-          PAST_CUTOFFTIME = Bet is submitted on a game after the betting cutoff time, 
-          RED_CARDS_CHANGED = Bet is submitted on a live soccer event with changed red card count,
-          SCORE_CHANGED = Bet is submitted on a live soccer event with changed score, 
-          TIME_RESTRICTION = Bet is submitted within too short of a period from the same bet previously placed by a client, 
-          DUPLICATE_UNIQUE_REQUEST_ID = REquest with the same uniqueRequestId was already processed. Please set the new value if you still want the request to be processed, 
-          INCOMPLETE_CUSTOMER_BETTING_PROFILE = System configuration issue, 
-          INVALID_CUSTOMER_PROFILE = System configuration issue, , 
-          LIMITS_CONFIGURATION_ISSUE = System configuration issue, 
-          RESPONSIBLE_BETTING_LOSS_LIMIT_EXCEEDED = Client has reached his total loss limit, 
-          RESPONSIBLE_BETTING_RISK_LIMIT_EXCEEDED = Client has reached his total risk limit,
-          RESUBMIT_REQUEST = Unable to process the request but the request itself is valid. This happens more often on the live betting in situations when there is more than one place bet request at the same on the same line. When this happens, we don't keep the place bet request on the server until we know if we can accept or reject the bet, but instead we return the error. It's very likely that the line will change after that. To reduce a chance of getting RESUBMIT_REQUEST client can try to place a bet as fast as possible, 
-          SYSTEM_ERROR_3 = Unexpected error, 
-          WAGERING_SUSPENDED = The customer wagering is suspended,
+          
+          ALL_BETTING_CLOSED = Betting is not allowed at this moment. This may happen during system maintenance,  
+          ALL_LIVE_BETTING_CLOSED = Live betting is not allowed at this moment. This may happen during system maintenance,  
+          ABOVE_EVENT_MAX = Bet cannot be placed because client exceeded allowed maximum of risk on a line,  
+          ABOVE_MAX_BET_AMOUNT = Stake is above allowed maximum amount,  
+          BELOW_MIN_BET_AMOUNT = Stake is below allowed minimum amount,  
+          BLOCKED_BETTING = Customer is an agent,  
+          BLOCKED_CLIENT = Client is no longer active,  
+          INSUFFICIENT_FUNDS = Bet is submitted by a client with insufficient funds,  
+          INVALID_COUNTRY = Client country is not allowed for betting,  
+          INVALID_EVENT = Invalid eventid,  
+          INVALID_ODDS_FORMAT = If a bet was submitted with the odds format that is not allowed for the client,  
+          LINE_CHANGED = Bet is submitted on a line that has changed,  
+          LISTED_PITCHERS_SELECTION_ERROR = If bet was submitted with pitcher1MustStart and/or pitcher2MustStart parameters in Place Bet request with values that are not allowed,  
+          OFFLINE_EVENT = Bet is submitted on a event that is offline or the submitted line is not offered at the moment due to points/handicap change or the submitted bet type is just not offered at the moment,  
+          PAST_CUTOFFTIME = Bet is submitted on a game after the betting cutoff time,  
+          RED_CARDS_CHANGED = Bet is submitted on a live soccer event with changed red card count,  
+          SCORE_CHANGED = Bet is submitted on a live soccer event with changed score,  
+          TIME_RESTRICTION = Bet is submitted within too short of a period from the same bet previously placed by a client,  
+          DUPLICATE_UNIQUE_REQUEST_ID = REquest with the same uniqueRequestId was already processed. Please set the new value if you still want the request to be processed,  
+          INCOMPLETE_CUSTOMER_BETTING_PROFILE = System configuration issue,  
+          INVALID_CUSTOMER_PROFILE = System configuration issue,   
+          LIMITS_CONFIGURATION_ISSUE = System configuration issue,   
+          RESPONSIBLE_BETTING_LOSS_LIMIT_EXCEEDED = Client has reached his total loss limit,  
+          RESPONSIBLE_BETTING_RISK_LIMIT_EXCEEDED = Client has reached his total risk limit,  
+          RESUBMIT_REQUEST = Unable to process the request but the request itself is valid. This happens more often on the live betting in situations when there is more than one place bet request at the same on the same line. When this happens, we don't keep the place bet request on the server until we know if we can accept or reject the bet, but instead we return the error. It's very likely that the line will change after that. To reduce a chance of getting RESUBMIT_REQUEST client can try to place a bet as fast as possible,  
+          SYSTEM_ERROR_3 = Unexpected error,  
+          WAGERING_SUSPENDED = The customer wagering is suspended
         enum:
           - ALL_BETTING_CLOSED
           - ALL_LIVE_BETTING_CLOSED
@@ -535,33 +536,34 @@ definitions:
         example: 'null'
         description: |
           If Status is PROCESSED_WITH_ERROR, errorCode will be in the response. 
-          ALL_BETTING_CLOSED = Betting is not allowed at this moment. This may happen during system maintenance, 
-          ALL_LIVE_BETTING_CLOSED = Live betting is not allowed at this moment. This may happen during system maintenance, 
-          ABOVE_EVENT_MAX = Bet cannot be placed because client exceeded allowed maximum of risk on a line,
-          ABOVE_MAX_BET_AMOUNT = Stake is above allowed maximum amount, 
-          BELOW_MIN_BET_AMOUNT = Stake is below allowed minimum amount, 
-          BLOCKED_BETTING = Customer is an agent, 
-          BLOCKED_CLIENT = Client is no longer active, 
-          INSUFFICIENT_FUNDS = Bet is submitted by a client with insufficient funds, 
-          INVALID_COUNTRY = Client country is not allowed for betting, 
-          INVALID_EVENT = Invalid eventid, 
-          INVALID_ODDS_FORMAT = If a bet was submitted with the odds format that is not allowed for the client, 
-          LINE_CHANGED = Bet is submitted on a line that has changed, 
-          LISTED_PITCHERS_SELECTION_ERROR = If bet was submitted with pitcher1MustStart and/or pitcher2MustStart parameters in Place Bet request with values that are not allowed.,
-          OFFLINE_EVENT = Bet is submitted on a event that is offline or the submitted line is not offered at the moment due to points/handicap change or the submitted bet type is just not offered at the moment., 
-          PAST_CUTOFFTIME = Bet is submitted on a game after the betting cutoff time, 
-          RED_CARDS_CHANGED = Bet is submitted on a live soccer event with changed red card count,
-          SCORE_CHANGED = Bet is submitted on a live soccer event with changed score, 
-          TIME_RESTRICTION = Bet is submitted within too short of a period from the same bet previously placed by a client, 
-          DUPLICATE_UNIQUE_REQUEST_ID = Request with the same uniqueRequestId was already processed. Please set the new value if you still want the request to be processed, 
-          INCOMPLETE_CUSTOMER_BETTING_PROFILE = System configuration issue, 
-          INVALID_CUSTOMER_PROFILE = System configuration issue, 
-          LIMITS_CONFIGURATION_ISSUE = System configuration issue,
-          RESPONSIBLE_BETTING_LOSS_LIMIT_EXCEEDED = Client has reached his total loss limit,
-          RESPONSIBLE_BETTING_RISK_LIMIT_EXCEEDED = Client has reached his total risk limit,
-          RESUBMIT_REQUEST = Unable to process the request but the request itself is valid. This happens more often on the live betting in situations when there is more than one place bet request at the same on the same line. When this happens, we don't keep the place bet request on the server until we know if we can accept or reject the bet, but instead we return the error. It's very likely that the line will change after that. To reduce a chance of getting RESUBMIT_REQUEST client can try to place a bet as fast as possible,
-          SYSTEM_ERROR_3 = Unexpected error,
-          WAGERING_SUSPENDED = The customer wagering is suspended,
+          
+          ALL_BETTING_CLOSED = Betting is not allowed at this moment. This may happen during system maintenance,  
+          ALL_LIVE_BETTING_CLOSED = Live betting is not allowed at this moment. This may happen during system maintenance,  
+          ABOVE_EVENT_MAX = Bet cannot be placed because client exceeded allowed maximum of risk on a line,  
+          ABOVE_MAX_BET_AMOUNT = Stake is above allowed maximum amount,   
+          BELOW_MIN_BET_AMOUNT = Stake is below allowed minimum amount,  
+          BLOCKED_BETTING = Customer is an agent,  
+          BLOCKED_CLIENT = Client is no longer active,   
+          INSUFFICIENT_FUNDS = Bet is submitted by a client with insufficient funds,  
+          INVALID_COUNTRY = Client country is not allowed for betting,  
+          INVALID_EVENT = Invalid eventid,  
+          INVALID_ODDS_FORMAT = If a bet was submitted with the odds format that is not allowed for the client,  
+          LINE_CHANGED = Bet is submitted on a line that has changed,  
+          LISTED_PITCHERS_SELECTION_ERROR = If bet was submitted with pitcher1MustStart and/or pitcher2MustStart parameters in Place Bet request with values that are not allowed,  
+          OFFLINE_EVENT = Bet is submitted on a event that is offline or the submitted line is not offered at the moment due to points/handicap change or the submitted bet type is just not offered at the moment,  
+          PAST_CUTOFFTIME = Bet is submitted on a game after the betting cutoff time,  
+          RED_CARDS_CHANGED = Bet is submitted on a live soccer event with changed red card count,  
+          SCORE_CHANGED = Bet is submitted on a live soccer event with changed score,  
+          TIME_RESTRICTION = Bet is submitted within too short of a period from the same bet previously placed by a client,  
+          DUPLICATE_UNIQUE_REQUEST_ID = Request with the same uniqueRequestId was already processed. Please set the new value if you still want the request to be processed,  
+          INCOMPLETE_CUSTOMER_BETTING_PROFILE = System configuration issue,  
+          INVALID_CUSTOMER_PROFILE = System configuration issue,  
+          LIMITS_CONFIGURATION_ISSUE = System configuration issue,  
+          RESPONSIBLE_BETTING_LOSS_LIMIT_EXCEEDED = Client has reached his total loss limit,  
+          RESPONSIBLE_BETTING_RISK_LIMIT_EXCEEDED = Client has reached his total risk limit,  
+          RESUBMIT_REQUEST = Unable to process the request but the request itself is valid. This happens more often on the live betting in situations when there is more than one place bet request at the same on the same line. When this happens, we don't keep the place bet request on the server until we know if we can accept or reject the bet, but instead we return the error. It's very likely that the line will change after that. To reduce a chance of getting RESUBMIT_REQUEST client can try to place a bet as fast as possible,  
+          SYSTEM_ERROR_3 = Unexpected error,  
+          WAGERING_SUSPENDED = The customer wagering is suspended,  
           LICENCE_RESTRICTION_LIVE_BETTING_BLOCKED - Live betting blocked due to licence restrictions
         enum:
           - ALL_BETTING_CLOSED
@@ -632,12 +634,13 @@ definitions:
         example: ACCEPTED
         description: |
           Bet Status.  
-          ACCEPTED = Bet was accepted, 
-          CANCELLED = Bet is cancelled as per Pinnacle betting rules, 
-          LOSE = The bet is settled as lose, 
-          PENDING_ACCEPTANCE = This status is reserved only for live bets. If a live bet is placed during danger zone or live delay is applied, it will be in PENDING_ACCEPTANCE , otherwise in ACCEPTED status. From this status bet can go to ACCEPTED or NOT_ACCEPTED status, 
-          REFUNDED = When an event is cancelled or when the bet is settled as push, the bet will have REFUNDED status, 
-          NOT_ACCEPTED = Bet was not accepted. Bet can be in this status only if it was previously in PENDING_ACCEPTANCE status, 
+          
+          ACCEPTED = Bet was accepted,  
+          CANCELLED = Bet is cancelled as per Pinnacle betting rules,  
+          LOSE = The bet is settled as lose,  
+          PENDING_ACCEPTANCE = This status is reserved only for live bets. If a live bet is placed during danger zone or live delay is applied, it will be in PENDING_ACCEPTANCE , otherwise in ACCEPTED status. From this status bet can go to ACCEPTED or NOT_ACCEPTED status,  
+          REFUNDED = When an event is cancelled or when the bet is settled as push, the bet will have REFUNDED status,  
+          NOT_ACCEPTED = Bet was not accepted. Bet can be in this status only if it was previously in PENDING_ACCEPTANCE status,  
           WON = The bet is settled as won 
         enum:
           - ACCEPTED
@@ -963,23 +966,25 @@ definitions:
         example: 'null'
         description: | 
           When Status is PROCESSED_WITH_ERROR, provides a code indicating the specific problem.
-          ABOVE_MAX_BET_AMOUNT = Stake is above allowed maximum amount, 
-          ALL_BETTING_CLOSED = Betting is not allowed at this moment, 
-          BELOW_MIN_BET_AMOUNT = Stake is below allowed minimum amount, 
-          BLOCKED_BETTING = Customer is an agent, 
-          BLOCKED_CLIENT = Client is no longer active, 
-          INSUFFICIENT_FUNDS = Bet is submitted by a client with insufficient funds, 
-          INVALID_COUNTRY = Client country is not allowed for betting, 
-          INVALID_LEGS = One or more legs are invalid, 
-          INVALID_ODDS_FORMAT = If a bet was submitted with the odds format that is not allowed for the client, 
-          INVALID_ROUND_ROBIN_OPTIONS = Round robin options are invalid (i.e. does not match with number of legs), 
-          ROUND_ROBIN_DISALLOWED = Round robin is disallowed for one of the leagues, 
-          TOO_MANY_LEGS = Maximum of 10 legs can be specified, 
-          TOO_FEW_LEGS = At least 2 legs are required for Parlay,
-          RESPONSIBLE_BETTING_LOSS_LIMIT_EXCEEDED = Client has reached his total loss limit, 
-          RESPONSIBLE_BETTING_RISK_LIMIT_EXCEEDED = Client has reached his total risk limit,
-          INVALID_REQUEST = Request has invalid parameters , 
-          DUPLICATE_UNIQUE_REQUEST_ID = Request with the same uniqueRequestId was already processed. Please set the new value if you still want the request to be processed, 
+          
+          
+          ABOVE_MAX_BET_AMOUNT = Stake is above allowed maximum amount,  
+          ALL_BETTING_CLOSED = Betting is not allowed at this moment,  
+          BELOW_MIN_BET_AMOUNT = Stake is below allowed minimum amount,  
+          BLOCKED_BETTING = Customer is an agent,  
+          BLOCKED_CLIENT = Client is no longer active,  
+          INSUFFICIENT_FUNDS = Bet is submitted by a client with insufficient funds,  
+          INVALID_COUNTRY = Client country is not allowed for betting,  
+          INVALID_LEGS = One or more legs are invalid,  
+          INVALID_ODDS_FORMAT = If a bet was submitted with the odds format that is not allowed for the client,  
+          INVALID_ROUND_ROBIN_OPTIONS = Round robin options are invalid (i.e. does not match with number of legs),  
+          ROUND_ROBIN_DISALLOWED = Round robin is disallowed for one of the leagues,  
+          TOO_MANY_LEGS = Maximum of 10 legs can be specified,  
+          TOO_FEW_LEGS = At least 2 legs are required for Parlay,  
+          RESPONSIBLE_BETTING_LOSS_LIMIT_EXCEEDED = Client has reached his total loss limit,  
+          RESPONSIBLE_BETTING_RISK_LIMIT_EXCEEDED = Client has reached his total risk limit,  
+          INVALID_REQUEST = Request has invalid parameters,  
+          DUPLICATE_UNIQUE_REQUEST_ID = Request with the same uniqueRequestId was already processed. Please set the new value if you still want the request to be processed,  
           SYSTEM_ERROR_3 = Unexpected error 
         enum:
           - ABOVE_MAX_BET_AMOUNT
@@ -1076,24 +1081,25 @@ definitions:
         example: 'null'
         description: |
             When Status is PROCESSED_WITH_ERROR, provides a code indicating the specific problem.
-            CANNOT_PARLAY_LIVE_GAME = The wager is placed on Live game, 
-            CORRELATED = The leg is correlated with another one,
-            EVENT_NO_LONGER_AVAILABLE_FOR_BETTING = The event is no longer offered for Parlays,
-            EVENT_NOT_OFFERED_FOR_PARLAY = The event is not offered for Parlays, 
-            INVALID_EVENT = Live betting is not allowed at this moment,
-            INVALID_LEG_BET_TYPE = Leg bet type is not accepted for Parlays, Accepted values are SPREAD, MONEYLINE, TOTAL_POINTS, 
-            INVALID_PARLAY_BET = The leg did not validated due to error on Parlay Bet. Check the error PlaceParlayBet response for error details, 
-            LINE_CHANGED = Bet is submitted on a line that has changed, 
-            LINE_DOES_NOT_BELONG_TO_EVENT = LineId does not match the EventId specified in the request,
-            LISTED_PITCHERS_SELECTION_ERROR = If bet was submitted with pitcher1MustStart and/or pitcher2MustStart parameters with values that are not allowed,
-            ODDS_NO_LONGER_OFFERED_FOR_PARLAY_1 = Due to line change odds are not offered for Parlay anymore,
-            ODDS_NO_LONGER_OFFERED_FOR_PARLAY_2 = Due to line change odds are not offered for Parlay anymore,
-            ODDS_NO_LONGER_OFFERED_FOR_PARLAY_3 = Due to line change odds are not offered for Parlay anymore,
-            OFFLINE_EVENT = Bet is submitted on an event that is offline or with incorrect lineId,
-            PAST_CUTOFFTIME = Bet is submitted on a game after the betting cutoff time, 
-            SYSTEM_ERROR_1 = Unexpected error, 
-            SYSTEM_ERROR_2 = Unexpected error, 
-            SYSTEM_ERROR_3 = Unexpected error, 
+            
+            CANNOT_PARLAY_LIVE_GAME = The wager is placed on Live game,  
+            CORRELATED = The leg is correlated with another one,  
+            EVENT_NO_LONGER_AVAILABLE_FOR_BETTING = The event is no longer offered,  
+            EVENT_NOT_OFFERED_FOR_PARLAY = The event is not offered for parlaying,  
+            INVALID_EVENT = Live betting is not allowed at this moment,  
+            INVALID_LEG_BET_TYPE = Leg bet type is not accepted for parlaying. Accepted values are SPREAD, MONEYLINE, TOTAL_POINTS,  
+            INVALID_PARLAY_BET = The leg did not validated due to error on Parlay Bet. Check the error PlaceParlayBet response for error details,  
+            LINE_CHANGED = Bet is submitted on a line that has changed,  
+            LINE_DOES_NOT_BELONG_TO_EVENT = LineId does not match the EventId specified in the request,  
+            LISTED_PITCHERS_SELECTION_ERROR = If bet was submitted with pitcher1MustStart and/or pitcher2MustStart parameters with values that are not allowed,  
+            ODDS_NO_LONGER_OFFERED_FOR_PARLAY_1 = Due to line change odds are not offered for parlaying,   
+            ODDS_NO_LONGER_OFFERED_FOR_PARLAY_2 = Due to line change odds are not offered for parlaying,   
+            ODDS_NO_LONGER_OFFERED_FOR_PARLAY_3 = Due to line change odds are not offered for parlaying,   
+            OFFLINE_EVENT = Bet is submitted on an event that is offline or with incorrect lineId,  
+            PAST_CUTOFFTIME = Bet is submitted on a game after the betting cutoff time,   
+            SYSTEM_ERROR_1 = Unexpected error,  
+            SYSTEM_ERROR_2 = Unexpected error,  
+            SYSTEM_ERROR_3 = Unexpected error,  
             LINE_IS_NOT_AVAILABLE = Line is not available for the specified Parlay Leg.
             
         enum:
@@ -1183,12 +1189,13 @@ definitions:
         example: ACCEPTED
         description: |
           Bet Status. 
-          ACCEPTED = Bet was accepted, 
-          CANCELLED = Bet is cancelled as per Pinnacle betting rules, 
-          LOSE = The bet is settled as lose, 
-          PENDING_ACCEPTANCE = This status is reserved only for live bets. If a live bet is placed during danger zone or live delay is applied, it will be in PENDING_ACCEPTANCE , otherwise in ACCEPTED status. From this status bet can go to ACCEPTED or REJECTED status, 
-          REFUNDED = When an event is cancelled or when the bet is settled as push, the bet will have REFUNDED status, 
-          NOT_ACCEPTED = Bet was not accepted. Bet can be in this status only if it was previously in PENDING_ACCEPTANCE status, 
+          
+          ACCEPTED = Bet was accepted,  
+          CANCELLED = Bet is cancelled as per Pinnacle betting rules,  
+          LOSE = The bet is settled as lose,  
+          PENDING_ACCEPTANCE = This status is reserved only for live bets. If a live bet is placed during danger zone or live delay is applied, it will be in PENDING_ACCEPTANCE , otherwise in ACCEPTED status. From this status bet can go to ACCEPTED or REJECTED status,  
+          REFUNDED = When an event is cancelled or when the bet is settled as push, the bet will have REFUNDED status,  
+          NOT_ACCEPTED = Bet was not accepted. Bet can be in this status only if it was previously in PENDING_ACCEPTANCE status,  
           WON = The bet is settled as won
         enum:
           - ACCEPTED
@@ -1267,10 +1274,10 @@ definitions:
         type: string
         description: | 
           Parlay Leg status.
-          CANCELLED = The leg is canceled- the stake on this leg will be transferred to the next one. In this case the leg will be ignored when calculating the winLoss, 
-          LOSE = The leg is a loss or a push-lose. When Push-lose happens, the half of the stake on the leg will be pushed to the next leg, and the other half will be a lose. This can happen only when the leg is placed on a quarter points handicap, 
-          PUSH = The leg is a push - the stake on this leg will be transferred to the next one. In this case the leg will be ignored when calculating the winLoss,
-          REFUNDED = The leg is refunded - the stake on this leg will be transferred to the next one. In this case the leg will be ignored when calculating the winLoss, 
+          CANCELLED = The leg is canceled- the stake on this leg will be transferred to the next one. In this case the leg will be ignored when calculating the winLoss,  
+          LOSE = The leg is a loss or a push-lose. When Push-lose happens, the half of the stake on the leg will be pushed to the next leg, and the other half will be a lose. This can happen only when the leg is placed on a quarter points handicap,  
+          PUSH = The leg is a push - the stake on this leg will be transferred to the next one. In this case the leg will be ignored when calculating the winLoss,  
+          REFUNDED = The leg is refunded - the stake on this leg will be transferred to the next one. In this case the leg will be ignored when calculating the winLoss,  
           WON = The leg is a won or a push-won. When Push-won happens, the half of the stake on the leg will be pushed to the next leg, and the other half is won. This can happen only when the leg is placed on a quarter points handicap 
         enum:
           - CANCELLED
@@ -1435,31 +1442,32 @@ definitions:
         type: string
         description: |
           When Status is PROCESSED_WITH_ERROR, provides a code indicating the specific problem.
-          ABOVE_MAX_BET_AMOUNT = Bet is above the maximum allowed,
-          ALL_BETTING_CLOSED = The wagering is disabled in the system (not related to a customer),
-          BELOW_MIN_BET_AMOUNT = Bet is below the minimum allowed, 
-          BLOCKED_BETTING = Customer is an agent, 
-          BLOCKED_CLIENT = Customer is inactive in the system, 
-          DOUBLE_HIT = The website submitted the same bet more than once, 
-          DUPLICATE_CLIENT_REFERENCE_ID = The teaser unique id and/or one of the leg unique id are the same,
-          INCOMPLETE_CUSTOMER_BETTING_PROFILE = The customer does not exist, 
-          INSUFFICIENT_FUNDS = The risk amount is above the customer’s available balance, 
-          INVALID_COUNTRY = Current location is proscribed, 
-          INVALID_CUSTOMER_PROFILE = Either the customer does not exist OR the customer business rules are not verified, 
-          INVALID_LEGS = One or more legs are not verified, 
-          INVALID_REQUEST = Teaser request is not valid, 
-          ODDS_FORMAT_MISMATCH = Agent customer’s odds format differs from wager request odds format,
-          RESUBMIT_REQUEST = The ticket hast to be resubmitted, 
-          TEASER_DOES_NOT_EXIST = Teaser does not exist in the system, 
-          SAME_EVENT_ONLY_REQUIRED = Legs required to be for the same game only. Specified in the Teaser Specifications, 
-          SYSTEM_ERROR_1 = System error, 
-          SYSTEM_ERROR_2 = System error, 
-          SYSTEM_ERROR_3 = System error, 
-          TOO_FEW_LEGS = Legs count is below Min Picks specified in the Teaser Specifications, 
-          TOO_MANY_LEGS = Legs count is above Max Picks specified in the Teaser Specifications,
-          WAGERING_SUSPENDED = The customer wagering is suspended, 
-          DUPLICATE_UNIQUE_REQUEST_ID = Request with the same uniqueRequestId was already processed. Please set the new value if you still want the request to be processed, 
-          RESPONSIBLE_BETTING_LOSS_LIMIT_EXCEEDED = Client has reached his total loss limit, 
+          
+          ABOVE_MAX_BET_AMOUNT = Bet is above the maximum allowed,  
+          ALL_BETTING_CLOSED = The wagering is disabled in the system (not related to a customer),  
+          BELOW_MIN_BET_AMOUNT = Bet is below the minimum allowed,  
+          BLOCKED_BETTING = Customer is an agent,  
+          BLOCKED_CLIENT = Customer is inactive in the system,  
+          DOUBLE_HIT = The website submitted the same bet more than once,  
+          DUPLICATE_CLIENT_REFERENCE_ID = The teaser unique id and/or one of the leg unique id are the same,  
+          INCOMPLETE_CUSTOMER_BETTING_PROFILE = The customer does not exist,  
+          INSUFFICIENT_FUNDS = The risk amount is above the customer’s available balance,  
+          INVALID_COUNTRY = Current location is proscribed,  
+          INVALID_CUSTOMER_PROFILE = Either the customer does not exist OR the customer business rules are not verified,  
+          INVALID_LEGS = One or more legs are not verified,  
+          INVALID_REQUEST = Teaser request is not valid,  
+          ODDS_FORMAT_MISMATCH = Agent customer’s odds format differs from wager request odds format,  
+          RESUBMIT_REQUEST = The ticket hast to be resubmitted,  
+          TEASER_DOES_NOT_EXIST = Teaser does not exist in the system,  
+          SAME_EVENT_ONLY_REQUIRED = Legs required to be for the same game only. Specified in the Teaser Specifications,  
+          SYSTEM_ERROR_1 = System error,  
+          SYSTEM_ERROR_2 = System error,  
+          SYSTEM_ERROR_3 = System error,  
+          TOO_FEW_LEGS = Legs count is below Min Picks specified in the Teaser Specifications,  
+          TOO_MANY_LEGS = Legs count is above Max Picks specified in the Teaser Specifications,  
+          WAGERING_SUSPENDED = The customer wagering is suspended,  
+          DUPLICATE_UNIQUE_REQUEST_ID = Request with the same uniqueRequestId was already processed. Please set the new value if you still want the request to be processed,  
+          RESPONSIBLE_BETTING_LOSS_LIMIT_EXCEEDED = Client has reached his total loss limit,  
           RESPONSIBLE_BETTING_RISK_LIMIT_EXCEEDED = Client has reached his total risk limit
 
         enum:
@@ -1533,19 +1541,20 @@ definitions:
         type: string
         description: |
           When Status is PROCESSED_WITH_ERROR, provides a code indicating the specific problem.
-          CANNOT_TEASER_LIVE_GAME = Teaser is not allowed on a live game, 
-          CHECK_TEASER_ERROR = The teaser is invalid, check the teaser error for more details, 
-          INVALID_EVENT = The game is not found in the system, 
-          INVALID_LEG_BET = The wager is not verified, 
-          INVALID_LEG_BET_TYPE = Wager type is not “teasable”, can be either Spread or Total, 
-          LINE_CHANGED = Wager is placed on a line that has changed, 
-          LINE_DOES_NOT_BELONG_TO_EVENT = There was no game found for the wager, 
-          OFFLINE_EVENT = Either the game is offline OR there was no game found for the wager,
-          PAST_CUTOFFTIME = Wager is placed on a game after the cutoff time, 
-          POINTS_ARE_NOT_ADJUSTED = The teaser points were not adjusted, 
-          SYSTEM_ERROR_1 = System error, 
-          SYSTEM_ERROR_2 = System error, 
-          WAGER_DATA_MISSING = Wager is denied due to insufficient information available for validation,
+          
+          CANNOT_TEASER_LIVE_GAME = Teaser is not allowed on a live game,   
+          CHECK_TEASER_ERROR = The teaser is invalid, check the teaser error for more details,  
+          INVALID_EVENT = The game is not found in the system,  
+          INVALID_LEG_BET = The wager is not verified,  
+          INVALID_LEG_BET_TYPE = Wager type is not “teasable”, can be either Spread or Total,  
+          LINE_CHANGED = Wager is placed on a line that has changed,  
+          LINE_DOES_NOT_BELONG_TO_EVENT = There was no game found for the wager,  
+          OFFLINE_EVENT = Either the game is offline OR there was no game found for the wager,  
+          PAST_CUTOFFTIME = Wager is placed on a game after the cutoff time,  
+          POINTS_ARE_NOT_ADJUSTED = The teaser points were not adjusted,  
+          SYSTEM_ERROR_1 = System error,  
+          SYSTEM_ERROR_2 = System error,  
+          WAGER_DATA_MISSING = Wager is denied due to insufficient information available for validation,  
           LINE_IS_NOT_AVAILABLE = Line is not available for the specified Teaser Leg.
         enum:
           - CANNOT_TEASER_LIVE_GAME
@@ -1651,26 +1660,27 @@ definitions:
         example: 'null'
         description: |
           When Status is PROCESSED_WITH_ERROR, provides a code indicating the specific problem.
-          ALL_BETTING_CLOSED = Betting is not allowed at this moment. This may happen during system maintenance. 
-           ABOVE_MAX_BET_AMOUNT = Stake is above allowed maximum amount. 
-           BELOW_MIN_BET_AMOUNT = Stake is below allowed minimum amount, 
-           BLOCKED_BETTING = Customer is an agent, 
-           BLOCKED_CLIENT = Client is no longer active, 
-           CONTEST_NOT_FOUND = Incorrect contest id provided or contest is no longer available,
-           DUPLICATE_UNIQUE_REQUEST_ID = UniqueRequestId must be inque for each bet,
-           INCOMPLETE_CUSTOMER_BETTING_PROFILE = Customer profile could not be loaded, 
-           INSUFFICIENT_FUNDS = Bet is submitted by a client with insufficient funds, 
-           INVALID_COUNTRY = Client country is not allowed for betting, 
-           INVALID_REQUEST = Special bet request is not valid, 
-           LINE_CHANGED = Bet is submitted on a line that has changed, 
-           PAST_CUTOFFTIME = Bet is submitted on a game after the betting cutoff time,
-           RESPONSIBLE_BETTING_LOSS_LIMIT_EXCEEDED = Self-imposed loss limit exceeded,
-           RESPONSIBLE_BETTING_RISK_LIMIT_EXCEEDED = Self-imposed risk limit exceeded, 
-           RESUBMIT_REQUEST = The ticket hast to be resubmitted, 
-           SYSTEM_ERROR_1 = Unexpected error, 
-           SYSTEM_ERROR_2 = Unexpected error, 
-           UNIQUE_REQUEST_ID_REQUIRED = UniqueRequestId is missing, 
-           WAGERING_SUSPENDED = Betting is suspened for client, 
+          
+          ALL_BETTING_CLOSED = Betting is not allowed at this moment. This may happen during system maintenance.  
+           ABOVE_MAX_BET_AMOUNT = Stake is above allowed maximum amount,  
+           BELOW_MIN_BET_AMOUNT = Stake is below allowed minimum amount,  
+           BLOCKED_BETTING = Customer is an agent,  
+           BLOCKED_CLIENT = Client is no longer active,  
+           CONTEST_NOT_FOUND = Incorrect contest id provided or contest is no longer available,  
+           DUPLICATE_UNIQUE_REQUEST_ID = UniqueRequestId must be inque for each bet,  
+           INCOMPLETE_CUSTOMER_BETTING_PROFILE = Customer profile could not be loaded,   
+           INSUFFICIENT_FUNDS = Bet is submitted by a client with insufficient funds,  
+           INVALID_COUNTRY = Client country is not allowed for betting,  
+           INVALID_REQUEST = Special bet request is not valid,  
+           LINE_CHANGED = Bet is submitted on a line that has changed,  
+           PAST_CUTOFFTIME = Bet is submitted on a game after the betting cutoff time,  
+           RESPONSIBLE_BETTING_LOSS_LIMIT_EXCEEDED = Self-imposed loss limit exceeded,  
+           RESPONSIBLE_BETTING_RISK_LIMIT_EXCEEDED = Self-imposed risk limit exceeded,  
+           RESUBMIT_REQUEST = The ticket hast to be resubmitted,  
+           SYSTEM_ERROR_1 = Unexpected error,  
+           SYSTEM_ERROR_2 = Unexpected error,  
+           UNIQUE_REQUEST_ID_REQUIRED = UniqueRequestId is missing,  
+           WAGERING_SUSPENDED = Betting is suspened for client,  
            INVALID_CUSTOMER_PROFILE
         enum:
           - ALL_BETTING_CLOSED
@@ -1928,10 +1938,10 @@ definitions:
         description: | 
             Bet Status. 
             
-            ACCEPTED = Bet was accepted, 
-            CANCELLED = Bet is cancelled as per Pinnacle betting rules, 
-            LOSE = The bet is settled as lose, 
-            REFUNDED = When an event is cancelled or when the bet is settled as push, the bet will have REFUNDED status, 
+            ACCEPTED = Bet was accepted,  
+            CANCELLED = Bet is cancelled as per Pinnacle betting rules,  
+            LOSE = The bet is settled as lose,  
+            REFUNDED = When an event is cancelled or when the bet is settled as push, the bet will have REFUNDED status,  
             WON = The bet is settled as won 
         enum:
           - ACCEPTED
@@ -2020,10 +2030,10 @@ definitions:
         description: |
           Bet Status. 
           
-          ACCEPTED = Bet was accepted, 
-          CANCELLED = Bet is cancelled as per Pinnacle betting rules, 
-          LOSE = The bet is settled as lose, 
-          REFUNDED = When an event is cancelled or when the bet is settled as push, the bet will have REFUNDED status, 
+          ACCEPTED = Bet was accepted,  
+          CANCELLED = Bet is cancelled as per Pinnacle betting rules,  
+          LOSE = The bet is settled as lose,  
+          REFUNDED = When an event is cancelled or when the bet is settled as push, the bet will have REFUNDED status,  
           WON = The bet is settled as won 
         enum:
           - ACCEPTED
@@ -2080,11 +2090,11 @@ definitions:
       legBetStatus:
         type: string
         description: |
-          CANCELLED = The leg is canceled- the stake on this leg will be transferred to the next one. In this case the leg will be ignored when calculating the winLoss, 
-          LOSE = The leg is a loss or a push-lose. When Push-lose happens, the half of the stake on the leg will be pushed to the next leg, and the other half will be a lose. This can happen only when the leg is placed on a quarter points handicap, 
-          PUSH = The leg is a push - the stake on this leg will be transferred to the next one. In this case the leg will be ignored when calculating the winLoss, 
-          REFUNDED = The leg is refunded - the stake on this leg will be transferred to the next one. In this case the leg will be ignored when calculating the winLoss, 
-          WON = The leg is a won or a push-won. When Push-won happens, the half of the stake on the leg will be pushed to the next leg, and the other half is won. This can happen only when the leg is placed on a quarter points handicap 
+          CANCELLED = The leg is canceled- the stake on this leg will be transferred to the next one. In this case the leg will be ignored when calculating the winLoss,  
+          LOSE = The leg is a loss or a push-lose. When Push-lose happens, the half of the stake on the leg will be pushed to the next leg, and the other half will be a lose. This can happen only when the leg is placed on a quarter points handicap,  
+          PUSH = The leg is a push - the stake on this leg will be transferred to the next one. In this case the leg will be ignored when calculating the winLoss,  
+          REFUNDED = The leg is refunded - the stake on this leg will be transferred to the next one. In this case the leg will be ignored when calculating the winLoss,  
+          WON = The leg is a won or a push-won. When Push-won happens, the half of the stake on the leg will be pushed to the next leg, and the other half is won. This can happen only when the leg is placed on a quarter points handicap  
         enum:
           - CANCELLED
           - LOSE
