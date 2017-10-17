@@ -1274,12 +1274,12 @@ definitions:
         description: ''
         items:
           $ref: '#/definitions/ParlayLeg'
-      odds:
+      price:
         type: number
         format: double
         example: 682
         description: ''
-      finalOdds:
+      finalPrice:
         type: number
         format: double
         example: 0
@@ -2221,7 +2221,7 @@ definitions:
       status:
         type: string
         description: |
-          Betting Statuses.
+          Betting status.
         enum:
           - ALL_BETTING_ENABLED
           - ALL_LIVE_BETTING_CLOSED
