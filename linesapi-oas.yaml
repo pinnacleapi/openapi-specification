@@ -1,7 +1,7 @@
 swagger: '2.0'
 info:
   version: 1.0.0
-  title: Pinnacle - Lines API Specification
+  title: Pinnacle - Lines API Reference
   description: |
     All about odds and fixtures
   
