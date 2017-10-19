@@ -1,7 +1,7 @@
 swagger: '2.0'
 info:
   version: 1.0.0
-  title: Pinnacle - Bets API Specification
+  title: Pinnacle - Bets API Reference
   description:  |
     All about bets, place bets, get your bet history or current bet status.
   
