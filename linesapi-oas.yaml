@@ -743,19 +743,6 @@ paths:
           required: false
           type: integer
           format: int64
-        - name: accountId
-          in: query
-          required: false
-          type: string
-        - name: commissionGroup
-          in: query
-          required: false
-          type: string
-          enum:
-            - A
-            - B
-            - C
-            - D
       responses:
         '200':
           description: OK
@@ -1133,19 +1120,6 @@ paths:
           required: true
           type: integer
           format: int64
-        - name: accountId
-          in: query
-          required: false
-          type: string
-        - name: commissionGroup
-          in: query
-          required: false
-          type: string
-          enum:
-            - A
-            - B
-            - C
-            - D
       responses:
         '200':
           description: OK
