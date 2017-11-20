@@ -398,7 +398,7 @@ definitions:
         type: integer
         format: int64
         example: null
-        default: null
+        x-nullable: true
         description: Alternate line identification.
       pitcher1MustStart:
         type: boolean
@@ -450,7 +450,7 @@ definitions:
       side:
         type: string
         example: null
-        default: null
+        x-nullable: true
         description: 'Side type.'
         enum:
           - OVER
@@ -578,7 +578,7 @@ definitions:
       errorCode:
         type: string
         example: null
-        default: null
+        x-nullable: true
         description: |
           If Status is PROCESSED_WITH_ERROR, errorCode will be in the response. 
           
@@ -722,7 +722,7 @@ definitions:
         type: number
         format: double
         example: null
-        default: null
+        x-nullable: true
         description: Win-Loss for settled bets.
       oddsFormat:
         $ref: '#/definitions/OddsFormat'
@@ -730,7 +730,7 @@ definitions:
         type: number
         format: double
         example: null
-        default: null
+        x-nullable: true
         description: Client’s commission on the bet.
       cancellationReason:
         $ref: '#/definitions/CancellationReason'
@@ -758,7 +758,7 @@ definitions:
         type: number
         format: double
         example: null
-        default: null
+        x-nullable: true
         description: ''
       price:
         type: number
@@ -772,7 +772,7 @@ definitions:
       side:
         type: string
         example: null
-        default: null
+        x-nullable: true
         description: 'Side type.'
         enum:
           - OVER
@@ -780,12 +780,12 @@ definitions:
       pitcher1:
         type: string
         example: null
-        default: null
+        x-nullable: true
         description: ''
       pitcher2:
         type: string
         example: null
-        default: null
+        x-nullable: true
         description: ''
       pitcher1MustStart:
         type: boolean
@@ -812,37 +812,37 @@ definitions:
         type: number
         format: double
         example: null
-        default: null
+        x-nullable: true
         description: 'Team 1 score that the bet was placed on, only for live bets.'
       team2Score:
         type: number
         format: double
         example: null
-        default: null
+        x-nullable: true
         description: 'Team 2 score that the bet was placed, only for live bets.'
       ftTeam1Score:
         type: number
         format: double
         example: null
-        default: null
+        x-nullable: true
         description: 'Full time team 1 score, only for settled bets.'
       ftTeam2Score:
         type: number
         format: double
         example: null
-        default: null
+        x-nullable: true
         description: 'Full time team 2 score, only for settled bets.'
       pTeam1Score:
         type: number
         format: double
         example: null
-        default: null
+        x-nullable: true
         description: '.End of period team 1 score, only for settled bets. If the bet was placed on Game period (periodNumber =0) , this will be null . '
       pTeam2Score:
         type: number
         format: double
         example: null
-        default: null
+        x-nullable: true
         description: 'End of period team 2 score, only for settled bets. If the bet was placed on Game period (periodNumber =0) , this will be null'
       isLive:
         type: boolean
@@ -967,7 +967,7 @@ definitions:
         type: integer
         format: int64
         example: null
-        default: null
+        x-nullable: true
         description: Alternate line identification.
       pitcher1MustStart:
         type: boolean
@@ -1007,7 +1007,7 @@ definitions:
       side:
         type: string
         example: null
-        default: null
+        x-nullable: true
         description: 'Chosen side type. This is needed only for TOTAL_POINTS bet type.'
         enum:
           - OVER
@@ -1026,7 +1026,7 @@ definitions:
       errorCode:
         type: string
         example: null
-        default: null
+        x-nullable: true
         description: | 
           When Status is PROCESSED_WITH_ERROR, provides a code indicating the specific problem.
           
@@ -1142,7 +1142,7 @@ definitions:
       errorCode:
         type: string
         example: null
-        default: null
+        x-nullable: true
         description: |
             When Status is PROCESSED_WITH_ERROR, provides a code indicating the specific problem.
             
@@ -1200,7 +1200,7 @@ definitions:
         type: integer
         format: int64
         example: null
-        default: null
+        x-nullable: true
         description: 'If bet was accpepted on alternate line, the altLineId will be returned.'
       price:
         type: number
@@ -1288,7 +1288,7 @@ definitions:
         type: number
         format: double
         example: null
-        default: null
+        x-nullable: true
         description: Win-Loss for settled bets.
       oddsFormat:
         $ref: '#/definitions/OddsFormat'
@@ -1296,7 +1296,7 @@ definitions:
         type: number
         format: double
         example: null
-        default: null
+        x-nullable: true
         description: Client’s commission on the bet.
       cancellationReason:
         $ref: '#/definitions/CancellationReason'
@@ -1372,7 +1372,7 @@ definitions:
         type: number
         format: double
         example: null
-        default: null
+        x-nullable: true
         description: ''
       price:
         type: number
@@ -1386,7 +1386,7 @@ definitions:
       side:
         type: string
         example: null
-        default: null
+        x-nullable: true
         description: 'Side type.'
         enum:
           - OVER
@@ -1394,12 +1394,12 @@ definitions:
       pitcher1:
         type: string
         example: null
-        default: null
+        x-nullable: true
         description: ''
       pitcher2:
         type: string
         example: null
-        default: null
+        x-nullable: true
         description: ''
       pitcher1MustStart:
         type: boolean
@@ -1424,25 +1424,25 @@ definitions:
         type: number
         format: double
         example: null
-        default: null
+        x-nullable: true
         description: Full time team 1 score
       ftTeam2Score:
         type: number
         format: double
         example: null
-        default: null
+        x-nullable: true
         description: Full time team 2 score
       pTeam1Score:
         type: number
         format: double
         example: null
-        default: null
+        x-nullable: true
         description: 'End of period team 1 score. If the bet was placed on Game period (periodNumber =0) , this will be null'
       pTeam2Score:
         type: number
         format: double
         example: null
-        default: null
+        x-nullable: true
         description: 'End of period team 2 score. If the bet was placed on Game period (periodNumber =0) , this will be null'
       cancellationReason:
         $ref: '#/definitions/CancellationReason'
@@ -1733,7 +1733,7 @@ definitions:
       errorCode:
         type: string
         example: null
-        default: null
+        x-nullable: true
         description: |
           When Status is PROCESSED_WITH_ERROR, provides a code indicating the specific problem.
           
@@ -1869,7 +1869,7 @@ definitions:
         type: number
         format: double
         example: null
-        default: null
+        x-nullable: true
         description: Win-Loss for settled bets.
       oddsFormat:
         $ref: '#/definitions/OddsFormat'
@@ -1877,7 +1877,7 @@ definitions:
         type: number
         format: double
         example: null
-        default: null
+        x-nullable: true
         description: Client’s commission on the bet.
       cancellationReason:
         $ref: '#/definitions/CancellationReason'
@@ -1932,23 +1932,23 @@ definitions:
         type: integer
         format: int64
         example: null
-        default: null
+        x-nullable: true
         description: Populated if bet was placed on a special linked to the event.
       periodNumber:
         type: integer
         format: int32
         example: null
-        default: null
+        x-nullable: true
         description: Populated if bet was placed on a special linked to the event.
       team1:
         type: string
         example: null
-        default: null
+        x-nullable: true
         description: Populated if bet was placed on a special linked to the event.
       team2:
         type: string
         example: null
-        default: null
+        x-nullable: true
         description: Populated if bet was placed on a special linked to the event.
     description: ''
   GetBetsByTypeResponse:
@@ -2154,7 +2154,7 @@ definitions:
         type: integer
         format: int64
         example: null
-        default: null
+        x-nullable: true
         description: Referenced original bet id.
     description: ''
   TeaserLeg:
