@@ -397,7 +397,7 @@ definitions:
       altLineId:
         type: integer
         format: int64
-        example: 'null'
+        example: null
         description: Alternate line identification.
       pitcher1MustStart:
         type: boolean
@@ -448,7 +448,7 @@ definitions:
           - DRAW
       side:
         type: string
-        example: 'null'
+        example: null
         description: 'Side type.'
         enum:
           - OVER
@@ -575,7 +575,7 @@ definitions:
           - PROCESSED_WITH_ERROR
       errorCode:
         type: string
-        example: 'null'
+        example: null
         description: |
           If Status is PROCESSED_WITH_ERROR, errorCode will be in the response. 
           
@@ -718,14 +718,14 @@ definitions:
       winLoss:
         type: number
         format: double
-        example: 'null'
+        example: null
         description: Win-Loss for settled bets.
       oddsFormat:
         $ref: '#/definitions/OddsFormat'
       customerCommission:
         type: number
         format: double
-        example: 'null'
+        example: null
         description: Client’s commission on the bet.
       cancellationReason:
         $ref: '#/definitions/CancellationReason'
@@ -752,7 +752,7 @@ definitions:
       handicap:
         type: number
         format: double
-        example: 'null'
+        example: null
         description: ''
       price:
         type: number
@@ -765,18 +765,18 @@ definitions:
         description: ''
       side:
         type: string
-        example: 'null'
+        example: null
         description: 'Side type.'
         enum:
           - OVER
           - UNDER
       pitcher1:
         type: string
-        example: 'null'
+        example: null
         description: ''
       pitcher2:
         type: string
-        example: 'null'
+        example: null
         description: ''
       pitcher1MustStart:
         type: boolean
@@ -802,32 +802,32 @@ definitions:
       team1Score:
         type: number
         format: double
-        example: 'null'
+        example: null
         description: 'Team 1 score that the bet was placed on, only for live bets.'
       team2Score:
         type: number
         format: double
-        example: 'null'
+        example: null
         description: 'Team 2 score that the bet was placed, only for live bets.'
       ftTeam1Score:
         type: number
         format: double
-        example: 'null'
+        example: null
         description: 'Full time team 1 score, only for settled bets.'
       ftTeam2Score:
         type: number
         format: double
-        example: 'null'
+        example: null
         description: 'Full time team 2 score, only for settled bets.'
       pTeam1Score:
         type: number
         format: double
-        example: 'null'
+        example: null
         description: '.End of period team 1 score, only for settled bets. If the bet was placed on Game period (periodNumber =0) , this will be null . '
       pTeam2Score:
         type: number
         format: double
-        example: 'null'
+        example: null
         description: 'End of period team 2 score, only for settled bets. If the bet was placed on Game period (periodNumber =0) , this will be null'
       isLive:
         type: boolean
@@ -951,7 +951,7 @@ definitions:
       altLineId:
         type: integer
         format: int64
-        example: 'null'
+        example: null
         description: Alternate line identification.
       pitcher1MustStart:
         type: boolean
@@ -990,7 +990,7 @@ definitions:
         description: Chosen team type. This is needed only for SPREAD and MONEYLINE bet types.
       side:
         type: string
-        example: 'null'
+        example: null
         description: 'Chosen side type. This is needed only for TOTAL_POINTS bet type.'
         enum:
           - OVER
@@ -1008,7 +1008,7 @@ definitions:
           - PROCESSED_WITH_ERROR
       errorCode:
         type: string
-        example: 'null'
+        example: null
         description: | 
           When Status is PROCESSED_WITH_ERROR, provides a code indicating the specific problem.
           
@@ -1123,7 +1123,7 @@ definitions:
           - VALID
       errorCode:
         type: string
-        example: 'null'
+        example: null
         description: |
             When Status is PROCESSED_WITH_ERROR, provides a code indicating the specific problem.
             
@@ -1180,7 +1180,7 @@ definitions:
       altLineId:
         type: integer
         format: int64
-        example: 'null'
+        example: null
         description: 'If bet was accpepted on alternate line, the altLineId will be returned.'
       price:
         type: number
@@ -1267,14 +1267,14 @@ definitions:
       winLoss:
         type: number
         format: double
-        example: 'null'
+        example: null
         description: Win-Loss for settled bets.
       oddsFormat:
         $ref: '#/definitions/OddsFormat'
       customerCommission:
         type: number
         format: double
-        example: 'null'
+        example: null
         description: Client’s commission on the bet.
       cancellationReason:
         $ref: '#/definitions/CancellationReason'
@@ -1349,7 +1349,7 @@ definitions:
       handicap:
         type: number
         format: double
-        example: 'null'
+        example: null
         description: ''
       price:
         type: number
@@ -1362,18 +1362,18 @@ definitions:
         description: ''
       side:
         type: string
-        example: 'null'
+        example: null
         description: 'Side type.'
         enum:
           - OVER
           - UNDER
       pitcher1:
         type: string
-        example: 'null'
+        example: null
         description: ''
       pitcher2:
         type: string
-        example: 'null'
+        example: null
         description: ''
       pitcher1MustStart:
         type: boolean
@@ -1397,22 +1397,22 @@ definitions:
       ftTeam1Score:
         type: number
         format: double
-        example: 'null'
+        example: null
         description: Full time team 1 score
       ftTeam2Score:
         type: number
         format: double
-        example: 'null'
+        example: null
         description: Full time team 2 score
       pTeam1Score:
         type: number
         format: double
-        example: 'null'
+        example: null
         description: 'End of period team 1 score. If the bet was placed on Game period (periodNumber =0) , this will be null'
       pTeam2Score:
         type: number
         format: double
-        example: 'null'
+        example: null
         description: 'End of period team 2 score. If the bet was placed on Game period (periodNumber =0) , this will be null'
       cancellationReason:
         $ref: '#/definitions/CancellationReason'
@@ -1702,7 +1702,7 @@ definitions:
           - PROCESSED_WITH_ERROR
       errorCode:
         type: string
-        example: 'null'
+        example: null
         description: |
           When Status is PROCESSED_WITH_ERROR, provides a code indicating the specific problem.
           
@@ -1837,14 +1837,14 @@ definitions:
       winLoss:
         type: number
         format: double
-        example: 'null'
+        example: null
         description: Win-Loss for settled bets.
       oddsFormat:
         $ref: '#/definitions/OddsFormat'
       customerCommission:
         type: number
         format: double
-        example: 'null'
+        example: null
         description: Client’s commission on the bet.
       cancellationReason:
         $ref: '#/definitions/CancellationReason'
@@ -1898,20 +1898,20 @@ definitions:
       eventId:
         type: integer
         format: int64
-        example: 'null'
+        example: null
         description: Populated if bet was placed on a special linked to the event.
       periodNumber:
         type: integer
         format: int32
-        example: 'null'
+        example: null
         description: Populated if bet was placed on a special linked to the event.
       team1:
         type: string
-        example: 'null'
+        example: null
         description: Populated if bet was placed on a special linked to the event.
       team2:
         type: string
-        example: 'null'
+        example: null
         description: Populated if bet was placed on a special linked to the event.
     description: ''
   GetBetsByTypeResponse:
@@ -2116,7 +2116,7 @@ definitions:
       referenceBetId:
         type: integer
         format: int64
-        example: 'null'
+        example: null
         description: Referenced original bet id.
     description: ''
   TeaserLeg:
