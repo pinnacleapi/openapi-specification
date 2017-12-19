@@ -489,7 +489,7 @@ definitions:
           ABOVE_EVENT_MAX = Bet cannot be placed because client exceeded allowed maximum of risk on a line,  
           ABOVE_MAX_BET_AMOUNT = Stake is above allowed maximum amount,  
           BELOW_MIN_BET_AMOUNT = Stake is below allowed minimum amount,  
-          BLOCKED_BETTING = Customer is an agent,  
+          BLOCKED_BETTING = Betting is suspended for the client,  
           BLOCKED_CLIENT = Client is no longer active,  
           INSUFFICIENT_FUNDS = Bet is submitted by a client with insufficient funds,  
           INVALID_COUNTRY = Client country is not allowed for betting,  
@@ -510,7 +510,6 @@ definitions:
           RESPONSIBLE_BETTING_RISK_LIMIT_EXCEEDED = Client has reached his total risk limit,  
           RESUBMIT_REQUEST = Unable to process the request but the request itself is valid. This happens more often on the live betting in situations when there is more than one place bet request at the same on the same line. When this happens, we don't keep the place bet request on the server until we know if we can accept or reject the bet, but instead we return the error. It's very likely that the line will change after that. To reduce a chance of getting RESUBMIT_REQUEST client can try to place a bet as fast as possible,  
           SYSTEM_ERROR_3 = Unexpected error,  
-          WAGERING_SUSPENDED = The customer wagering is suspended
         enum:
           - ALL_BETTING_CLOSED
           - ALL_LIVE_BETTING_CLOSED
@@ -538,7 +537,6 @@ definitions:
           - RESPONSIBLE_BETTING_RISK_LIMIT_EXCEEDED
           - RESUBMIT_REQUEST
           - SYSTEM_ERROR_3
-          - WAGERING_SUSPENDED
       betId:
         type: integer
         format: int64
@@ -598,7 +596,7 @@ definitions:
           ABOVE_EVENT_MAX = Bet cannot be placed because client exceeded allowed maximum of risk on a line,  
           ABOVE_MAX_BET_AMOUNT = Stake is above allowed maximum amount,   
           BELOW_MIN_BET_AMOUNT = Stake is below allowed minimum amount,  
-          BLOCKED_BETTING = Customer is an agent,  
+          BLOCKED_BETTING = Betting is suspended for the client,  
           BLOCKED_CLIENT = Client is no longer active,   
           INSUFFICIENT_FUNDS = Bet is submitted by a client with insufficient funds,  
           INVALID_COUNTRY = Client country is not allowed for betting,  
@@ -619,7 +617,6 @@ definitions:
           RESPONSIBLE_BETTING_RISK_LIMIT_EXCEEDED = Client has reached his total risk limit,  
           RESUBMIT_REQUEST = Unable to process the request but the request itself is valid. This happens more often on the live betting in situations when there is more than one place bet request at the same on the same line. When this happens, we don't keep the place bet request on the server until we know if we can accept or reject the bet, but instead we return the error. It's very likely that the line will change after that. To reduce a chance of getting RESUBMIT_REQUEST client can try to place a bet as fast as possible,  
           SYSTEM_ERROR_3 = Unexpected error,  
-          WAGERING_SUSPENDED = The customer wagering is suspended,  
           LICENCE_RESTRICTION_LIVE_BETTING_BLOCKED - Live betting blocked due to licence restrictions
         enum:
           - ALL_BETTING_CLOSED
@@ -648,7 +645,6 @@ definitions:
           - RESPONSIBLE_BETTING_RISK_LIMIT_EXCEEDED
           - RESUBMIT_REQUEST
           - SYSTEM_ERROR_3
-          - WAGERING_SUSPENDED
           - LICENCE_RESTRICTION_LIVE_BETTING_BLOCKED
       uniqueRequestId:
         type: string
@@ -1045,7 +1041,7 @@ definitions:
           ABOVE_MAX_BET_AMOUNT = Stake is above allowed maximum amount,  
           ALL_BETTING_CLOSED = Betting is not allowed at this moment,  
           BELOW_MIN_BET_AMOUNT = Stake is below allowed minimum amount,  
-          BLOCKED_BETTING = Customer is an agent,  
+          BLOCKED_BETTING = Betting is suspended for the client,   
           BLOCKED_CLIENT = Client is no longer active,  
           INSUFFICIENT_FUNDS = Bet is submitted by a client with insufficient funds,  
           INVALID_COUNTRY = Client country is not allowed for betting,  
@@ -1532,7 +1528,7 @@ definitions:
           ABOVE_MAX_BET_AMOUNT = Bet is above the maximum allowed,  
           ALL_BETTING_CLOSED = The wagering is disabled in the system (not related to a customer),  
           BELOW_MIN_BET_AMOUNT = Bet is below the minimum allowed,  
-          BLOCKED_BETTING = Customer is an agent,  
+          BLOCKED_BETTING = Betting is suspended for the client,  
           BLOCKED_CLIENT = Customer is inactive in the system,  
           DOUBLE_HIT = The website submitted the same bet more than once,  
           DUPLICATE_CLIENT_REFERENCE_ID = The teaser unique id and/or one of the leg unique id are the same,  
@@ -1550,8 +1546,7 @@ definitions:
           SYSTEM_ERROR_2 = System error,  
           SYSTEM_ERROR_3 = System error,  
           TOO_FEW_LEGS = Legs count is below Min Picks specified in the Teaser Specifications,  
-          TOO_MANY_LEGS = Legs count is above Max Picks specified in the Teaser Specifications,  
-          WAGERING_SUSPENDED = The customer wagering is suspended,  
+          TOO_MANY_LEGS = Legs count is above Max Picks specified in the Teaser Specifications,
           DUPLICATE_UNIQUE_REQUEST_ID = Request with the same uniqueRequestId was already processed. Please set the new value if you still want the request to be processed,  
           RESPONSIBLE_BETTING_LOSS_LIMIT_EXCEEDED = Client has reached his total loss limit,  
           RESPONSIBLE_BETTING_RISK_LIMIT_EXCEEDED = Client has reached his total risk limit
@@ -1579,7 +1574,6 @@ definitions:
           - SYSTEM_ERROR_3
           - TOO_FEW_LEGS
           - TOO_MANY_LEGS
-          - WAGERING_SUSPENDED
           - DUPLICATE_UNIQUE_REQUEST_ID
           - RESPONSIBLE_BETTING_LOSS_LIMIT_EXCEEDED
           - RESPONSIBLE_BETTING_RISK_LIMIT_EXCEEDED
@@ -1751,7 +1745,7 @@ definitions:
           ALL_BETTING_CLOSED = Betting is not allowed at this moment. This may happen during system maintenance.  
            ABOVE_MAX_BET_AMOUNT = Stake is above allowed maximum amount,  
            BELOW_MIN_BET_AMOUNT = Stake is below allowed minimum amount,  
-           BLOCKED_BETTING = Customer is an agent,  
+           BLOCKED_BETTING = Betting is suspened for the client,  
            BLOCKED_CLIENT = Client is no longer active,  
            CONTEST_NOT_FOUND = Incorrect contest id provided or contest is no longer available,  
            DUPLICATE_UNIQUE_REQUEST_ID = UniqueRequestId must be inque for each bet,  
@@ -1767,7 +1761,6 @@ definitions:
            SYSTEM_ERROR_1 = Unexpected error,  
            SYSTEM_ERROR_2 = Unexpected error,  
            UNIQUE_REQUEST_ID_REQUIRED = UniqueRequestId is missing,  
-           WAGERING_SUSPENDED = Betting is suspened for client,  
            INVALID_CUSTOMER_PROFILE
         enum:
           - ALL_BETTING_CLOSED
@@ -1789,7 +1782,6 @@ definitions:
           - SYSTEM_ERROR_1
           - SYSTEM_ERROR_2
           - UNIQUE_REQUEST_ID_REQUIRED
-          - WAGERING_SUSPENDED
           - INVALID_CUSTOMER_PROFILE
       betId:
         type: integer
