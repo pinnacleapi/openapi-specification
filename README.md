@@ -1,6 +1,6 @@
 # Pinnacle REST API Open API Specification
  
-
+ 
 ## Description
 This repository contains Pinnacle Open API Specification
 - **[Customer API](customerapi-oas.yaml)**
