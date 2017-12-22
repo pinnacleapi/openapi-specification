@@ -74,6 +74,8 @@ paths:
            Place straight bet (SPREAD, MONEYLINE, TOTAL_POINTS, TEAM_TOTAL_POINTS).
       
            Please note when the status is PENDING_ACCEPTANCE and if the live delay was applied, the response will not have betId. Client would have to call /bets by uniqueRequestId to check the status if the bet was ACCEPTED.
+           
+           For more details please see [Betting on Events with Live Delay](https://www.pinnacle.com/en/api/manual#livedelaybetting/)
       operationId: Bets_StraightV2
       consumes:
         - application/json
