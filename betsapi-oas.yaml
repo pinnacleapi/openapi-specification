@@ -790,20 +790,28 @@ definitions:
         type: string
         example: null
         x-nullable: true
-        description: ''
+        description: 'Pitcher name of team1. Only for bets on baseball.'
       pitcher2:
         type: string
         example: null
         x-nullable: true
-        description: ''
+        description: 'Pitcher name of team2. Only for bets on baseball.'
       pitcher1MustStart:
-        type: boolean
-        example: false
-        description: ''
+        type: string
+        enum:
+          - TRUE
+          - FALSE
+        example: null
+        x-nullable: true
+        description: 'Whether the team1 pitcher must start. Only for bets on baseball.'
       pitcher2MustStart:
-        type: boolean
-        example: false
-        description: ''
+        type: string
+        enum:
+          - TRUE
+          - FALSE
+        example: null
+        x-nullable: true
+        description: 'Whether the team1 pitcher must start. Only for bets on baseball.'
       team1:
         type: string
         example: Crvena Zvezda
@@ -854,8 +862,11 @@ definitions:
         x-nullable: true
         description: 'End of period team 2 score, only for settled bets. If the bet was placed on Game period (periodNumber =0) , this will be null'
       isLive:
-        type: boolean
-        example: false
+        type: string
+        enum:
+          - TRUE
+          - FALSE
+        example: "FALSE"
         description: Whether the bet is on live event
     description: ''
   CancellationReason:
