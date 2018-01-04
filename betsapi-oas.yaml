@@ -386,9 +386,8 @@ definitions:
         example: D5CC50E4-284D-4D50-8D49-429BDC4F2A48
         description: This is a Unique ID for PlaceBet requests. This is to support idempotent requests.
       acceptBetterLine:
-        type: string
-        format: boolean
-        example: 'true'
+        type: boolean
+        example: true
         description: Whether or not to accept a bet when there is a line change in favor of the client.
       stake:
         type: number
