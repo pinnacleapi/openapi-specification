@@ -368,7 +368,7 @@ paths:
           ### Get settled cancelled bets by time range:
             
           ```
-          http://apix.pinnacle.com/v3/bets?betList=SETTLED&fromDate=2018-03-01&toDate=2018-03-28&betStatuses=CANCELLED
+          http://api.pinnacle.com/v3/bets?betList=SETTLED&fromDate=2018-03-01&toDate=2018-03-28&betStatuses=CANCELLED
           ```
           
 
