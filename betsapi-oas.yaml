@@ -319,6 +319,7 @@ paths:
           items:
             type: string
           collectionFormat: csv
+      deprecated: true  
       responses:
         '200':
           description: OK
