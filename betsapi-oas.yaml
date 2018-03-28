@@ -1240,45 +1240,38 @@ definitions:
         $ref: '#/definitions/CancellationDetails'
     description: ''
   CancellationDetails:
+    type: array
+    items:
+      - $ref: "#/definitions/CancellationDetailsItem"
+    example:  [
+                    {
+                        "key": "correctSpread",
+                        "value": "-1.5"
+                    }
+                ]
+  CancellationDetailsItem:
     type: object
     properties:
-      correctTeam1Id:
+      key:
         type: string
-        example: Arizona Diamondbacks
-      correctTeam2Id:
-        type: string
-        example: Blue Jays Hits
-      correctListedPitcher1:
-        type: string
-        example: Smith
-      correctListedPitcher2:
-        type: string
-        example: Tony
-      correctSpread:
-        type: string
-        example: '1.3'
-      correctTotalPoints:
-        type: string
-        example: '34.7'
-      correctTeam1TotalPoints:
-        type: string
-        example: '3.4'
-      correctTeam2TotalPoints:
-        type: string
-        example: '2.6'
-      correctTeam1Score:
-        type: string
-        example: '1'
-      correctTeam2Score:
-        type: string
-        example: '3'
-      correctTeam1TennisSetsScore:
-        type: string
-        example: '4'
-      correctTeam2TennisSetsScore:
-        type: string
-        example: '2'
-    description: ''
+        example: correctSpread  
+      value:
+        type: string  
+        example: "1.5"
+    description: |  
+                Possible keys   
+                correctTeam1Id
+                correctTeam2Id
+                correctListedPitcher1
+                correctListedPitcher2
+                correctSpread
+                correctTotalPoints
+                correctTeam1TotalPoints
+                correctTeam2TotalPoints
+                correctTeam1Score
+                correctTeam2Score
+                correctTeam1TennisSetsScore
+                correctTeam2TennisSetsScore    
   ErrorResponseWithErrorRef:
     type: object
     properties:
