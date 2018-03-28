@@ -1237,8 +1237,21 @@ definitions:
         type: string
         example: FBS_CW_227
       details:
-        $ref: '#/definitions/CancellationDetails'
-    description: ''
+          $ref: '#/definitions/CancellationDetails'
+    description: |  
+                Possible keys \:  
+                * correctTeam1Id
+                * correctTeam2Id
+                * correctListedPitcher1
+                * correctListedPitcher2
+                * correctSpread
+                * correctTotalPoints
+                * correctTeam1TotalPoints
+                * correctTeam2TotalPoints
+                * correctTeam1Score
+                * correctTeam2Score
+                * correctTeam1TennisSetsScore
+                * correctTeam2TennisSetsScore
   CancellationDetails:
     type: array
     items:
@@ -1257,21 +1270,7 @@ definitions:
         example: correctSpread  
       value:
         type: string  
-        example: "1.5"
-    description: |  
-                Possible keys   
-                correctTeam1Id
-                correctTeam2Id
-                correctListedPitcher1
-                correctListedPitcher2
-                correctSpread
-                correctTotalPoints
-                correctTeam1TotalPoints
-                correctTeam2TotalPoints
-                correctTeam1Score
-                correctTeam2Score
-                correctTeam1TennisSetsScore
-                correctTeam2TennisSetsScore    
+        example: "1.5"    
   ErrorResponseWithErrorRef:
     type: object
     properties:
