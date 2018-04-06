@@ -569,6 +569,11 @@ paths:
             type: integer
             format: int64
           collectionFormat: multi
+        - name: toCurrencyCode
+          in: query
+          description: 3 letter currency code as in the [/currency](https://pinnacleapi.github.io/linesapi#operation/Currencies_V2_Get) response. Limits will be returned in the requested currency. Default is USD. 
+          required: false
+          type: string
       responses:
         '200':
           description: OK
@@ -1541,7 +1546,11 @@ definitions:
       id:
         type: integer
         format: int64
-        description: Event ID.
+        description: Event id.
+      parentId:
+        type: integer
+        format: int64
+        description: If event is linked to another event , parentId will be populated.  Live event would have pre game event as parent id.
       starts:
         type: string
         format: date-time
@@ -1601,6 +1610,9 @@ definitions:
           - 0
           - 1
           - 2
+      altTeaser:
+        type: boolean
+        description: Whether an event is offer with alterantive teaser points. Events with alternative teaser points may vary from teaser definition. 
   SettledFixturesSport:
     type: object
     properties:

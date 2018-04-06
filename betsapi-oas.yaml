@@ -309,7 +309,8 @@ paths:
               A comma separated list of uniqueRequestIds to query earlier  placed straight bets. If specified, is treated with highest priority, all other parameters are ignored. Maximum is 10 ids. If client has bet id, preferred way is to use betIds query parameter to check the get the bets. You can use uniqueRequestIds when you do not  have bet id. That’s pretty much in just 2 cases\:
               
               1. When you bet on live event with live delay, place bet response in that case does not return bet id, so client can query bet status by uniqueRequestIds.
-              2. In case of any network issues when client is not sure what happened with his place bet request. Empty response means that the bet was not placed. Please check [Deduplication section](https://www.pinnacle.com/de/api/manual#overview)for more details
+              2. In case of any network issues when client is not sure what happened with his place bet request. Empty response means that the bet was not placed. Please check [Deduplication section](https://www.pinnacle.com/de/api/manual#overview) 
+              for more details
               
               
               Note that there is a restriction: querying by uniqueRequestIds  is supported only for straight bets and only up to 30 min from the moment the bet was place. 
@@ -318,6 +319,7 @@ paths:
           items:
             type: string
           collectionFormat: csv
+      deprecated: true  
       responses:
         '200':
           description: OK
@@ -339,6 +341,159 @@ paths:
           description: InternalServerError
           schema:
             $ref: '#/definitions/ErrorResponseWithErrorRef'
+  /v3/bets:
+    get:
+      tags:
+        - Get Bets
+      summary: Get Bets - v3
+      description: |
+          Returns bets. 
+          
+          
+          ### Get running bets by time range:
+          ```
+          https://api.pinnacle.com/v3/bets?betlist=RUNNING&fromDate=2017-11-21T00:00:00Z&toDate=2017-11-29T00:00:00Z
+          ```
+          Running bets are queried by *placedAt* date time
+          
+          
+          ### Get settled bets by time range:
+            
+          ```
+          https://api.pinnacle.com/v3/bets?betlist=SETTLED&fromDate=2015-12-28T00:00:00Z&toDate=2015-12-29T00:00:00Z
+          ```
+          Settled bets are queried by *settledAt* date time
+          https://api.pinnacle.com/v3/bets?betlist=SETTLED&fromDate=2017-11-20T00:00:00Z&toDate=2017-11-23T00:00:00Z
+          
+          
+          ### Get settled cancelled bets by time range:
+            
+          ```
+          http://api.pinnacle.com/v3/bets?betList=SETTLED&fromDate=2018-03-01&toDate=2018-03-28&betStatuses=CANCELLED
+          ```
+          
+
+          ### Get bets by bet ids:
+          
+          ```
+          https://api.pinnacle.com/v3/bets?betIds=775856112,775856113,775856114
+          ```
+          
+          ### Get bets by uniqueRequestIds:
+          
+          ```
+          https://api.pinnacle.com/v3/bets?uniqueRequestIds=62335222-dae4-479a-8c05-46440ccdd3bb,42335222-dae4-479a-8c05-46440ccdd3bb
+          ```
+          
+      operationId: Bets_GetBetsByTypeV3
+      consumes: []
+      produces:
+        - application/json
+      parameters:
+        - name: betlist
+          in: query
+          description: 'Type of bet list to return. Not needed when betids is submitted.'
+          required: false
+          type: string
+          enum:
+            - SETTLED
+            - RUNNING
+            - ALL
+        - name: betStatuses
+          in: query
+          description: 'Type of bet statuse to return. This works only in conjustion with betlist, as additional filter.'
+          required: false
+          type: array
+          items:
+            type: string
+            enum:
+            - WON
+            - LOSE 
+            - CANCELLED 
+            - REFUNDED 
+            - NOT_ACCEPTED 
+            - ACCEPTED 
+            - PENDING_ACCEPTANCE
+          collectionFormat: csv
+        - name: fromDate
+          in: query
+          description: |
+            Start date of the requested period. Required when betlist parameter is submitted. Start date can be up to 30 days in the past. Expected format is ISO8601 - can be set to just date or date and time.
+          required: false
+          type: string
+        - name: toDate
+          in: query
+          description: |
+            End date of the requested period. Required when betlist parameter is submitted. Expected format is ISO8601 - can be set to just date or date and time.  toDate value is exclusive, meaning it cannot be equal to fromDate.
+          required: false
+          type: string
+        - name: sortDir
+          in: query
+          description: 'Sort direction by postedAt/settledAt. Respected only when querying by date range.'
+          required: false
+          type: string
+          enum:
+            - ASC
+            - DESC
+          default: ASC
+        - name: pageSize
+          in: query
+          description: 'Page size in case. Max is 1000. Respected only when querying by date range.'
+          required: false
+          type: integer
+          default: 1000 
+        - name: fromRecord
+          in: query
+          description: 'Starting record (inclusive) of the result. Respected only when querying by date range. To fetch next page set it to toRecord+1 '
+          required: false
+          type: integer
+          default: 0  
+        - name: betids
+          in: query
+          description: 'A comma separated list of bet ids. When betids is submitted, no other parameter is necessary. Maximum is 100 ids. Works for all non settled bets and all bets settled in the last 30 days.'
+          required: false
+          type: array
+          items:
+            type: integer
+            format: int64
+          collectionFormat: csv
+        - name: uniqueRequestIds
+          in: query
+          description: |
+              A comma separated list of uniqueRequestIds to query earlier  placed straight bets. If specified, is treated with highest priority, all other parameters are ignored. Maximum is 10 ids. If client has bet id, preferred way is to use betIds query parameter to check the get the bets. You can use uniqueRequestIds when you do not  have bet id. That’s pretty much in just 2 cases\:
+              
+              1. When you bet on live event with live delay, place bet response in that case does not return bet id, so client can query bet status by uniqueRequestIds.
+              2. In case of any network issues when client is not sure what happened with his place bet request. Empty response means that the bet was not placed. Please check [Deduplication section](https://www.pinnacle.com/de/api/manual#overview) for more details
+              
+              
+              Note that there is a restriction: querying by uniqueRequestIds  is supported only for straight bets and only up to 30 min from the moment the bet was place. 
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: csv
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/GetBetsByTypeResponseV3'
+        '400':
+          description: BadRequest
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/ErrorResponseWithErrorRef'
+            
   /v1/bets/betting-status:
     get:
       tags:
@@ -868,6 +1023,211 @@ definitions:
         example: "FALSE"
         description: Whether the bet is on live event
     description: ''
+  StraightBetV3:
+      type: object
+      required:
+        - betId
+        - betStatus
+        - betType
+        - oddsFormat
+        - placedAt
+        - risk
+        - updateSequence
+        - wagerNumber
+        - win
+      properties:
+        betId:
+          type: integer
+          format: int64
+          example: 759629245
+          description: Bet identification
+        wagerNumber:
+          type: integer
+          format: int32
+          example: 1
+          description: 'Wager identification. All bets placed thru the API will have value 1. Website Classic view supports multiple contest(special) bets placement in the same bet slip in that case the bet would have appropriate wager number, as well as all round robin parlay bets.'
+        placedAt:
+          type: string
+          format: date-time
+          example: '2017-09-05T01:32:59Z'
+          description: Date time when the bet was placed.
+        betStatus:
+          type: string
+          example: ACCEPTED
+          description: |
+            Bet Status.  
+            
+            ACCEPTED = Bet was accepted,  
+            CANCELLED = Bet is cancelled as per Pinnacle betting rules,  
+            LOSE = The bet is settled as lose,  
+            PENDING_ACCEPTANCE = This status is reserved only for live bets. If a live bet is placed during danger zone or live delay is applied, it will be in PENDING_ACCEPTANCE , otherwise in ACCEPTED status. From this status bet can go to ACCEPTED or NOT_ACCEPTED status,  
+            REFUNDED = When an event is cancelled or when the bet is settled as push, the bet will have REFUNDED status,  
+            NOT_ACCEPTED = Bet was not accepted. Bet can be in this status only if it was previously in PENDING_ACCEPTANCE status,  
+            WON = The bet is settled as won 
+          enum:
+            - ACCEPTED
+            - CANCELLED
+            - LOSE
+            - PENDING_ACCEPTANCE
+            - REFUNDED
+            - NOT_ACCEPTED
+            - WON
+        betType:
+          type: string
+          example: MONEYLINE
+          description: 'Bet type.'
+          enum:
+            - MONEYLINE
+            - TEAM_TOTAL_POINTS
+            - SPREAD
+            - TOTAL_POINTS
+            - SPECIAL
+            - PARLAY
+            - TEASER
+            - MANUAL
+        win:
+          type: number
+          format: double
+          example: 1
+          description: Win amount.
+        risk:
+          type: number
+          format: double
+          example: 1.5
+          description: Risk amount.
+        winLoss:
+          type: number
+          format: double
+          example: null
+          x-nullable: true
+          description: Win-Loss for settled bets.
+        oddsFormat:
+          $ref: '#/definitions/OddsFormat'
+        customerCommission:
+          type: number
+          format: double
+          example: null
+          x-nullable: true
+          description: Client’s commission on the bet.
+        cancellationReason:
+          $ref: '#/definitions/CancellationReason'
+        updateSequence:
+          type: integer
+          format: int64
+          example: 111548915
+          description: Update Sequence
+        sportId:
+          type: integer
+          format: int32
+          example: 29
+          description: ''
+        leagueId:
+          type: integer
+          format: int32
+          example: 2462
+          description: ''
+        eventId:
+          type: integer
+          format: int64
+          example: 757064557
+          description: ''
+        handicap:
+          type: number
+          format: double
+          example: null
+          x-nullable: true
+          description: ''
+        price:
+          type: number
+          format: double
+          example: -155
+          description: ''
+        teamName:
+          type: string
+          example: Crvena Zvezda
+          description: ''
+        side:
+          type: string
+          example: null
+          x-nullable: true
+          description: 'Side type.'
+          enum:
+            - OVER
+            - UNDER
+        pitcher1:
+          type: string
+          example: null
+          x-nullable: true
+          description: 'Pitcher name of team1. Only for bets on baseball.'
+        pitcher2:
+          type: string
+          example: null
+          x-nullable: true
+          description: 'Pitcher name of team2. Only for bets on baseball.'
+        pitcher1MustStart:
+          type: boolean
+          example: false
+          description: 'Baseball only. Refers to the pitcher for Team1.  This applicable only for MONEYLINE bet type, for all other bet types this has to be TRUE.'  
+          x-nullable: true
+        pitcher2MustStart:
+          type: boolean
+          example: false
+          description: 'Baseball only. Refers to the pitcher for Team2.  This applicable only for MONEYLINE bet type, for all other bet types this has to be TRUE.'  
+          x-nullable: true  
+        team1:
+          type: string
+          example: Crvena Zvezda
+          description: ''
+        team2:
+          type: string
+          example: Partizan
+          description: ''
+        periodNumber:
+          type: integer
+          format: int32
+          example: 0
+          description: ''
+        team1Score:
+          type: number
+          format: double
+          example: null
+          x-nullable: true
+          description: 'Team 1 score that the bet was placed on, only for live bets.'
+        team2Score:
+          type: number
+          format: double
+          example: null
+          x-nullable: true
+          description: 'Team 2 score that the bet was placed, only for live bets.'
+        ftTeam1Score:
+          type: number
+          format: double
+          example: null
+          x-nullable: true
+          description: 'Full time team 1 score, only for settled bets.'
+        ftTeam2Score:
+          type: number
+          format: double
+          example: null
+          x-nullable: true
+          description: 'Full time team 2 score, only for settled bets.'
+        pTeam1Score:
+          type: number
+          format: double
+          example: null
+          x-nullable: true
+          description: '.End of period team 1 score, only for settled bets. If the bet was placed on Game period (periodNumber =0) , this will be null . '
+        pTeam2Score:
+          type: number
+          format: double
+          example: null
+          x-nullable: true
+          description: 'End of period team 2 score, only for settled bets. If the bet was placed on Game period (periodNumber =0) , this will be null'
+        isLive:
+          type: boolean
+          example: false
+          description: Whether the bet is on live event
+      description: ''    
   CancellationReason:
     type: object
     required:
@@ -877,48 +1237,40 @@ definitions:
         type: string
         example: FBS_CW_227
       details:
-        $ref: '#/definitions/CancellationDetails'
-    description: ''
+          $ref: '#/definitions/CancellationDetails'
+    description: |  
+                Possible keys \:  
+                * correctTeam1Id
+                * correctTeam2Id
+                * correctListedPitcher1
+                * correctListedPitcher2
+                * correctSpread
+                * correctTotalPoints
+                * correctTeam1TotalPoints
+                * correctTeam2TotalPoints
+                * correctTeam1Score
+                * correctTeam2Score
+                * correctTeam1TennisSetsScore
+                * correctTeam2TennisSetsScore
   CancellationDetails:
+    type: array
+    items:
+      - $ref: "#/definitions/CancellationDetailsItem"
+    example:  [
+                    {
+                        "key": "correctSpread",
+                        "value": "-1.5"
+                    }
+                ]
+  CancellationDetailsItem:
     type: object
     properties:
-      correctTeam1Id:
+      key:
         type: string
-        example: Arizona Diamondbacks
-      correctTeam2Id:
-        type: string
-        example: Blue Jays Hits
-      correctListedPitcher1:
-        type: string
-        example: Smith
-      correctListedPitcher2:
-        type: string
-        example: Tony
-      correctSpread:
-        type: string
-        example: '1.3'
-      correctTotalPoints:
-        type: string
-        example: '34.7'
-      correctTeam1TotalPoints:
-        type: string
-        example: '3.4'
-      correctTeam2TotalPoints:
-        type: string
-        example: '2.6'
-      correctTeam1Score:
-        type: string
-        example: '1'
-      correctTeam2Score:
-        type: string
-        example: '3'
-      correctTeam1TennisSetsScore:
-        type: string
-        example: '4'
-      correctTeam2TennisSetsScore:
-        type: string
-        example: '2'
-    description: ''
+        example: correctSpread  
+      value:
+        type: string  
+        example: "1.5"    
   ErrorResponseWithErrorRef:
     type: object
     properties:
@@ -1995,6 +2347,47 @@ definitions:
         items:
           $ref: '#/definitions/ManualBet'
     description: ''
+  GetBetsByTypeResponseV3:
+    type: object
+    properties:
+      moreAvailable:
+        type: boolean 
+        description: Whether there are more pages available.
+      pageSize:
+        type: integer 
+        description: Page size. Default is 1000.
+      fromRecord:
+        type: integer 
+        description: Starting record number of the result set. Records start at zero
+      toRecord:
+        type: integer 
+        description: Ending record number of the result set. 
+      straightBets:
+        type: array
+        description: A collection of placed straight bets.
+        items:
+          $ref: '#/definitions/StraightBetV3'
+      parlayBets:
+        type: array
+        description: A collection of placed parlay bets.
+        items:
+          $ref: '#/definitions/ParlayBet'
+      teaserBets:
+        type: array
+        description: A collection of placed teaser bets.
+        items:
+          $ref: '#/definitions/TeaserBet'
+      specialBets:
+        type: array
+        description: A collection of placed special bets.
+        items:
+          $ref: '#/definitions/SpecialBet'
+      manualBets:
+        type: array
+        description: A collection of placed manual bets.
+        items:
+          $ref: '#/definitions/ManualBet'
+    description: ''  
   TeaserBet:
     type: object
     required:
