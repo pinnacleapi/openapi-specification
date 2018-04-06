@@ -569,7 +569,7 @@ paths:
             type: integer
             format: int64
           collectionFormat: multi
-        - name: currencyCode
+        - name: toCurrencyCode
           in: query
           description: 3 letter currency code as in the [/currency](https://pinnacleapi.github.io/linesapi#operation/Currencies_V2_Get) response. Limits will be returned in the requested currency. Default is USD. 
           required: false
