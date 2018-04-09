@@ -1563,7 +1563,7 @@ definitions:
         description: Away team name.
       rotNum:
         type: string
-        description: Team1 rotation number.
+        description: Team1 rotation number. Please note that in the next version of /fixtures, rotNum property will be decomissioned. ParentId can be used instead to group the related events.
       liveStatus:
         type: integer
         format: int32
