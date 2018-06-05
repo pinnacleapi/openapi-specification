@@ -1616,7 +1616,7 @@ definitions:
       resultingUnit:   
         type: string
         description: | 
-          Speficies based on what the event will be resulted, e.g. Corners, Bookings 
+          Specifies based on what the event will be resulted, e.g. Corners, Bookings 
   SettledFixturesSport:
     type: object
     properties:
