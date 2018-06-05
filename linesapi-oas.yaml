@@ -1613,6 +1613,10 @@ definitions:
       altTeaser:
         type: boolean
         description: Whether an event is offer with alterantive teaser points. Events with alternative teaser points may vary from teaser definition. 
+      resultingUnit:   
+        type: string
+        description: | 
+          Speficies based on what the event will be resulted, e.g. Corners, Bookings 
   SettledFixturesSport:
     type: object
     properties:
@@ -2296,6 +2300,13 @@ definitions:
         type: string
         format: date-time
         description: Period’s wagering cut-off date in UTC.
+      status:
+        type: integer
+        format: int32
+        description: |
+              1 - online, period is open for betting 
+              2 - offline, period is not open for betting
+        example: 1
       maxSpread:
         type: number
         format: double
@@ -2482,6 +2493,13 @@ definitions:
         type: string
         format: date-time
         description: Period’s wagering cut-off date in UTC.
+      status:
+        type: integer
+        format: int32
+        description: |
+              1 - online, period is open for betting 
+              2 - offline, period is not open for betting
+        example: 1  
       maxSpread:
         type: number
         format: double
@@ -2659,6 +2677,10 @@ definitions:
         type: number
         format: double
         description: Away team handicap. Refer to Get Fixtures endpoint to determine home and away teams.
+      altHdp:
+        type: boolean 
+        description: Whether the spread is offer with alterantive teaser points. Events with alternative teaser points may vary from teaser definition. 
+        example: false  
   TeaserOddsTotalPoints:
     type: object
     properties:
