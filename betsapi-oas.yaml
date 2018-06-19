@@ -2481,6 +2481,16 @@ definitions:
         type: number
         format: double
         description: ''
+      price:
+        type: number
+        format: double
+        example: 682
+        description: 'Populated for all teaser bets and will be the original price at the time of the placement.'
+      finalPrice:
+        type: number
+        format: double
+        example: 0
+        description: Only for settled parlay. Final price may differ in case leg was cancelled or half won. 
       legs:
         type: array
         description: ''
