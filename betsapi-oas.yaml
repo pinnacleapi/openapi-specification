@@ -1472,7 +1472,11 @@ definitions:
         description: The collection of legs that resulted in error (format described below). Can be empty if no invalid legs found.
         items:
           $ref: '#/definitions/ParlayLegResponse'
+      parlayBet:
+        $ref: '#/definitions/ParlayBet'
+      description: 'Present if bet was accepted'
     description: ''
+    
   RoundRobinOptionWithOdds:
     type: object
     properties:
@@ -1975,6 +1979,9 @@ definitions:
         description: 'A collection of valid legs, if any.'
         items:
           $ref: '#/definitions/PlaceTeaserBetLegResponse'
+      teaserBet:
+        $ref: '#/definitions/TeaserBet'
+        description: 'Present if bet was accepted'
   PlaceTeaserBetLegResponse:
     type: object
     properties:
@@ -2161,6 +2168,9 @@ definitions:
         type: boolean
         example: false
         description: Whether or not the bet was accepted on the line that changed in favour of client. This can be true only if acceptBetterLine in the Place Bet request is set to TRUE.
+      specialBet:
+        $ref: '#/definitions/SpecialBet'
+        description: 'Present if bet was accepted'
     description: ''
   SpecialBet:
     type: object
@@ -2491,6 +2501,14 @@ definitions:
         format: double
         example: 0
         description: Only for settled parlay. Final price may differ in case leg was cancelled or half won. 
+      teaserId:
+        type: number
+        format: int32
+        description: Reference to the teaser id
+      teaserGroupId:
+        type: number
+        format: int32
+        description: Reference to the teaser group id
       legs:
         type: array
         description: ''
