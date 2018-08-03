@@ -1255,7 +1255,7 @@ definitions:
   CancellationDetails:
     type: array
     items:
-      - $ref: "#/definitions/CancellationDetailsItem"
+       $ref: "#/definitions/CancellationDetailsItem"
     example:  [
                     {
                         "key": "correctSpread",
@@ -1474,9 +1474,6 @@ definitions:
           $ref: '#/definitions/ParlayLegResponse'
       parlayBet:
         $ref: '#/definitions/ParlayBet'
-      description: 'Present if bet was accepted'
-    description: ''
-    
   RoundRobinOptionWithOdds:
     type: object
     properties:
