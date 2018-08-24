@@ -1572,7 +1572,7 @@ definitions:
           
           0 = No live betting will be offered on this event, 
           1 = Live betting event, 
-          2 = Live betting will be offered on this event
+          2 = Live betting will be offered on this match, but on a different event. Please note that [pre-game and live events are different](https://github.com/pinnacleapi/pinnacleapi-documentation/blob/master/FAQ.md#how-to-find-associated-events) .
         enum:
           - 0
           - 1
