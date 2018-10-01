@@ -1018,8 +1018,8 @@ definitions:
       isLive:
         type: string
         enum:
-          - TRUE
-          - FALSE
+          - 'TRUE'
+          - 'FALSE'
         example: "FALSE"
         description: Whether the bet is on live event
     description: ''
