@@ -201,12 +201,12 @@ paths:
           description: The SpecialBet request.
           required: true
           schema:
-            $ref: '#/definitions/MultiBetRequest[SpecialBetRequest]'
+            $ref: '#/definitions/MultiBetRequest.SpecialBetRequest'
       responses:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/MultiBetResponse[SpecialBetResponse]'
+            $ref: '#/definitions/MultiBetResponse.SpecialBetResponse'
         '400':
           description: BadRequest
           schema:
@@ -2033,7 +2033,7 @@ definitions:
         format: double
         description: Number of points.
     description: ''
-  'MultiBetRequest[SpecialBetRequest]':
+  'MultiBetRequest.SpecialBetRequest':
     type: object
     properties:
       bets:
@@ -2084,7 +2084,7 @@ definitions:
         example: 726394411
         description: Contestant identification.
     description: ''
-  'MultiBetResponse[SpecialBetResponse]':
+  'MultiBetResponse.SpecialBetResponse':
     type: object
     properties:
       bets:
