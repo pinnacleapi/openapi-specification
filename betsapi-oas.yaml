@@ -228,6 +228,7 @@ paths:
       tags:
         - Get Bets
       summary: Get Bets - v2
+      deprecated: true
       description: |
           Returns bets. 
           
@@ -1020,7 +1021,7 @@ definitions:
         enum:
           - TRUE
           - FALSE
-        example: "FALSE"
+        example: FALSE
         description: Whether the bet is on live event
     description: ''
   StraightBetV3:
