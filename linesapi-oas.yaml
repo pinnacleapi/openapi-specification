@@ -2949,6 +2949,12 @@ definitions:
         format: int32
         description: The period of the match. For example in soccer 0 (Game), 1 (1st Half) & 2 (2nd Half)
         type: integer
+      home:
+        type: string
+        description: Home team name.
+      away:
+        type: string
+        description: Away team name.  
   SpecialsFixturesContestant:
     type: object
     properties:
