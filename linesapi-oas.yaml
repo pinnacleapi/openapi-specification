@@ -1125,6 +1125,12 @@ paths:
           required: true
           type: integer
           format: int64
+        - name: handicap
+          in: query
+          description: handicap of the contestant. As contestant's handicap is a mutable property, it may happened that line/special returns status:SUCCESS, but with the different handicap from the one that client had at the moment of calling the line/special. One can specify handicap parameter in the request and if the contestant's handicap changed, it would return status:NOT_EXISTS. This way line/special is more aligned to how /line works.
+          required: false
+          type: integer
+          format: int32
       responses:
         '200':
           description: OK
