@@ -16,14 +16,8 @@ info:
       - [HTTP Basic access authentication](https://en.wikipedia.org/wiki/Basic_access_authentication)
       - ApiKey authentication
   
-    You need to send following HTTP headers:  
-
-     - `Authorization: Basic `
-
-     - `X-PARTNER-KEY: `
-
-
-    Example:
+    You need to send `Authorization ` and `X-PARTNER-KEY` HTTP headers, e.g.
+    
     ```
     
       POST /b2b/v1/bets/straight HTTP/1.1
