@@ -4,16 +4,17 @@ info:
   version: 2.2.7
   title: Pinnacle - B2B Bets API Reference
   description: |
-    B2B API to place bets. It should be used in the conjunction with the Public API, to get the fixtures, odds,  bets. Main difference comparing to public API is that b2b api can capture info about the actual bettor in the partner's system    
+    B2B API to place bets.  Main difference comparing to the Public Bets API is that B2B API can capture info about the actual bettor in the partner's system.    
+    
+    It should be used in the conjunction with the Public API, to get the fixtures, odds and bets from.
 
     # Authentication 
     
-
+    Access is restricted by IP address. Partner would have to provide the list of IP addresses. Pinnacle will provide the api key.
+  
     B2B API requires both:  
       - [HTTP Basic access authentication](https://en.wikipedia.org/wiki/Basic_access_authentication)
       - ApiKey authentication
-
-    Access is restricted by IP address. Partner would have to provide the list of IPs. Pinnacle will provide the api key.
   
     You need to send following HTTP headers:  
 
@@ -1716,7 +1717,7 @@ components:
           type: object
           properties:
             appId: 
-              description: Application identifier. 
+              description: Partner's channels over which the bet was placed. 
               type: string 
               enum:
                   - Web
