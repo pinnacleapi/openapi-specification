@@ -1227,6 +1227,11 @@ definitions:
           type: boolean
           example: false
           description: Whether the bet is on live event
+        eventStartTime:
+          type: string
+          format: date-time
+          example: '2017-10-05T01:32:59Z'
+          description: Date time when the event starts.  
       description: ''    
   CancellationReason:
     type: object
@@ -1738,8 +1743,8 @@ definitions:
       eventStartTime:
         type: string
         format: date-time
-        example: '2017-10-07T21:00:00Z'
-        description: ''
+        example: '2017-10-05T01:32:59Z'
+        description: Date time when the event starts.  
       handicap:
         type: number
         format: double
@@ -1978,7 +1983,6 @@ definitions:
           $ref: '#/definitions/PlaceTeaserBetLegResponse'
       teaserBet:
         $ref: '#/definitions/TeaserBet'
-        description: 'Present if bet was accepted'
   PlaceTeaserBetLegResponse:
     type: object
     properties:
@@ -2168,7 +2172,6 @@ definitions:
       specialBet:
         $ref: '#/definitions/SpecialBet'
         description: 'Present if bet was accepted'
-    description: ''
   SpecialBet:
     type: object
     required:
@@ -2324,6 +2327,11 @@ definitions:
         example: null
         x-nullable: true
         description: Populated if bet was placed on a special linked to the event.
+      eventStartTime:
+        type: string
+        format: date-time
+        example: '2017-10-05T01:32:59Z'
+        description: Date time when the event starts   
     description: ''
   GetBetsByTypeResponse:
     type: object
@@ -2627,7 +2635,9 @@ definitions:
         description: ''
       eventStartTime:
         type: string
-        description: ''
+        format: date-time
+        example: '2017-10-05T01:32:59Z'
+        description: Date time when the event starts. 
       handicap:
         type: number
         format: double
