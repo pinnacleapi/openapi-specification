@@ -3344,6 +3344,24 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/SpecialsFixturesContestant'
+        liveStatus:
+          type: integer
+          format: int32
+          description: >
+            When a special is linked to an event, we will return live status of the event, otherwise it will be 0. 
+            
+            0 = No live betting will be offered on this event, 
+            
+            1 = Live betting event, 
+            
+            2 = Live betting will be offered on this match, but on a different
+            event.  
+            
+            Please note that live delay is applied when placing bets on special with LiveStatus=1 
+          enum:
+            - 0
+            - 1
+            - 2    
     SpecialsFixturesEvent:
       type: object
       description: Optional event asscoaited with the special.
