@@ -466,7 +466,7 @@ paths:
               1. When you bet on live event with live delay, place bet response in that case does not return bet id, so client can query bet status by `uniqueRequestIds`.
               2. In case of any network issues when client is not sure what happened with his place bet request. Empty response means that the bet was not placed. Please check [Deduplication section](https://www.pinnacle.com/de/api/manual#overview) for more details.
               
-             Note that there is a restriction: querying by uniqueRequestIds  is supported for straight/special bets and only up to 30 min from the moment the bet was place. 
+                Note that there is a restriction: querying by uniqueRequestIds  is supported for straight and special bets and only up to 30 min from the moment the bet was placed. 
           required: false
           type: array
           items:
