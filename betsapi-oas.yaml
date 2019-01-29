@@ -460,7 +460,7 @@ paths:
         - name: uniqueRequestIds
           in: query
           description: |
-              A comma separated list of uniqueRequestIds to query earlier  placed straight bets. If specified, is treated with highest priority, all other parameters are ignored. Maximum is 10 ids. If client has bet id, preferred way is to use betIds query parameter to check the get the bets. You can use uniqueRequestIds when you do not  have bet id. That’s pretty much in just 2 cases\:
+              A comma separated list of `uniqueRequestId` from the place bet request. If specified, is treated with highest priority, all other parameters are ignored. Maximum is 10 ids. If client has bet id, preferred way is to use betIds query parameter to check the get the bets. You can use uniqueRequestIds when you do not  have bet id. That’s pretty much in just 2 cases\:
               
               1. When you bet on live event with live delay, place bet response in that case does not return bet id, so client can query bet status by uniqueRequestIds.
               2. In case of any network issues when client is not sure what happened with his place bet request. Empty response means that the bet was not placed. Please check [Deduplication section](https://www.pinnacle.com/de/api/manual#overview) for more details
