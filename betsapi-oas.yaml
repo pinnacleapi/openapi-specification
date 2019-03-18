@@ -664,7 +664,6 @@ definitions:
           LIMITS_CONFIGURATION_ISSUE = System configuration issue,   
           RESPONSIBLE_BETTING_LOSS_LIMIT_EXCEEDED = Client has reached his total loss limit,  
           RESPONSIBLE_BETTING_RISK_LIMIT_EXCEEDED = Client has reached his total risk limit,  
-          RESUBMIT_REQUEST = Unable to process the request but the request itself is valid. This happens more often on the live betting in situations when there is more than one place bet request at the same on the same line. When this happens, we don't keep the place bet request on the server until we know if we can accept or reject the bet, but instead we return the error. It's very likely that the line will change after that. To reduce a chance of getting RESUBMIT_REQUEST client can try to place a bet as fast as possible,  
           SYSTEM_ERROR_3 = Unexpected error,  
         enum:
           - ALL_BETTING_CLOSED
@@ -691,7 +690,6 @@ definitions:
           - LIMITS_CONFIGURATION_ISSUE
           - RESPONSIBLE_BETTING_LOSS_LIMIT_EXCEEDED
           - RESPONSIBLE_BETTING_RISK_LIMIT_EXCEEDED
-          - RESUBMIT_REQUEST
           - SYSTEM_ERROR_3
       betId:
         type: integer
@@ -721,12 +719,14 @@ definitions:
           INVALID_AUTHORIZATION_HEADER = HTTP Authorization header is missing (http status 401) 
           ACCOUNT_INACTIVE = Client's account is not active  (http status 403)  
           NO_API_ACCESS = Account not permitted to access the API  (http status 403) 
+          RESUBMIT_REQUEST = It can happen only when placing a bet (http status 400).  Unable to process the request but the request itself is valid. This happens more often on the live betting in situations when there is more than one place bet request at the same on the same line. When this happens, we don't keep the place bet request on the server until we know if we can accept or reject the bet, but instead we return the error. It's also very likely that the line will change after that. To reduce a chance of getting RESUBMIT_REQUEST client should try to place a bet as fast as possible. 
         enum:
           - INVALID_REQUEST_DATA
           - INVALID_CREDENTIALS
           - INVALID_AUTHORIZATION_HEADER
           - ACCOUNT_INACTIVE
           - NO_API_ACCESS
+          - RESUBMIT_REQUEST
       message:
         type: string
   PlaceBetResponseV2:
@@ -771,7 +771,6 @@ definitions:
           LIMITS_CONFIGURATION_ISSUE = System configuration issue,  
           RESPONSIBLE_BETTING_LOSS_LIMIT_EXCEEDED = Client has reached his total loss limit,  
           RESPONSIBLE_BETTING_RISK_LIMIT_EXCEEDED = Client has reached his total risk limit,  
-          RESUBMIT_REQUEST = Unable to process the request but the request itself is valid. This happens more often on the live betting in situations when there is more than one place bet request at the same on the same line. When this happens, we don't keep the place bet request on the server until we know if we can accept or reject the bet, but instead we return the error. It's very likely that the line will change after that. To reduce a chance of getting RESUBMIT_REQUEST client can try to place a bet as fast as possible,  
           SYSTEM_ERROR_3 = Unexpected error,  
           LICENCE_RESTRICTION_LIVE_BETTING_BLOCKED - Live betting blocked due to licence restrictions
         enum:
@@ -799,7 +798,6 @@ definitions:
           - LIMITS_CONFIGURATION_ISSUE
           - RESPONSIBLE_BETTING_LOSS_LIMIT_EXCEEDED
           - RESPONSIBLE_BETTING_RISK_LIMIT_EXCEEDED
-          - RESUBMIT_REQUEST
           - SYSTEM_ERROR_3
           - LICENCE_RESTRICTION_LIVE_BETTING_BLOCKED
       uniqueRequestId:
@@ -1908,8 +1906,7 @@ definitions:
           INVALID_CUSTOMER_PROFILE = Either the customer does not exist OR the customer business rules are not verified,  
           INVALID_LEGS = One or more legs are not verified,  
           INVALID_REQUEST = Teaser request is not valid,  
-          ODDS_FORMAT_MISMATCH = Agent customer’s odds format differs from wager request odds format,  
-          RESUBMIT_REQUEST = The ticket hast to be resubmitted,  
+          ODDS_FORMAT_MISMATCH = Agent customer’s odds format differs from wager request odds format,
           TEASER_DOES_NOT_EXIST = Teaser does not exist in the system,  
           SAME_EVENT_ONLY_REQUIRED = Legs required to be for the same game only. Specified in the Teaser Specifications,  
           SYSTEM_ERROR_1 = System error,  
@@ -1936,7 +1933,6 @@ definitions:
           - INVALID_LEGS
           - INVALID_REQUEST
           - ODDS_FORMAT_MISMATCH
-          - RESUBMIT_REQUEST
           - TEASER_DOES_NOT_EXIST
           - SAME_EVENT_ONLY_REQUIRED
           - SYSTEM_ERROR_1
@@ -2128,8 +2124,7 @@ definitions:
            LINE_CHANGED = Bet is submitted on a line that has changed,  
            PAST_CUTOFFTIME = Bet is submitted on a game after the betting cutoff time,  
            RESPONSIBLE_BETTING_LOSS_LIMIT_EXCEEDED = Self-imposed loss limit exceeded,  
-           RESPONSIBLE_BETTING_RISK_LIMIT_EXCEEDED = Self-imposed risk limit exceeded,  
-           RESUBMIT_REQUEST = The ticket hast to be resubmitted,  
+           RESPONSIBLE_BETTING_RISK_LIMIT_EXCEEDED = Self-imposed risk limit exceeded, 
            SYSTEM_ERROR_1 = Unexpected error,  
            SYSTEM_ERROR_2 = Unexpected error,  
            UNIQUE_REQUEST_ID_REQUIRED = UniqueRequestId is missing,  
@@ -2150,7 +2145,6 @@ definitions:
           - PAST_CUTOFFTIME
           - RESPONSIBLE_BETTING_LOSS_LIMIT_EXCEEDED
           - RESPONSIBLE_BETTING_RISK_LIMIT_EXCEEDED
-          - RESUBMIT_REQUEST
           - SYSTEM_ERROR_1
           - SYSTEM_ERROR_2
           - UNIQUE_REQUEST_ID_REQUIRED
