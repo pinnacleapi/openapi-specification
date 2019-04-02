@@ -7,7 +7,7 @@ info:
   
     # Authentication 
     
-    API uses HTTP Basic access authentication.You need to send Authorization HTTP Request header:  
+    API uses HTTP Basic access authentication. You need to send Authorization HTTP Request header:  
     
     `Authorization: Basic <Base64 value of UTF-8 encoded "username:password">`
     
@@ -245,7 +245,7 @@ paths:
           ```
           https://api.pinnacle.com/v2/bets?betlist=SETTLED&fromDate=2015-12-28T00:00:00Z&toDate=2015-12-29T00:00:00Z
           ```
-          When a bet is settled it's tagged with the settlement date and midnight time in [PST time zone](https://en.wikipedia.org/wiki/Pacific_Time_Zone).  When querying by fromDate/toDate range, date time gets converted from [UTC](https://en.wikipedia.org/wiki/Coordinated_Universal_Time) to  [PST](https://en.wikipedia.org/wiki/Pacific_Time_Zone) and then its used to filter the settled bets, e.g. if one wants to query all settled bets between 2017-11-20 and 2017-11-22 (in PST time zone) one should issue a  call: 
+          When a bet is settled it's tagged with the settlement date and midnight time in [PST time zone](https://en.wikipedia.org/wiki/Pacific_Time_Zone).  When querying by fromDate/toDate range, date time gets converted from [UTC](https://en.wikipedia.org/wiki/Coordinated_Universal_Time) to  [PST](https://en.wikipedia.org/wiki/Pacific_Time_Zone) and then it’s used to filter the settled bets, e.g. if one wants to query all settled bets between 2017-11-20 and 2017-11-22 (in PST time zone) one should issue a  call: 
           ```
           https://api.pinnacle.com/v2/bets?betlist=SETTLED&fromDate=2017-11-20T00:00:00Z&toDate=2017-11-23T00:00:00Z
           ```
@@ -307,7 +307,7 @@ paths:
         - name: uniqueRequestIds
           in: query
           description: |
-              A comma separated list of uniqueRequestIds to query earlier  placed straight bets. If specified, is treated with highest priority, all other parameters are ignored. Maximum is 10 ids. If client has bet id, preferred way is to use betIds query parameter to check the get the bets. You can use uniqueRequestIds when you do not  have bet id. That’s pretty much in just 2 cases\:
+              A comma separated list of uniqueRequestIds to query earlier placed straight bets. If specified, is treated with highest priority, all other parameters are ignored. Maximum is 10 ids. If client has bet id, preferred way is to use betIds query parameter to check the get the bets. You can use uniqueRequestIds when you do not have bet id. That’s pretty much in just 2 cases\:
               
               1. When you bet on live event with live delay, place bet response in that case does not return bet id, so client can query bet status by uniqueRequestIds.
               2. In case of any network issues when client is not sure what happened with his place bet request. Empty response means that the bet was not placed. Please check [Deduplication section](https://www.pinnacle.com/de/api/manual#overview) 
@@ -401,7 +401,7 @@ paths:
             - ALL
         - name: betStatuses
           in: query
-          description: 'Type of bet statuse to return. This works only in conjustion with betlist, as additional filter.'
+          description: 'Type of bet statues to return. This works only in conjustion with betlist, as additional filter.'
           required: false
           type: array
           items:
@@ -499,7 +499,7 @@ paths:
       tags:
         - Betting Status
       summary: Get Betting Status
-      description: 'Returns current betting status. During maintenance windows betting could be disabled , you can call this operation to check the current betting status.'
+      description: 'Returns current betting status. During maintenance windows betting could be disabled, you can call this operation to check the current betting status.'
       operationId: Bets_GetBettingStatus
       consumes: []
       produces:
@@ -658,7 +658,7 @@ definitions:
           RED_CARDS_CHANGED = Bet is submitted on a live soccer event with changed red card count,  
           SCORE_CHANGED = Bet is submitted on a live soccer event with changed score,  
           TIME_RESTRICTION = Bet is submitted within too short of a period from the same bet previously placed by a client,  
-          DUPLICATE_UNIQUE_REQUEST_ID = REquest with the same uniqueRequestId was already processed. Please set the new value if you still want the request to be processed,  
+          DUPLICATE_UNIQUE_REQUEST_ID = Request with the same uniqueRequestId was already processed. Please set the new value if you still want the request to be processed,  
           INCOMPLETE_CUSTOMER_BETTING_PROFILE = System configuration issue,  
           INVALID_CUSTOMER_PROFILE = System configuration issue,   
           LIMITS_CONFIGURATION_ISSUE = System configuration issue,   
@@ -702,7 +702,7 @@ definitions:
         description: Echo of the uniqueRequestId from the request.
       betterLineWasAccepted:
         type: boolean
-        description: "Whether or not the bet was accepted on the line that changed in favour of client.\r\nThis can be true only if acceptBetterLine in the Place Bet request is set to TRUE."
+        description: "Whether or not the bet was accepted on the line that changed in favour of client.\r\n This can be true only if acceptBetterLine in the Place Bet request is set to TRUE."
       price:
         type: number
         format: double
@@ -717,8 +717,8 @@ definitions:
           INVALID_REQUEST_DATA  = Invalid request parameters (http status 400)  
           INVALID_CREDENTIALS = Authorization failed, invalid credentials (http status 401)  
           INVALID_AUTHORIZATION_HEADER = HTTP Authorization header is missing (http status 401) 
-          ACCOUNT_INACTIVE = Client's account is not active  (http status 403)  
-          NO_API_ACCESS = Account not permitted to access the API  (http status 403) 
+          ACCOUNT_INACTIVE = Client's account is not active (http status 403)  
+          NO_API_ACCESS = Account not permitted to access the API (http status 403) 
           RESUBMIT_REQUEST = It can happen only when placing a bet (http status 400).  Unable to process the request but the request itself is valid. This happens more often on the live betting in situations when there is more than one place bet request at the same on the same line. When this happens, we don't keep the place bet request on the server until we know if we can accept or reject the bet, but instead we return the error. It's also very likely that the line will change after that. To reduce a chance of getting RESUBMIT_REQUEST client should try to place a bet as fast as possible. 
         enum:
           - INVALID_REQUEST_DATA
@@ -760,7 +760,7 @@ definitions:
           INVALID_ODDS_FORMAT = If a bet was submitted with the odds format that is not allowed for the client,  
           LINE_CHANGED = Bet is submitted on a line that has changed,  
           LISTED_PITCHERS_SELECTION_ERROR = If bet was submitted with pitcher1MustStart and/or pitcher2MustStart parameters in Place Bet request with values that are not allowed,  
-          OFFLINE_EVENT = Bet is submitted on a event that is offline or the submitted line is not offered at the moment due to points/handicap change or the submitted bet type is just not offered at the moment,  
+          OFFLINE_EVENT = Bet is submitted on an event that is offline or the submitted line is not offered at the moment due to points/handicap change or the submitted bet type is just not offered at the moment,  
           PAST_CUTOFFTIME = Bet is submitted on a game after the betting cutoff time,  
           RED_CARDS_CHANGED = Bet is submitted on a live soccer event with changed red card count,  
           SCORE_CHANGED = Bet is submitted on a live soccer event with changed score,  
@@ -1012,7 +1012,7 @@ definitions:
         format: double
         example: null
         x-nullable: true
-        description: 'End of period team 2 score, only for settled bets. If the bet was placed on Game period (periodNumber =0) , this will be null'
+        description: 'End of period team 2 score, only for settled bets. If the bet was placed on Game period (periodNumber =0), this will be null'
       isLive:
         type: string
         enum:
@@ -1214,13 +1214,13 @@ definitions:
           format: double
           example: null
           x-nullable: true
-          description: '.End of period team 1 score, only for settled bets. If the bet was placed on Game period (periodNumber =0) , this will be null . '
+          description: '.End of period team 1 score, only for settled bets. If the bet was placed on Game period (periodNumber =0), this will be null . '
         pTeam2Score:
           type: number
           format: double
           example: null
           x-nullable: true
-          description: 'End of period team 2 score, only for settled bets. If the bet was placed on Game period (periodNumber =0) , this will be null'
+          description: 'End of period team 2 score, only for settled bets. If the bet was placed on Game period (periodNumber =0), this will be null'
         isLive:
           type: boolean
           example: false
@@ -1576,7 +1576,7 @@ definitions:
         format: int64
         example: null
         x-nullable: true
-        description: 'If bet was accpepted on alternate line, the altLineId will be returned.'
+        description: 'If bet was accepted on alternate line, the altLineId will be returned.'
       price:
         type: number
         format: double
@@ -2113,10 +2113,10 @@ definitions:
           ALL_BETTING_CLOSED = Betting is not allowed at this moment. This may happen during system maintenance.  
            ABOVE_MAX_BET_AMOUNT = Stake is above allowed maximum amount,  
            BELOW_MIN_BET_AMOUNT = Stake is below allowed minimum amount,  
-           BLOCKED_BETTING = Betting is suspened for the client,  
+           BLOCKED_BETTING = Betting is suspended for the client,  
            BLOCKED_CLIENT = Client is no longer active,  
            CONTEST_NOT_FOUND = Incorrect contest id provided or contest is no longer available,  
-           DUPLICATE_UNIQUE_REQUEST_ID = UniqueRequestId must be inque for each bet,  
+           DUPLICATE_UNIQUE_REQUEST_ID = UniqueRequestId must be unique for each bet,  
            INCOMPLETE_CUSTOMER_BETTING_PROFILE = Customer profile could not be loaded,   
            INSUFFICIENT_FUNDS = Bet is submitted by a client with insufficient funds,  
            INVALID_COUNTRY = Client country is not allowed for betting,  
@@ -2686,3 +2686,4 @@ definitions:
           - ALL_LIVE_BETTING_CLOSED
           - ALL_BETTING_CLOSED
     description: ''
+
