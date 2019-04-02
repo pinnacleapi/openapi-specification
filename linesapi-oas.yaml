@@ -9,7 +9,7 @@ info:
     # Authentication 
 
 
-    API uses HTTP Basic access authentication.You need to send Authorization
+    API uses HTTP Basic access authentication. You need to send Authorization
     HTTP Request header:  
 
 
@@ -42,7 +42,7 @@ paths:
       parameters:
         - name: sportId
           in: query
-          description: The sport id to retrieve the fixutres for.
+          description: The sport id to retrieve the fixtures for.
           required: true
           schema:
             type: integer
@@ -595,8 +595,7 @@ paths:
         - Odds
       summary: Get Straight Odds - v1
       description: >-
-        Returns straight odds for all non-settled events. Please note that it is
-        possible that the event is in Get Fixtures response but not in Get Odds.
+        Returns straight odds for all non-settled events. Please note that it is  possible that the event is in Get Fixtures response but not in Get Odds.
         This happens when the odds are not currently available for wagering.
       operationId: Odds_Straight_V1_Get
       parameters:
@@ -694,7 +693,7 @@ paths:
       summary: Get Parlay Odds - v1
       description: >-
         Returns parlay odds for all non-settled events. Please note that it is
-        possible that the event is in Get Fixtures response but notin Get Odds.
+        possible that the event is in Get Fixtures response but not in Get Parlay Odds.
         This happens when the odds are not currently available for wagering.
       operationId: Odds_Parlays_V1_Get
       parameters:
@@ -1706,10 +1705,10 @@ components:
       properties:
         code:
           type: string
-          description: Identifier representing the the type of error that occurred.
+          description: Identifier representing the type of error that occurred.
         message:
           type: string
-          description: Description of the the error.
+          description: Description of the error.
       description: Contains details of an error that was encountered.
     ExtendedErrorResponse:
       type: object
@@ -1833,7 +1832,7 @@ components:
           type: integer
           format: int64
           description: >-
-            If event is linked to another event , parentId will be populated. 
+            If event is linked to another event, parentId will be populated. 
             Live event would have pre game event as parent id.
         starts:
           type: string
@@ -1849,7 +1848,7 @@ components:
           type: string
           description: >-
             Team1 rotation number. Please note that in the next version of
-            /fixtures, rotNum property will be decomissioned. ParentId can be
+            /fixtures, rotNum property will be decommissioned. ParentId can be
             used instead to group the related events.
         liveStatus:
           type: integer
@@ -1907,9 +1906,8 @@ components:
 
             1 = Not allowed to parlay this event, 
 
-            2 = Allowed to parlay with the restrictions. You can not have more
-            than one leg from the same event in the parlay. All events with the
-            same rotation number are treated as same event.
+            2 = Allowed to parlay with the restrictions. You cannot have more
+            than one leg from the same event in the parlay. All events with the same rotation number are treated as same event.
           enum:
             - 0
             - 1
@@ -1917,7 +1915,7 @@ components:
         altTeaser:
           type: boolean
           description: >-
-            Whether an event is offer with alterantive teaser points. Events
+            Whether an event is offer with alternative teaser points. Events
             with alternative teaser points may vary from teaser definition.
         resultingUnit:
           type: string
@@ -2516,10 +2514,10 @@ components:
               INVALID_LEGS = One or more of the legs is invalid,
               SAME_EVENT_ONLY_REQUIRED = Teaser specified requires that all legs are from the same event,  
               TEASER_DISABLED = Teaser has been disabled and cannot be bet on,  
-              TEASER_DOES_NOT_EXIST = The teaser identifier could requeted could not be found,  
+              TEASER_DOES_NOT_EXIST = The teaser identifier could not be found,  
               TOO_FEW_LEGS = You do not meet the minimum number of legs requirement for the teaser specified,  
               TOO_MANY_LEGS = You are above the maximum number of legs for the teaser specified,  
-              UNKNOWN = An unknown error has occured  
+              UNKNOWN = An unknown error has occurred  
           enum:
             - INVALID_LEGS
             - SAME_EVENT_ONLY_REQUIRED
@@ -3580,3 +3578,4 @@ components:
           format: double
           description: Vig Percentage
           type: number
+
