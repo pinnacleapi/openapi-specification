@@ -6,7 +6,7 @@ info:
     
     # Authentication 
     
-    API uses HTTP Basic access authentication.You need to send Authorization HTTP Request header:  
+    API uses HTTP Basic access authentication. You need to send Authorization HTTP Request header:  
     
     `Authorization: Basic <Base64 value of UTF-8 encoded "username:password">`
     
@@ -108,10 +108,10 @@ definitions:
     properties:
       code:
         type: string
-        description: Identifier representing the the type of error that occurred.
+        description: Identifier representing the type of error that occurred.
       message:
         type: string
-        description: Description of the the error.
+        description: Description of the error.
     description: Contains details of an error that was encountered.
   ExtendedErrorResponse:
     type: object
@@ -174,3 +174,4 @@ definitions:
       text:
         type: string
         description: Translation text.
+
