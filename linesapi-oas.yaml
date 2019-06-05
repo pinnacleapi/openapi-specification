@@ -2008,6 +2008,14 @@ components:
           type: integer
           format: int32
           description: Team2 score.
+        team1ScoreSets:
+          type: integer
+          format: int32
+          description: Team1 sets score. Supported for tennis only.
+        team2ScoreSets:
+          type: integer
+          format: int32
+          description: Team2 sets score. Supported for tennis only.  
         cancellationReason:
           $ref: '#/components/schemas/CancellationReasonType'
     CancellationReasonType:
@@ -3578,4 +3586,3 @@ components:
           format: double
           description: Vig Percentage
           type: number
-
