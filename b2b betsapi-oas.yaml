@@ -4,18 +4,22 @@ info:
   version: 2.2.7
   title: Pinnacle - B2B Bets API Reference
   description: |
-    B2B API to place bets.  Main difference comparing to the Public Bets API is that B2B API can capture info about the actual bettor in the partner's system.    
+    B2B API to place bets.  Main difference comparing to the Public Bets API is that B2B Bets API captures unique id off the actual bettor in the partner's system.    
     
-    It should be used in the conjunction with the Public API, to get the fixtures, odds and bets from.
+    It should be used in the conjunction with the Public API to get the fixtures, odds and bets.
 
     # Authentication 
     
-    Access is restricted by IP address. Partner would have to provide the list of IP addresses. Pinnacle will provide the api key.
+    Access is restricted by IP address. Partner would have to provide the list of IP addresses from where it would access the API. 
+    
   
-    B2B API requires both:  
+    B2B API authentication requires both:  
       - [HTTP Basic access authentication](https://en.wikipedia.org/wiki/Basic_access_authentication)
-      - ApiKey authentication
-  
+      - Api key authentication
+
+   Partner key identifies the partner and can be used with any client credentials partner may have.  
+   Pinnacle will provide the api key (partner key) upon approval to use the B2B API. 
+ 
     You need to send `Authorization ` and `X-PARTNER-KEY` HTTP headers, e.g.
     
     ```
@@ -1286,7 +1290,7 @@ components:
           description: | 
             Parlay Leg status.
             CANCELLED = The leg is canceled- the stake on this leg will be transferred to the next one. In this case the leg will be ignored when calculating the winLoss,  
-            LOSE = The leg is a loss or a push-lose. When Push-lose happens, the half of the stake on the leg will be pushed to the next leg, and the other half will be a lose. This can happen only when the leg is placed on a quarter points handicap,  
+            LOSE = The leg is a loss or a push-lose. When Push-lose happens, the half of the stake on the leg will be pushed to the next leg, and the other half will be a loss. This can happen only when the leg is placed on a quarter points handicap,  
             PUSH = The leg is a push - the stake on this leg will be transferred to the next one. In this case the leg will be ignored when calculating the winLoss,  
             REFUNDED = The leg is refunded - the stake on this leg will be transferred to the next one. In this case the leg will be ignored when calculating the winLoss,  
             WON = The leg is a won or a push-won. When Push-won happens, the half of the stake on the leg will be pushed to the next leg, and the other half is won. This can happen only when the leg is placed on a quarter points handicap 
