@@ -17,8 +17,8 @@ info:
       - [HTTP Basic access authentication](https://en.wikipedia.org/wiki/Basic_access_authentication)
       - Api key authentication
 
-   Partner key identifies the partner and can be used with any client credentials partner may have.  
-   Pinnacle will provide the api key (partner key) upon approval to use the B2B API. 
+      Partner key identifies the partner and can be used with any client credentials partner may have.  
+      Pinnacle will provide the api key (partner key) upon approval to use the B2B API. 
  
     You need to send `Authorization ` and `X-PARTNER-KEY` HTTP headers, e.g.
     
