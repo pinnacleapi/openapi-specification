@@ -24,8 +24,6 @@ security:
 paths:
   /v1/client/balance:
     get:
-      tags:
-        - Default
       summary: Get Client Balance - v1
       description: Returns current client balance.
       operationId: Client_Balance_V1_Get
@@ -59,8 +57,6 @@ paths:
       deprecated: false
   /v1/translations:
     get:
-      tags:
-        - Default
       summary: Get Translations - v1
       description: >
         Returns language translations.  
