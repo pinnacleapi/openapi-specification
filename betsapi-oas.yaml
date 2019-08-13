@@ -73,9 +73,14 @@ paths:
       description: | 
            Place straight bet (SPREAD, MONEYLINE, TOTAL_POINTS, TEAM_TOTAL_POINTS).
       
-           Please note when the status is PENDING_ACCEPTANCE and if the live delay was applied, the response will not have betId. Client would have to call /bets by uniqueRequestId to check the status if the bet was ACCEPTED.
+           Please note when the status is PENDING_ACCEPTANCE and if the live delay was applied, the response will not have betId. Client would have to call /bets by uniqueRequestId to check the status if the bet was ACCEPTED.  For more details please see [How to place a bet on live events?](https://github.com/pinnacleapi/pinnacleapi-documentation/blob/master/FAQ.md#how-to-place-a-bet-on-live-events)
            
-           For more details please see [Betting on Events with Live Delay](https://www.pinnacle.com/en/api/manual#livedelaybetting)
+           Make sure you handle properly the case of an unexpected error as per
+            [How to handle error on placing a bet?](https://github.com/pinnacleapi/pinnacleapi-documentation/blob/master/FAQ.md#how-to-handle-unexpected-error-on-placing-a-bet)
+           
+           
+           
+           
       operationId: Bets_StraightV2
       consumes:
         - application/json
@@ -114,6 +119,11 @@ paths:
       tags:
         - Place Bets
       summary: Place parlay bet.
+      description: | 
+
+           Make sure you handle properly the case of an unexpected error as per
+            [How to handle error on placing a bet?](https://github.com/pinnacleapi/pinnacleapi-documentation/blob/master/FAQ.md#how-to-handle-unexpected-error-on-placing-a-bet)
+           
       operationId: Bets_Parlay
       consumes:
         - application/json
@@ -152,6 +162,11 @@ paths:
       tags:
         - Place Bets
       summary: Place teaser bet.
+      description: | 
+
+           Make sure you handle properly the case of an unexpected error as per
+            [How to handle error on placing a bet?](https://github.com/pinnacleapi/pinnacleapi-documentation/blob/master/FAQ.md#how-to-handle-unexpected-error-on-placing-a-bet)
+           
       operationId: Bets_Teaser
       consumes:
         - application/json
@@ -190,6 +205,11 @@ paths:
       tags:
         - Place Bets
       summary: Place specials bet.
+      description: | 
+
+           Make sure you handle properly the case of an unexpected error as per
+            [How to handle error on placing a bet?](https://github.com/pinnacleapi/pinnacleapi-documentation/blob/master/FAQ.md#how-to-handle-unexpected-error-on-placing-a-bet)
+           
       operationId: Bets_Special
       consumes:
         - application/json
