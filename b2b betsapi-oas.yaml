@@ -343,10 +343,6 @@ components:
           description: Bettor identifier in the partner's system.
           example: ABC1234
           type: string
-        sourceIP:
-          description: Bettor's IP address
-          type: string
-          example: 123.123.123.123
         ext:
            $ref: '#/components/schemas/PlaceBetExtension'
     MultiBetStraightResponse:
@@ -388,7 +384,6 @@ components:
             - INVALID_ODDS_FORMAT
             - INVALID_PARTNER
             - INVALID_SOURCEID
-            - INVALID_SOURCEIP
             - LICENCE_RESTRICTION_LIVE_BETTING_BLOCKED
             - LIMITS_CONFIGURATION_ISSUE
             - LIMIT_PRICE_IS_WORST_THAN_CURRENT
@@ -675,10 +670,6 @@ components:
           description: Bettor identifier in the partner's system.
           example: ABC1234
           type: string
-        sourceIP:
-          description: Bettor's IP address
-          type: string
-          example: 123.123.123.123
         ext:
            $ref: '#/components/schemas/PlaceBetExtension'        
       description: ''
@@ -724,7 +715,6 @@ components:
             - INVALID_PARTNER
             - INVALID_REQUEST
             - INVALID_SOURCEID
-            - INVALID_SOURCEIP
             - INVALID_WAGER
             - INVALID_WAGER_TYPE
             - LINE_CHANGED
@@ -1441,10 +1431,6 @@ components:
           description: Bettor identifier in the partner's system.
           example: ABC1234
           type: string
-        sourceIP:
-          description: Bettor's IP address
-          type: string
-          example: 123.123.123.123
         ext:
            $ref: '#/components/schemas/PlaceBetExtension'    
         legs:
