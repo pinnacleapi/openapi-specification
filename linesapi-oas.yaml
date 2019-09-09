@@ -2674,19 +2674,19 @@ components:
         maxSpread:
           type: number
           format: double
-          description: Maximum spread bet. Only in straight odds response.
+          description: Maximum spread bet volume. See [How to calculate max risk from the max volume](https://github.com/pinnacleapi/pinnacleapi-documentation/blob/master/FAQ.md#how-to-calculate-max-risk-from-the-max-volume-limits-in-odds)
         maxMoneyline:
           type: number
           format: double
-          description: Maximum moneyline bet. Only in straight odds response.
+          description: Maximum moneyline bet volume. See [How to calculate max risk from the max volume](https://github.com/pinnacleapi/pinnacleapi-documentation/blob/master/FAQ.md#how-to-calculate-max-risk-from-the-max-volume-limits-in-odds)
         maxTotal:
           type: number
           format: double
-          description: Maximum total points bet. Only in straight odds response.
+          description: Maximum total points bet volume. See [How to calculate max risk from the max volume](https://github.com/pinnacleapi/pinnacleapi-documentation/blob/master/FAQ.md#how-to-calculate-max-risk-from-the-max-volume-limits-in-odds)
         maxTeamTotal:
           type: number
           format: double
-          description: Maximum team total points bet. Only in straight odds response.
+          description: Maximum team total points bet volume. See [How to calculate max risk from the max volume](https://github.com/pinnacleapi/pinnacleapi-documentation/blob/master/FAQ.md#how-to-calculate-max-risk-from-the-max-volume-limits-in-odds)
         spreads:
           type: array
           description: Container for spread odds.
@@ -2871,19 +2871,19 @@ components:
         maxSpread:
           type: number
           format: double
-          description: Maximum spread bet. Only in straight odds response.
+          description: Maximum spread bet volume. See [How to calculate max risk from the max volume](https://github.com/pinnacleapi/pinnacleapi-documentation/blob/master/FAQ.md#how-to-calculate-max-risk-from-the-max-volume-limits-in-odds)
         maxMoneyline:
           type: number
           format: double
-          description: Maximum moneyline bet. Only in straight odds response.
+          description: Maximum moneyline bet volume. See [How to calculate max risk from the max volume](https://github.com/pinnacleapi/pinnacleapi-documentation/blob/master/FAQ.md#how-to-calculate-max-risk-from-the-max-volume-limits-in-odds)
         maxTotal:
           type: number
           format: double
-          description: Maximum total points bet. Only in straight odds response.
+          description: Maximum total points bet volume. See [How to calculate max risk from the max volume](https://github.com/pinnacleapi/pinnacleapi-documentation/blob/master/FAQ.md#how-to-calculate-max-risk-from-the-max-volume-limits-in-odds)
         maxTeamTotal:
           type: number
           format: double
-          description: Maximum team total points bet. Only in straight odds response.
+          description: Maximum team total points bet volume. See [How to calculate max risk from the max volume](https://github.com/pinnacleapi/pinnacleapi-documentation/blob/master/FAQ.md#how-to-calculate-max-risk-from-the-max-volume-limits-in-odds)
         spreads:
           type: array
           description: Container for spread odds.
@@ -3048,7 +3048,7 @@ components:
         maxBet:
           type: number
           format: double
-          description: Maximum bet amount.
+          description: Maximum bet amount volume. See [How to calculate max risk from the max volume](https://github.com/pinnacleapi/pinnacleapi-documentation/blob/master/FAQ.md#how-to-calculate-max-risk-from-the-max-volume-limits-in-odds)
         homeHdp:
           type: number
           format: double
@@ -3073,7 +3073,7 @@ components:
         maxBet:
           type: number
           format: double
-          description: Maximum bet amount.
+          description: Maximum bet amount volume. See [How to calculate max risk from the max volume](https://github.com/pinnacleapi/pinnacleapi-documentation/blob/master/FAQ.md#how-to-calculate-max-risk-from-the-max-volume-limits-in-odds)
         overPoints:
           type: number
           format: double
@@ -3530,7 +3530,7 @@ components:
           type: integer
         maxBet:
           format: double
-          description: Maximum risk amount.
+          description: Maximum bet volume amount. See [How to calculate max risk from the max volume](https://github.com/pinnacleapi/pinnacleapi-documentation/blob/master/FAQ.md#how-to-calculate-max-risk-from-the-max-volume-limits-in-odds)
           type: number
         contestantLines:
           description: ContestantLines available for wagering on.
