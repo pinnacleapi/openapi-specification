@@ -3556,7 +3556,3 @@ components:
           format: double
           description: 'A number indicating the spread, over/under etc.'
           type: number
-        vig:
-          format: double
-          description: Vig Percentage
-          type: number
