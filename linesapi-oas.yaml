@@ -2629,19 +2629,19 @@ components:
         awayScore:
           type: number
           format: double
-          description: Away team score. Only for live soccer events.
+          description: Away team score. Only for live soccer events.Supported only for full match period (number=0).
         homeScore:
           type: number
           format: double
-          description: Home team score. Only for live soccer events.
+          description: Home team score. Only for live soccer events.Supported only for full match period (number=0).
         awayRedCards:
           type: integer
           format: int32
-          description: Away team red cards. Only for live soccer events.
+          description: Away team red cards. Only for live soccer events. Supported only for full match period (number=0).
         homeRedCards:
           type: integer
           format: int32
-          description: Home team red cards. Only for live soccer events.
+          description: Home team red cards. Only for live soccer events.Supported only for full match period (number=0).
         periods:
           type: array
           description: Contains a list of periods.
