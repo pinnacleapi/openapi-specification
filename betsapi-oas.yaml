@@ -1099,7 +1099,7 @@ definitions:
             
             ACCEPTED = Bet was accepted.
             CANCELLED = Bet is cancelled as per Pinnacle betting rules.  
-            LOSE = The bet is settled as lose.  
+            LOST = The bet is settled as lose.  
             PENDING_ACCEPTANCE = This status is reserved only for live bets. If a live bet is placed during danger zone or live delay is applied, it will be in PENDING_ACCEPTANCE , otherwise in ACCEPTED status. From this status bet can go to ACCEPTED or NOT_ACCEPTED status.  
             REFUNDED = When an event is cancelled or when the bet is settled as push, the bet will have REFUNDED status.  
             NOT_ACCEPTED = Bet was not accepted. Bet can be in this status only if it was previously in PENDING_ACCEPTANCE status.  
@@ -1109,7 +1109,7 @@ definitions:
           enum:
             - ACCEPTED
             - CANCELLED
-            - LOSE
+            - LOST
             - PENDING_ACCEPTANCE
             - REFUNDED
             - NOT_ACCEPTED
@@ -1700,7 +1700,7 @@ definitions:
           
           ACCEPTED = Bet was accepted.  
           CANCELLED = Bet is cancelled as per Pinnacle betting rules.  
-          LOSE = The bet is settled as lose.  
+          LOST = The bet is settled as lose.  
           PENDING_ACCEPTANCE = This status is reserved only for live bets. If a live bet is placed during danger zone or live delay is applied, it will be in PENDING_ACCEPTANCE , otherwise in ACCEPTED status. From this status bet can go to ACCEPTED or REJECTED status.  
           REFUNDED = When an event is cancelled or when the bet is settled as push, the bet will have REFUNDED status.  
           NOT_ACCEPTED = Bet was not accepted. Bet can be in this status only if it was previously in PENDING_ACCEPTANCE status.  
