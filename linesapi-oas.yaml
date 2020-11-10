@@ -543,27 +543,22 @@ paths:
               examples:
                 response:
                   value:
-                    sportId: 0
-                    last: 0
+                    sportId: 29
+                    last: 7004137
                     leagues:
-                      - id: 0
+                      - id: 5200
                         specials:
-                          - settledAt: '2017-10-11T15:05:50.996671Z'
+                          - id : 1206517453
+                            settlementId: 7003218
+                            status: 3
+                            settledAt: '2020-11-10T06:56:28.427Z'
+                            contestants:
+                              - name: Barranquilla
+                                outcome: "X"
+                              - name: Valledupar
+                                outcome: "X"                                
                             cancellationReason:
-                              code: string
-                              details:
-                                correctTeam1Id: string
-                                correctTeam2Id: string
-                                correctListedPitcher1: string
-                                correctListedPitcher2: string
-                                correctSpread: '0.0'
-                                correctTotalPoints: '0.0'
-                                correctTeam1TotalPoints: '0.0'
-                                correctTeam2TotalPoints: '0.0'
-                                correctTeam1Score: '0'
-                                correctTeam2Score: '0'
-                                correctTeam1TennisSetsScore: '0'
-                                correctTeam2TennisSetsScore: '0'
+                              code: FBS_CW_65 
         '400':
           description: BadRequest
           content:
@@ -3445,6 +3440,40 @@ components:
         cancellationReason:
           $ref: '#/components/schemas/CancellationReason'
           description: Cancellation Reason for Special Event
+        contestants:
+          description: A collection of contestants
+          type: array
+          items:
+            $ref: '#/components/schemas/SettledContestants'   
+    SettledContestants:
+      description: Settled Special
+      type: object
+      properties:
+        name: 
+          description: Contestant name
+          type: string
+          example: Union Magdalena
+        outcome: 
+           description: >
+            Contestant outcomes
+
+            W =  Won,
+
+            L = Lost, 
+
+            X = Cancelled,
+            
+            T = Tie,
+            
+            Z = Scratched
+           type: string
+           example: Z
+           enum:
+            - W
+            - L
+            - X
+            - T
+            - Z
     SpecialLineResponse:
       type: object
       properties:
