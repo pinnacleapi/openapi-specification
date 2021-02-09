@@ -1117,8 +1117,7 @@ paths:
         - name: periodNumber
           in: query
           description: >-
-            This represents the period of the match. For example, for soccer we
-            have 0 (Game),  1 (1st Half) & 2 (2nd Half)
+            This represents the period of the match. Please check Get Periods endpoint for the list of currently supported periods per sport.  
           required: true
           schema:
             type: integer
