@@ -159,6 +159,50 @@ paths:
           description: InternalServerError
           schema:
             $ref: '#/definitions/ErrorResponseWithErrorRef'
+      deprecated: true    
+  /v2/bets/parlay:
+    post:
+      tags:
+        - Place Bets
+      summary: Place parlay bet.
+      description: | 
+
+           Make sure you handle properly the case of an unexpected error as per
+            [How to handle error on placing a bet?](https://github.com/pinnacleapi/pinnacleapi-documentation/blob/master/FAQ.md#how-to-handle-unexpected-error-on-placing-a-bet)
+           
+      operationId: Bets_ParlayV2
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: request
+          description: The Parlay request.
+          required: true
+          schema:
+            $ref: '#/definitions/PlaceParlayBetRequest'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PlaceParlayBetResponse'
+        '400':
+          description: BadRequest
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/ErrorResponseWithErrorRef'          
   /v1/bets/teaser:
     post:
       tags:
