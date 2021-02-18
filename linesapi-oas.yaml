@@ -1231,6 +1231,50 @@ paths:
             schema:
               $ref: '#/components/schemas/ParlayLinesRequest'
         required: true
+  /v2/line/parlay:
+    post:
+      tags:
+        - Line
+      summary: Get Parlay Line - v2
+      description: Returns parlay lines and calculate odds. For placing round robin bets, must be used with /v2/bets/parlay.
+      operationId: Line_Parlay_V2_Post
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParlayLinesResponseV2'
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExtendedErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ParlayLinesRequest'
+        required: true      
   /v1/line/teaser:
     post:
       tags:
@@ -2270,6 +2314,56 @@ components:
         - eventId
         - periodNumber
         - legBetType
+    ParlayLinesResponseV2:
+      type: object
+      properties:
+        status:
+          type: string
+          description: >-
+            Status of the parlay [VALID = Parlay is valid, PROCESSED_WITH_ERROR
+            = Parlay contains error(s)]
+          example: PROCESSED_WITH_ERROR
+          enum:
+            - VALID
+            - PROCESSED_WITH_ERROR
+        error:
+          type: string
+          description: >-
+            INVALID_LEGS. Signifies that one or more legs are invalid. Populated
+            only if status is PROCESSED_WITH_ERROR.
+          example: INVALID_LEGS
+        minRiskStake:
+          type: number
+          format: double
+          description: Minimum allowed stake amount.
+        maxParlayRiskStake:
+          type: number
+          format: double
+          description: Maximum allowed stake amount for parlay bets. For round robin max stake [see FAQ](https://github.com/pinnacleapi/pinnacleapi-documentation/blob/master/FAQ.md#how-to-calculate-round-robin-max-stake).
+        maxRoundRobinTotalRisk:
+          type: number
+          format: double
+          description: Maximum allowed total stake amount for all the parlay bets in the round robin.
+        maxRoundRobinTotalWin:
+          type: number
+          format: double
+          description: Maximum allowed total win amount for all the parlay bets in the round robin.
+        roundRobinOptionWithOdds:
+          type: array
+          description: >-
+            Provides array with all acceptable Round Robin options with parlay
+            odds for that option.
+          items:
+            $ref: '#/components/schemas/RoundRobinOptionWithOddsV2'
+        legs:
+          type: array
+          description: >-
+            The collection of legs (the format of the object is described
+            below).
+          items:
+            $ref: '#/components/schemas/ParlayLineLeg'
+      required:
+        - status
     ParlayLinesResponse:
       type: object
       properties:
@@ -2351,6 +2445,49 @@ components:
         - roundRobinOption
         - odds
         - unroundedDecimalOdds
+    RoundRobinOptionWithOddsV2:
+      type: object
+      properties:
+        roundRobinOption:
+          type: string
+          description: |
+            RoundRobinOptions  
+              
+              Parlay = Single parlay that include all wagers (No Round Robin),  
+              TwoLegRoundRobin = Multiple parlays having 2 wagers each (round robin style),  
+              ThreeLegRoundRobin = Multiple parlays having 3 wagers each (round robin style),  
+              FourLegRoundRobin = Multiple parlays having 4 wagers each (round robin style),  
+              FiveLegRoundRobin = Multiple parlays having 5 wagers each (round robin style),  
+              SixLegRoundRobin = Multiple parlays having 6 wagers each (round robin style),  
+              SevenLegRoundRobin = Multiple parlays having 7 wagers each (round robin style),   
+              EightLegRoundRobin = Multiple parlays having 8 wagers each (round robin style)  
+          enum:
+            - Parlay
+            - TwoLegRoundRobin
+            - ThreeLegRoundRobin
+            - FourLegRoundRobin
+            - FiveLegRoundRobin
+            - SixLegRoundRobin
+            - SevenLegRoundRobin
+            - EightLegRoundRobin
+        odds:
+          type: number
+          format: double
+          description: Parlay odds for this option.
+        unroundedDecimalOdds:
+          type: number
+          format: double
+          description: >-
+            Unrounded parlay odds in decimal format to be used for calculations
+            only
+        numberOfBets:
+            type: number
+            format: int
+            description: Number of bets in the roundRobinOption.
+      required:
+        - roundRobinOption
+        - odds
+        - unroundedDecimalOdds    
     ParlayLineLeg:
       type: object
       properties:
@@ -2716,6 +2853,11 @@ components:
           type: number
           format: double
           description: Away team price.
+        max:
+          type: number
+          format: double
+          nullable: true
+          description: Maximum bet volume. Present only on alternative lines, if set it overides `maxSpread` market limit.  
     OddsMoneyline:
       type: object
       properties:
@@ -2750,6 +2892,11 @@ components:
           type: number
           format: double
           description: Under price.
+        max:
+          type: number
+          format: double
+          nullable: true
+          description: Maximum bet volume. Present only on alternative lines, if set it overides `maxTotal` market limit.  
     OddsTeamTotals:
       type: object
       properties:
