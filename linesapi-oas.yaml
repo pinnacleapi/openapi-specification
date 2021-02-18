@@ -789,6 +789,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ExtendedErrorResponse'
+      deprecated: true  
   /v1/odds/teaser:
     get:
       tags:
