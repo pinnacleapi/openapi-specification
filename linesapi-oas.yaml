@@ -1955,8 +1955,9 @@ components:
             Bookings 
         version:
           type: number
+          format: int64
           description: >
-            Fixture version, goes up when there is a cange in the fixture.    
+            Fixture version, goes up when there is a change in the fixture.    
     SettledFixturesSport:
       type: object
       properties:
