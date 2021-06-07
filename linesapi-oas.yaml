@@ -1953,6 +1953,10 @@ components:
           description: >
             Specifies based on what the event will be resulted, e.g. Corners,
             Bookings 
+        version:
+          type: number
+          description: >
+            Fixture version, goes up when there is a cange in the fixture.    
     SettledFixturesSport:
       type: object
       properties:
