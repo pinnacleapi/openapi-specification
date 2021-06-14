@@ -1521,33 +1521,7 @@ paths:
                         moneylineShortDescription: 1X2
                         totalShortDescription: O/U
                         team1TotalShortDescription: Team 1 Goals
-                        team2TotalShortDescription: Team 2 Goals
-                      - number: 1
-                        description: 1st Half
-                        shortDescription: 1st H
-                        spreadDescription: 1H Handicap
-                        moneylineDescription: 1H 1X2
-                        totalDescription: 1H Total
-                        team1TotalDescription: 1H Team 1 Goals
-                        team2TotalDescription: 1H Team 2 Goals
-                        spreadShortDescription: 1H HDP
-                        moneylineShortDescription: 1H 1X2
-                        totalShortDescription: 1H O/U
-                        team1TotalShortDescription: 1H GOAL
-                        team2TotalShortDescription: 1H GOAL
-                      - number: 2
-                        description: 2nd Half
-                        shortDescription: 2nd H
-                        spreadDescription: 2H Handicap
-                        moneylineDescription: 2H 1X2
-                        totalDescription: 2H Total
-                        team1TotalDescription: 2H Team 1 Goals
-                        team2TotalDescription: 2H Team 2 Goals
-                        spreadShortDescription: 2H HDP
-                        moneylineShortDescription: 2H 1X2
-                        totalShortDescription: 2H O/U
-                        team1TotalShortDescription: 2H GOAL
-                        team2TotalShortDescription: 2H GOAL
+                        team2TotalShortDescription: Team 2 Goals 
         '400':
           description: BadRequest
           content:
@@ -2007,8 +1981,7 @@ components:
           type: integer
           format: int32
           description: >-
-            This represents the period of the match. For example, for soccer we
-            have 0 (Game), 1 (1st Half) & 2 (2nd Half)
+            This represents the period of the match. 
         status:
           type: integer
           format: int32
@@ -2283,8 +2256,7 @@ components:
           type: integer
           format: int32
           description: >-
-            This represents the period of the match. For example, for soccer we
-            have 0 (Game), 1 (1st Half), 2 (2nd Half)
+            This represents the period of the match. 
         legBetType:
           type: string
           description: >-
@@ -2797,8 +2769,7 @@ components:
           type: integer
           format: int32
           description: >-
-            This represents the period of the match. For example, for soccer we
-            have  0 (Game), 1 (1st Half) & 2 (2nd Half)
+            This represents the period of the match.
         cutoff:
           type: string
           format: date-time
@@ -3004,8 +2975,7 @@ components:
           type: integer
           format: int32
           description: >-
-            This represents the period of the match. For example, for soccer we
-            have 0 (Game), 1 (1st Half) & 2 (2nd Half)
+            This represents the period of the match. 
         cutoff:
           type: string
           format: date-time
@@ -3518,8 +3488,7 @@ components:
         periodNumber:
           format: int32
           description: >-
-            The period of the match. For example in soccer 0 (Game), 1 (1st
-            Half) & 2 (2nd Half)
+            The period of the match.
           type: integer
         home:
           type: string
@@ -3688,7 +3657,7 @@ components:
             retrieve changes.
           type: integer
         leagues:
-          description: Contains a list of Leagues.
+          description: Contains a list of Leagues. 
           type: array
           items:
             $ref: '#/components/schemas/SpecialOddsLeague'
