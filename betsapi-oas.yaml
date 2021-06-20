@@ -1048,13 +1048,13 @@ definitions:
         format: double
         example: null
         x-nullable: true
-        description: 'Team 1 score that the bet was placed on, only for live bets.'
+        description: 'Team 1 score on the period that the bet was placed on at the moment of placing a bet, only for live bets.'
       team2Score:
         type: number
         format: double
         example: null
         x-nullable: true
-        description: 'Team 2 score that the bet was placed, only for live bets.'
+        description: 'Team 2 score on the period that the bet was placed on at the moment of placing a bet, only for live bets.'
       ftTeam1Score:
         type: number
         format: double
@@ -1282,13 +1282,13 @@ definitions:
           format: double
           example: null
           x-nullable: true
-          description: 'Team 1 score that the bet was placed on, only for live bets.'
+          description: 'Team 1 on the period that the bet was placed on at the moment of placing a bet, only for live bets.'
         team2Score:
           type: number
           format: double
           example: null
           x-nullable: true
-          description: 'Team 2 score that the bet was placed, only for live bets.'
+          description: 'Team 2 on the period that the bet was placed on at the moment of placing a bet, only for live bets.'
         ftTeam1Score:
           type: number
           format: double
