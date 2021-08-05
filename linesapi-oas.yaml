@@ -2260,8 +2260,8 @@ components:
         legBetType:
           type: string
           description: >-
-            Only SPREAD, MONEYLINE and TOTAL_POINTS are supported. [SPREAD,
-            MONEYLINE, TOTAL_POINTS]
+            SPREAD, MONEYLINE  TOTAL_POINTS and TEAM_TOTAL_POINTS are supported. [SPREAD,
+            MONEYLINE, TOTAL_POINTS, TEAM_TOTAL_POINTS]
           enum:
             - SPREAD
             - MONEYLINE
