@@ -1195,6 +1195,7 @@ paths:
       summary: Get Parlay Line - v1
       description: Returns parlay lines and calculate odds.
       operationId: Line_Parlay_V1_Post
+      deprecated: true  
       responses:
         '200':
           description: OK
@@ -2260,12 +2261,12 @@ components:
         legBetType:
           type: string
           description: >-
-            SPREAD, MONEYLINE  TOTAL_POINTS and TEAM_TOTAL_POINTS are supported. [SPREAD,
-            MONEYLINE, TOTAL_POINTS, TEAM_TOTAL_POINTS]
+            SPREAD, MONEYLINE,  TOTAL_POINTS and TEAM_TOTAL_POINTS are supported.  
           enum:
             - SPREAD
             - MONEYLINE
             - TOTAL_POINTS
+            - TEAM_TOTAL_POINTS
         team:
           type: string
           description: >-
