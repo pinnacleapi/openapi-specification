@@ -538,6 +538,22 @@ paths:
           items:
             type: string
           collectionFormat: csv
+        - name: betType
+          in: query
+          description: 'A comma separated list of bet types.'
+          required: false
+          type: array
+          items:
+            type: string
+            enum:
+                - SPREAD
+                - MONEYLINE
+                - TOTAL_POINTS
+                - TEAM_TOTAL_POINTS
+                - SPECIAL
+                - PARLAY
+                - TEASER
+                - MANUAL
       responses:
         '200':
           description: OK
