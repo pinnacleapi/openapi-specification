@@ -24,7 +24,7 @@ info:
     
     ```
     
-      POST /b2b/v1/bets/straight HTTP/1.1
+      POST /b2b/v2/bets/straight HTTP/1.1
       User-Agent: Apache-HttpClient/4.5.2
       Host: api.pinnacle.com
       Authorization: Basic am9uYXRoYW46cmljaG1hbg==
@@ -43,7 +43,7 @@ servers:
     description: Production server
 
 paths:
-  /b2b/v1/bets/straight:
+  /b2b/v2/bets/straight:
     post:
       tags:
         - Place Bets      
@@ -87,7 +87,6 @@ paths:
               $ref: '#/components/schemas/MultiBetStraightRequest'
         description: The Place Straight Bet request.
         required: true      
-
   /b2b/v1/bets/special:
     post:
       tags:
@@ -132,8 +131,7 @@ paths:
               $ref: '#/components/schemas/MultiBetSpecialBetRequest'
         description: The Place Special Bet request.
         required: true      
-        
-  /b2b/v1/bets/parlay:
+  /b2b/v2/bets/parlay:
     post:
       tags:
         - Place Bets
@@ -413,6 +411,7 @@ components:
       required:
         - betId
         - betStatus
+        - betStatus2
         - betType
         - oddsFormat
         - placedAt
@@ -457,6 +456,31 @@ components:
             - REFUNDED
             - NOT_ACCEPTED
             - WON
+        betStatus2:
+          type: string
+          example: ACCEPTED
+          description: |
+            Bet Status.  
+            
+            ACCEPTED = Bet was accepted.
+            CANCELLED = Bet is cancelled as per Pinnacle betting rules.  
+            LOST = The bet is settled as lose.  
+            PENDING_ACCEPTANCE = This status is reserved only for live bets. If a live bet is placed during danger zone or live delay is applied, it will be in PENDING_ACCEPTANCE , otherwise in ACCEPTED status. From this status bet can go to ACCEPTED or NOT_ACCEPTED status.  
+            REFUNDED = When an event is cancelled or when the bet is settled as push, the bet will have REFUNDED status.  
+            NOT_ACCEPTED = Bet was not accepted. Bet can be in this status only if it was previously in PENDING_ACCEPTANCE status.  
+            WON = The bet is settled as won.  
+            HALF_WON_HALF_PUSHED = The bet is settled as half won half pushed. Only for asian handicap bets.  
+            HALF_LOST_HALF_PUSHED =  The bet is settled as half lost half pushed. Only for asian handicap bets.
+          enum:
+            - ACCEPTED
+            - CANCELLED
+            - LOST
+            - PENDING_ACCEPTANCE
+            - REFUNDED
+            - NOT_ACCEPTED
+            - WON    
+            - HALF_WON_HALF_PUSHED 
+            - HALF_LOST_HALF_PUSHED             
         betType:
           type: string
           example: MONEYLINE
@@ -608,6 +632,11 @@ components:
           type: boolean
           example: false
           description: Whether the bet is on live event
+        eventStartTime:
+          type: string
+          format: date-time
+          example: '2017-10-05T01:32:59Z'
+          description: Date time when the event starts.            
       description: ''    
 
     # Special Bet  
@@ -801,7 +830,7 @@ components:
             - CANCELLED
             - LOSE
             - REFUNDED
-            - WON
+            - WON 
         betType:
           type: string
           default: SPECIAL
@@ -901,6 +930,11 @@ components:
           example: null
           nullable: true
           description: Populated if bet was placed on a special linked to the event.
+        eventStartTime:
+          type: string
+          format: date-time
+          example: '2017-10-07T21:00:00Z'
+          description: ''  
       description: ''      
     
     # Parlay
@@ -1158,6 +1192,7 @@ components:
       required:
         - betId
         - betStatus
+        - betStatus2
         - betType
         - legs
         - oddsFormat
@@ -1196,7 +1231,7 @@ components:
             ACCEPTED = Bet was accepted,  
             CANCELLED = Bet is cancelled as per Pinnacle betting rules,  
             LOSE = The bet is settled as lose,  
-            PENDING_ACCEPTANCE = This status is reserved only for live bets. If a live bet is placed during danger zone or live delay is applied, it will be in PENDING_ACCEPTANCE , otherwise in ACCEPTED status. From this status bet can go to ACCEPTED or REJECTED status,  
+            PENDING_ACCEPTANCE = This status is reserved only for live bets. If a live bet is placed during danger zone or live delay is applied, it will be in PENDING_ACCEPTANCE , otherwise in ACCEPTED status. From this status bet can go to ACCEPTED or NOT_ACCEPTED status,  
             REFUNDED = When an event is cancelled or when the bet is settled as push, the bet will have REFUNDED status,  
             NOT_ACCEPTED = Bet was not accepted. Bet can be in this status only if it was previously in PENDING_ACCEPTANCE status,  
             WON = The bet is settled as won
@@ -1208,6 +1243,31 @@ components:
             - REFUNDED
             - NOT_ACCEPTED
             - WON
+        betStatus2:
+          type: string
+          example: ACCEPTED
+          description: |
+            Bet Status. 
+            
+            ACCEPTED = Bet was accepted.  
+            CANCELLED = Bet is cancelled as per Pinnacle betting rules.  
+            LOST = The bet is settled as lose.  
+            PENDING_ACCEPTANCE = This status is reserved only for live bets. If a live bet is placed during danger zone or live delay is applied, it will be in PENDING_ACCEPTANCE , otherwise in ACCEPTED status. From this status bet can go to ACCEPTED or REJECTED status.  
+            REFUNDED = When an event is cancelled or when the bet is settled as push, the bet will have REFUNDED status.  
+            NOT_ACCEPTED = Bet was not accepted. Bet can be in this status only if it was previously in PENDING_ACCEPTANCE status.  
+            WON = The bet is settled as won.  
+            PARTIAL_WON  - If gross payout is greater than the  stake. Only for parlays with the asian handicap legs.  
+            PARTIAL_LOST  - If gross payout is less or equal to the stake. Only for parlays with the asian handicap legs.
+          enum:
+            - ACCEPTED
+            - CANCELLED
+            - LOST
+            - PENDING_ACCEPTANCE
+            - REFUNDED
+            - NOT_ACCEPTED
+            - WON
+            - PARTIAL_WON
+            - PARTIAL_LOST      
         betType:
           type: string
           default: PARLAY
@@ -1291,6 +1351,26 @@ components:
             - REFUNDED
             - WON
             - ACCEPTED
+        legBetStatus2:
+          type: string
+          description: | 
+            Parlay Leg status.
+            CANCELLED = The leg is canceled- the stake on this leg will be transferred to the next one. In this case the leg will be ignored when calculating the winLoss.
+            LOST = The leg is a loss or a push-lose. When Push-lose happens, the half of the stake on the leg will be pushed to the next leg, and the other half will be a lose. This can happen only when the leg is placed on a quarter points handicap.  
+            PUSHED = The leg is a push - the stake on this leg will be transferred to the next one. In this case the leg will be ignored when calculating the winLoss.  
+            REFUNDED = The leg is refunded - the stake on this leg will be transferred to the next one. In this case the leg will be ignored when calculating the winLoss.  
+            WON = The leg is a won or a push-won. When Push-won happens, the half of the stake on the leg will be pushed to the next leg, and the other half is won. This can happen only when the leg is placed on a quarter points handicap.
+            HALF_WON_HALF_PUSHED = The bet is settled as half won half pushed. Only for asian handicap legs.
+            HALF_LOST_HALF_PUSHED =  The bet is settled as half lost half pushed. Only for asian handicap legs. 
+          enum:
+            - CANCELLED
+            - LOST
+            - PUSHED
+            - REFUNDED
+            - WON
+            - ACCEPTED 
+            - HALF_WON_HALF_PUSHED
+            - HALF_LOST_HALF_PUSHED    
         leagueId:
           type: integer
           format: int32
@@ -1384,8 +1464,7 @@ components:
           description: 'End of period team 2 score. If the bet was placed on Game period (periodNumber =0) , this will be null'
         cancellationReason:
           $ref: '#/components/schemas/CancellationReason'
-      description: ''
-      
+          description: '' 
     # Teaser Bet
     MultiBetTeaserRequest:
       type: object
