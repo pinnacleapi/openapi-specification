@@ -683,113 +683,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-  /v1/odds/parlay:
-    get:
-      tags:
-        - Odds
-      summary: Get Parlay Odds - v1
-      description: >-
-        Returns parlay odds for all non-settled events. Please note that it is
-        possible that the event is in Get Fixtures response but not in Get Parlay Odds.
-        This happens when the odds are not currently available for wagering.
-      operationId: Odds_Parlays_V1_Get
-      parameters:
-        - name: sportId
-          in: query
-          description: The sportid for which to retrieve the odds.
-          required: true
-          schema:
-            type: integer
-            format: int32
-        - name: leagueIds
-          in: query
-          description: >-
-            The leagueIds array may contain a list of comma separated league
-            ids.
-          required: false
-          explode: true
-          schema:
-            type: array
-            items:
-              type: integer
-              format: int32
-        - name: oddsFormat
-          in: query
-          description: >-
-            Format in which we return the odds. Default is American. [American,
-            Decimal, HongKong, Indonesian, Malay]
-          required: false
-          schema:
-            type: string
-            enum:
-              - American
-              - Decimal
-              - HongKong
-              - Indonesian
-              - Malay
-        - name: since
-          in: query
-          description: >-
-            This is used to receive incremental updates. Use the value of last
-            from previous odds response. When since parameter is not provided,
-            the odds are delayed up to 1 min to encourage the use of the
-            parameter. Please note that when using since parameter you will get
-            in the response ONLY changed periods. If a period didn’t have any
-            changes it will not be in the response.
-          required: false
-          schema:
-            type: integer
-            format: int64
-        - name: isLive
-          in: query
-          description: >-
-            To retrieve ONLY live odds set the value to 1 (isLive=1). Otherwise
-            response will have all odds.
-          required: false
-          schema:
-            type: boolean
-        - name: eventIds
-          in: query
-          description: Filter by EventIds
-          required: false
-          explode: true
-          schema:
-            type: array
-            items:
-              type: integer
-              format: int64
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ParlayOddsResponse'
-        '400':
-          description: BadRequest
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '403':
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '500':
-          description: InternalServerError
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ExtendedErrorResponse'
-      deprecated: true  
   /v1/odds/teaser:
     get:
       tags:
@@ -1188,51 +1081,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ExtendedErrorResponse'
-  /v1/line/parlay:
-    post:
-      tags:
-        - Line
-      summary: Get Parlay Line - v1
-      description: Returns parlay lines and calculate odds.
-      operationId: Line_Parlay_V1_Post
-      deprecated: true  
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ParlayLinesResponse'
-        '400':
-          description: BadRequest
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '403':
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '500':
-          description: InternalServerError
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ExtendedErrorResponse'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ParlayLinesRequest'
-        required: true
   /v2/line/parlay:
     post:
       tags:
@@ -2798,6 +2646,22 @@ components:
           type: number
           format: double
           description: Maximum team total points bet volume. See [How to calculate max risk from the max volume](https://github.com/pinnacleapi/pinnacleapi-documentation/blob/master/FAQ.md#how-to-calculate-max-risk-from-the-max-volume-limits-in-odds)
+        moneylineUpdatedAt:
+          type: string
+          format: date-time
+          description: Date time of the last moneyline update.
+        spreadUpdatedAt:
+          type: string
+          format: date-time
+          description: Date time of the last spread update.  
+        totalUpdatedAt:
+          type: string
+          format: date-time
+          description: Date time of the last total update.
+        teamTotalUpdatedAt:
+          type: string
+          format: date-time
+          description: Date time of the last team total update.  
         spreads:
           type: array
           description: Container for spread odds.
@@ -2897,206 +2761,6 @@ components:
           type: number
           format: double
           description: Under price.
-    ParlayOddsResponse:
-      type: object
-      properties:
-        sportId:
-          type: integer
-          format: int32
-          description: Same as requested sport Id.
-        last:
-          type: integer
-          format: int64
-          description: >-
-            Use this value for the subsequent requests for since query parameter
-            to get just the changes since previous response.
-        leagues:
-          type: array
-          description: Contains a list of Leagues.
-          items:
-            $ref: '#/components/schemas/ParlayOddsLeague'
-      required:
-        - sportId
-        - last
-        - leagues
-    ParlayOddsLeague:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          description: League Id.
-        events:
-          type: array
-          description: Contains a list of events.
-          items:
-            $ref: '#/components/schemas/ParlayOddsEvent'
-      required:
-        - id
-        - events
-    ParlayOddsEvent:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Event Id.
-        awayScore:
-          type: number
-          format: double
-          description: Away team score. Only for live soccer events.
-        homeScore:
-          type: number
-          format: double
-          description: Home team score. Only for live soccer events.
-        awayRedCards:
-          type: integer
-          format: int32
-          description: Away team red cards. Only for live soccer events.
-        homeRedCards:
-          type: integer
-          format: int32
-          description: Home team red cards. Only for live soccer events.
-        periods:
-          type: array
-          description: Contains a list of periods.
-          items:
-            $ref: '#/components/schemas/ParlayOddsPeriod'
-      required:
-        - id
-        - periods
-    ParlayOddsPeriod:
-      type: object
-      properties:
-        lineId:
-          type: integer
-          format: int64
-          description: Line Id.
-        number:
-          type: integer
-          format: int32
-          description: >-
-            This represents the period of the match. 
-        cutoff:
-          type: string
-          format: date-time
-          description: Period’s wagering cut-off date in UTC.
-        status:
-          type: integer
-          format: int32
-          description: |
-            1 - online, period is open for betting 
-            2 - offline, period is not open for betting
-          example: 1
-        maxSpread:
-          type: number
-          format: double
-          description: Maximum spread bet volume. See [How to calculate max risk from the max volume](https://github.com/pinnacleapi/pinnacleapi-documentation/blob/master/FAQ.md#how-to-calculate-max-risk-from-the-max-volume-limits-in-odds)
-        maxMoneyline:
-          type: number
-          format: double
-          description: Maximum moneyline bet volume. See [How to calculate max risk from the max volume](https://github.com/pinnacleapi/pinnacleapi-documentation/blob/master/FAQ.md#how-to-calculate-max-risk-from-the-max-volume-limits-in-odds)
-        maxTotal:
-          type: number
-          format: double
-          description: Maximum total points bet volume. See [How to calculate max risk from the max volume](https://github.com/pinnacleapi/pinnacleapi-documentation/blob/master/FAQ.md#how-to-calculate-max-risk-from-the-max-volume-limits-in-odds)
-        maxTeamTotal:
-          type: number
-          format: double
-          description: Maximum team total points bet volume. See [How to calculate max risk from the max volume](https://github.com/pinnacleapi/pinnacleapi-documentation/blob/master/FAQ.md#how-to-calculate-max-risk-from-the-max-volume-limits-in-odds)
-        spreads:
-          type: array
-          description: Container for spread odds.
-          items:
-            $ref: '#/components/schemas/ParlayOddsSpread'
-        moneyline:
-          $ref: '#/components/schemas/ParlayOddsMoneyline'
-        totals:
-          type: array
-          description: Container for team total points.
-          items:
-            $ref: '#/components/schemas/ParlayOddsTotal'
-        teamTotal:
-          $ref: '#/components/schemas/ParlayOddsTeamTotals'
-      required:
-        - lineId
-        - number
-        - cutoff
-    ParlayOddsSpread:
-      type: object
-      properties:
-        altLineId:
-          type: integer
-          format: int64
-          description: This is present only if it’s alternative line.
-        hdp:
-          type: number
-          format: double
-          description: Home team handicap.
-        home:
-          type: number
-          format: double
-          description: Home team price.
-        away:
-          type: number
-          format: double
-          description: Away team price.
-      required:
-        - hdp
-        - home
-        - away
-    ParlayOddsMoneyline:
-      type: object
-      properties:
-        home:
-          type: number
-          format: double
-          description: Away team price
-        away:
-          type: number
-          format: double
-          description: Away team price.
-        draw:
-          type: number
-          format: double
-          description: Draw price. This is present only for events we offer price for draw.
-      required:
-        - home
-        - away
-    ParlayOddsTotal:
-      $ref: '#/components/schemas/ParlayOddsTotals'
-    ParlayOddsTeamTotals:
-      type: object
-      properties:
-        away:
-          $ref: '#/components/schemas/ParlayOddsTotals'
-        home:
-          $ref: '#/components/schemas/ParlayOddsTotals'
-    ParlayOddsTotals:
-      type: object
-      properties:
-        altLineId:
-          type: number
-          format: int64
-          description: >-
-            Line Id for the alternate line. This is present only if it’s
-            alternative line.
-        points:
-          type: number
-          format: double
-          description: Total points.
-        over:
-          type: number
-          format: double
-          description: Over price.
-        under:
-          type: number
-          format: double
-          description: Under price.
-      required:
-        - points
-        - over
-        - under
     TeaserOddsResponse:
       type: object
       properties:
