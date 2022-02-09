@@ -2822,6 +2822,14 @@ components:
           type: integer
           format: int64
           description: Unique identifier.
+        spreadUpdatedAt:
+          type: string
+          format: date-time
+          description: Date time of the last spread update.  
+        totalUpdatedAt:
+          type: string
+          format: date-time
+          description: Date time of the last total update.          
         spread:
           $ref: '#/components/schemas/TeaserOddsSpread'
         total:
