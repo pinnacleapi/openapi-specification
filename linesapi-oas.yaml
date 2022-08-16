@@ -2676,6 +2676,22 @@ components:
             $ref: '#/components/schemas/OddsTotal'
         teamTotal:
           $ref: '#/components/schemas/OddsTeamTotals'
+        awayScore:
+          type: number
+          format: double
+          description: Period away team score. Only for live soccer events. Supported only for Match (number=0) and Extra Time (number=3).
+        homeScore:
+          type: number
+          format: double
+          description: Period home team score. Only for live soccer events. Supported only for Match (number=0) and Extra Time (number=3).
+        awayRedCards:
+          type: integer
+          format: int32
+          description: Period away team red cards. Only for live soccer events. Supported only for  Match (number=0) and Extra Time (number=3).
+        homeRedCards:
+          type: integer
+          format: int32
+          description: Period home team red cards. Only for live soccer events. Supported only for Match (number=0) and Extra Time number=3).
     OddsSpread:
       type: object
       properties:
