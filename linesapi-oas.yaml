@@ -472,9 +472,7 @@ paths:
                                     correctTeam1TotalPoints: '0.0'
                                     correctTeam2TotalPoints: '0.0'
                                     correctTeam1Score: '0'
-                                    correctTeam2Score: '0'
-                                    correctTeam1TennisSetsScore: '0'
-                                    correctTeam2TennisSetsScore: '0'
+                                    correctTeam2Score: '0' 
         '400':
           description: BadRequest
           content:
@@ -1870,10 +1868,12 @@ components:
           type: integer
           format: int32
           description: Team1 sets score. Supported for tennis only.
+          deprecated: true
         team2ScoreSets:
           type: integer
           format: int32
           description: Team2 sets score. Supported for tennis only.  
+          deprecated: true
         cancellationReason:
           $ref: '#/components/schemas/CancellationReasonType'
     CancellationReasonType:
