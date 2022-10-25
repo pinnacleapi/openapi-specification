@@ -2073,19 +2073,19 @@ components:
         periodTeam1Score:
           type: integer
           format: int32
-          description: Team 1 score for the selected period Applicable to soccer only.
+          description: Team 1 score for the supported periods. Applicable to soccer only.
         periodTeam2Score:
           type: integer
           format: int32
-          description: Team 2 score for the selected period. Applicable to soccer only.
+          description: Team 2 score for the supported periods. Applicable to soccer only.
         periodTeam1RedCards:
           type: integer
           format: int32
-          description: Team 1 red cards for the selected period. Applicable to soccer only.
+          description: Team 1 red cards for the supported periods. Applicable to soccer only.
         periodTeam2RedCards:
           type: integer
           format: int32
-          description: Team 2 red cards for the selected period. Applicable to soccer only.  
+          description: Team 2 red cards for the supported periods. Applicable to soccer only.  
     ParlayLinesRequest:
       type: object
       properties:
