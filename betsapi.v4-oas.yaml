@@ -1302,7 +1302,8 @@ components:
             \  \nPAST_CUTOFFTIME = Bet is submitted on a game after the betting cutoff\
             \ time,   \nSYSTEM_ERROR_1 = Unexpected error,  \nSYSTEM_ERROR_2 = Unexpected\
             \ error,  \nSYSTEM_ERROR_3 = Unexpected error,  \nLINE_IS_NOT_AVAILABLE\
-            \ = Line is not available for the specified Parlay Leg.\n"
+            \ = Line is not available for the specified Parlay Leg,  \nPERIOD_IS_DISALLOWED_FOR_SAME_GAME_PARLAY\
+            \ = Period is not allowed to be parlayed on a same event.\n"
           nullable: true
           example: null
           enum:
@@ -1325,6 +1326,7 @@ components:
           - SYSTEM_ERROR_2
           - SYSTEM_ERROR_3
           - LINE_IS_NOT_AVAILABLE
+          - PERIOD_IS_DISALLOWED_FOR_SAME_GAME_PARLAY
         legId:
           type: string
           description: Echo of the legId from the request.
@@ -1771,7 +1773,11 @@ components:
             \ points were not adjusted,  \nSYSTEM_ERROR_1 = System error,  \nSYSTEM_ERROR_2\
             \ = System error,  \nWAGER_DATA_MISSING = Wager is denied due to insufficient\
             \ information available for validation,  \nLINE_IS_NOT_AVAILABLE = Line\
-            \ is not available for the specified Teaser Leg.\n"
+            \ is not available for the specified Teaser Leg, \nTEASER_IS_NOT_ENABLED = Teaser is\
+            \ not available for the specified leg.\n
+            
+            
+            "
           enum:
           - CANNOT_TEASER_LIVE_GAME
           - CHECK_TEASER_ERROR
@@ -1787,6 +1793,7 @@ components:
           - SYSTEM_ERROR_2
           - WAGER_DATA_MISSING
           - LINE_IS_NOT_AVAILABLE
+          - TEASER_IS_NOT_ENABLED
         legId:
           type: string
           description: Echo of the legId from the request.
