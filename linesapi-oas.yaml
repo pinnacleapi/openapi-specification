@@ -472,9 +472,7 @@ paths:
                                     correctTeam1TotalPoints: '0.0'
                                     correctTeam2TotalPoints: '0.0'
                                     correctTeam1Score: '0'
-                                    correctTeam2Score: '0'
-                                    correctTeam1TennisSetsScore: '0'
-                                    correctTeam2TennisSetsScore: '0'
+                                    correctTeam2Score: '0' 
         '400':
           description: BadRequest
           content:
@@ -1877,10 +1875,12 @@ components:
           type: integer
           format: int32
           description: Team1 sets score. Supported for tennis only.
+          deprecated: true
         team2ScoreSets:
           type: integer
           format: int32
           description: Team2 sets score. Supported for tennis only.  
+          deprecated: true
         cancellationReason:
           $ref: '#/components/schemas/CancellationReasonType'
     CancellationReasonType:
@@ -2045,19 +2045,19 @@ components:
         team1Score:
           type: integer
           format: int32
-          description: Away team score. Applicable to soccer only.
+          description: Team 1 score for the period 0. Applicable to soccer only.
         team2Score:
           type: integer
           format: int32
-          description: Home team score. Applicable to soccer only.
+          description: Team 2 score for the period 0. Applicable to soccer only.
         team1RedCards:
           type: integer
           format: int32
-          description: Team 1 red cards. Applicable to soccer only.
+          description: Team 1 red cards for the period 0. Applicable to soccer only.
         team2RedCards:
           type: integer
           format: int32
-          description: Team 2 red cards. Applicable to soccer only.
+          description: Team 2 red cards for the period 0. Applicable to soccer only.
         maxRiskStake:
           type: number
           format: double
@@ -2077,6 +2077,22 @@ components:
         effectiveAsOf:
           type: string
           description: Line is effective as of this date and time in UTC.
+        periodTeam1Score:
+          type: integer
+          format: int32
+          description: Team 1 score for the supported periods. Applicable to soccer only.
+        periodTeam2Score:
+          type: integer
+          format: int32
+          description: Team 2 score for the supported periods. Applicable to soccer only.
+        periodTeam1RedCards:
+          type: integer
+          format: int32
+          description: Team 1 red cards for the supported periods. Applicable to soccer only.
+        periodTeam2RedCards:
+          type: integer
+          format: int32
+          description: Team 2 red cards for the supported periods. Applicable to soccer only.  
     ParlayLinesRequest:
       type: object
       properties:
@@ -2687,6 +2703,22 @@ components:
             $ref: '#/components/schemas/OddsTotal'
         teamTotal:
           $ref: '#/components/schemas/OddsTeamTotals'
+        awayScore:
+          type: number
+          format: double
+          description: Period away team score. Only for live soccer events. Supported only for Match (number=0) and Extra Time (number=3).
+        homeScore:
+          type: number
+          format: double
+          description: Period home team score. Only for live soccer events. Supported only for Match (number=0) and Extra Time (number=3).
+        awayRedCards:
+          type: integer
+          format: int32
+          description: Period away team red cards. Only for live soccer events. Supported only for  Match (number=0) and Extra Time (number=3).
+        homeRedCards:
+          type: integer
+          format: int32
+          description: Period home team red cards. Only for live soccer events. Supported only for Match (number=0) and Extra Time number=3).
     OddsSpread:
       type: object
       properties:
