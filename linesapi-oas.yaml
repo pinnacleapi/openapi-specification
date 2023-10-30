@@ -1780,7 +1780,14 @@ components:
           type: number
           format: int64
           description: >
-            Fixture version, goes up when there is a change in the fixture.    
+            Fixture version, goes up when there is a change in the fixture. 
+        sameEventParlayPeriodsEnabled:
+          type: array
+          description: Contains a list of period numbers that are allowed to be parlayed together.
+          items:
+             type: integer
+             format: int32
+          example: [0,1]
     SettledFixturesSport:
       type: object
       properties:
@@ -2332,14 +2339,15 @@ components:
             When Status is PROCESSED_WITH_ERROR, provides a code indicating the
             specific problem. 
 
-              CORRELATED = The leg is correlated with another one,  
-              CANNOT_PARLAY_LIVE_GAME = The wager is placed on Live game,   
-              EVENT_NO_LONGER_AVAILABLE_FOR_BETTING = The event is no longer offered for Parlays,  
-              EVENT_NOT_OFFERED_FOR_PARLAY = The event is not offered for Parlays,  
-              LINE_DOES_NOT_BELONG_TO_EVENT = LineId does not match the EventId specified in the request,  
-              WAGER_TYPE_NO_LONGER_AVAILABLE_FOR_BETTING = Wager Type no longer available for betting, 
-              WAGER_TYPE_NOT_VALID_FOR_PARLAY =  Wager Type not valid for parlay,  
-              WAGER_TYPE_CONFLICTS_WITH_OTHER_LEG = Wager Type conflicts with other leg  
+              CORRELATED - The leg is correlated with another one,  
+              CANNOT_PARLAY_LIVE_GAME - The wager is placed on Live game,   
+              EVENT_NO_LONGER_AVAILABLE_FOR_BETTING - The event is no longer offered for Parlays,  
+              EVENT_NOT_OFFERED_FOR_PARLAY - The event is not offered for Parlays,  
+              LINE_DOES_NOT_BELONG_TO_EVENT - LineId does not match the EventId specified in the request,  
+              WAGER_TYPE_NO_LONGER_AVAILABLE_FOR_BETTING - Wager Type no longer available for betting, 
+              WAGER_TYPE_NOT_VALID_FOR_PARLAY -  Wager Type not valid for parlay,  
+              WAGER_TYPE_CONFLICTS_WITH_OTHER_LEG - Wager Type conflicts with other leg
+              SAME_EVENT_PERIODS_ARE_DISALLOWED - It's not allowed to parlay selected periods of the same event.
           enum:
             - CORRELATED
             - CANNOT_PARLAY_LIVE_GAME
@@ -2349,6 +2357,7 @@ components:
             - WAGER_TYPE_NO_LONGER_AVAILABLE_FOR_BETTING
             - WAGER_TYPE_NOT_VALID_FOR_PARLAY
             - WAGER_TYPE_CONFLICTS_WITH_OTHER_LEG
+            - SAME_EVENT_PERIODS_ARE_DISALLOWED
         legId:
           type: string
           description: Echo of the legId from the request.
@@ -2530,15 +2539,17 @@ components:
             When Status is PROCESSED_WITH_ERROR, provides a code indicating the
             specific problem.  
               
-              EVENT_NOT_FOUND = The event specified could not be found,  
-              POINTS_NO_LONGER_AVAILABLE = The points requested are no longer available. This means that the lines moved,   
-              UNKNOWN = An unknown error has occured,  
-              WAGER_TYPE_NOT_VALID_FOR_TEASER = The specified wager type is not valid for teasers  
+              EVENT_NOT_FOUND - The event specified could not be found,  
+              POINTS_NO_LONGER_AVAILABLE - The points requested are no longer available. This means that the lines moved,   
+              UNKNOWN - An unknown error has occured,  
+              WAGER_TYPE_NOT_VALID_FOR_TEASER - The specified wager type is not valid for teasers  
+              GAME_TEASER_DISABLED - Teasers are disabled for the event.
           enum:
             - EVENT_NOT_FOUND
             - POINTS_NO_LONGER_AVAILABLE
             - UNKNOWN
             - WAGER_TYPE_NOT_VALID_FOR_TEASER
+            - GAME_TEASER_DISABLED
         legId:
           type: string
           description: Echo of the unique id for the leg from the request.
