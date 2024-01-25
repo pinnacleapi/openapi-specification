@@ -553,9 +553,11 @@ paths:
                             status: 3
                             settledAt: '2020-11-10T06:56:28.427Z'
                             contestants:
-                              - name: Barranquilla
+                              - id: 1206517454
+                                name: Barranquilla
                                 outcome: "X"
-                              - name: Valledupar
+                              - id: 1206517455
+                                name: Valledupar
                                 outcome: "X"                                
                             cancellationReason:
                               code: FBS_CW_65 
@@ -3288,6 +3290,11 @@ components:
       description: Settled Special
       type: object
       properties:
+        id:
+          description: Contestant identifier 
+          type: integer
+          format: int64
+          example: 1206517455
         name: 
           description: Contestant name
           type: string
