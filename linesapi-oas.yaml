@@ -810,11 +810,13 @@ paths:
                             contestantLines:
                               - id: 1
                                 lineId: 1001
-                                price: -199
+                                price: 4086.0
                                 handicap: null
+                                max: 450
                               - id: 2
                                 lineId: 1002
-                                price: -198
+                                price: 2159.0
+                                max: 450
                                 handicap: null
                           - id: 2
                             maxBet: 100
@@ -3431,3 +3433,6 @@ components:
           format: double
           description: 'A number indicating the spread, over/under etc.'
           type: number
+        max:
+          format: double
+          description: Maximum bet volume amount per contestant. See [How to calculate max risk from the max volume](https://github.com/pinnacleapi/pinnacleapi-documentation/blob/master/FAQ.md#how-to-calculate-max-risk-from-the-max-volume-limits-in-odds)    
