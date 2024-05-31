@@ -1,4 +1,625 @@
-swagger: '2.0'
+Skip to content
+ 
+Search…
+All gists
+Back to GitHub
+@pinnacleapi
+pinnacleapi/B2BBetsAPI.yaml Secret
+Last active 2 years ago
+Code
+Revisions
+13
+Clone this repository at &lt;script src=&quot;https://gist.github.com/pinnacleapi/4b3344f16b5fdb9ee9b071464f4a13c0.js&quot;&gt;&lt;/script&gt;
+<script src="https://gist.github.com/pinnacleapi/4b3344f16b5fdb9ee9b071464f4a13c0.js"></script>
+B2BBetsAPI.yaml
+openapi: 3.0.0
+info:
+  version: b2b
+  title: Pinnacle - B2B Bets API Reference
+  description: >
+    B2B API to place bets.  Main difference comparing to the Public Bets API is
+    that B2B Bets API captures unique id off the actual bettor in the partner's
+    system.    
+    It should be used in the conjunction with the Public API to get the fixtures, odds and bets.
+    # Authentication 
+    Access is restricted by IP address. Partner would have to provide the list of IP addresses from where it would access the API. 
+    B2B API authentication requires both:  
+      - [HTTP Basic access authentication](https://en.wikipedia.org/wiki/Basic_access_authentication)
+      - Api key authentication
+      Partner key identifies the partner and can be used with any client credentials partner may have.  
+      Pinnacle will provide the api key (partner key) upon approval to use the B2B API. 
+    You need to send `Authorization ` and `X-PARTNER-KEY` HTTP headers, e.g.
+    ```
+      POST /b2b/v1/bets/straight HTTP/1.1
+      User-Agent: Apache-HttpClient/4.5.2
+      Host: api.pinnacle.com
+      Authorization: Basic am9uYXRoYW46cmljaG1hbg==
+      Accept-Encoding: gzip, deflate
+      X-Partner-Key: B4B480D3-EB1B-44DB-AA9C-197A229EF717
+      Connection: Keep-Alive
+    ```
+  x-logo:
+    url: https://avatars2.githubusercontent.com/u/31601407?s=400&u=f3c6e1cfc8a26665e4a4df6d8da4a7ee527aeceb&v=4
+
+security:
+  - basicAuth: []
+    partnerKey: []  
+paths:
+  /b2b/v4/bets/straight:
+    post: 
+      summary: Place multiple straight bet in the system.
+      operationId: V4B2BBets_Straight
+      parameters:
+      - name: X-Partner-Key
+        in: header
+        description: '''Partner-Key'' identifying a partner that performs current
+          request.'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MultipleStraightBetRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/MultipleStraightBetRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/MultipleStraightBetRequest'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlaceBetB2BResponseV2'
+        400:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseWithErrorId'
+        500:
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseWithErrorId'
+      x-codegen-request-body-name: request
+  /b2b/v4/bets/parlay:
+    post: 
+      summary: Place parlay bet in the system.
+      operationId: V4B2BBets_Parlay
+      parameters:
+      - name: X-Partner-Key
+        in: header
+        description: '''Partner-Key'' identifying a partner that performs current
+          request.'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/B2BParlayBet'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/B2BParlayBet'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/B2BParlayBet'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/B2BPlaceParlayBetResponse'
+        400:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        500:
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-codegen-request-body-name: request
+  /b2b/v4/bets/teaser:
+    post: 
+      operationId: V4B2BBets_Teaser
+      parameters:
+      - name: X-Partner-Key
+        in: header
+        description: '''Partner-Key'' identifying a partner that performs current
+          request.'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/B2BTeaserBetRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/B2BTeaserBetRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/B2BTeaserBetRequest'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/B2BTeaserBetResponse'
+        400:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        500:
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-codegen-request-body-name: request
+  /b2b/v4/bets/special:
+    post: 
+      summary: Place specials bet in the system.
+      operationId: V4B2BBets_Special
+      parameters:
+      - name: X-Partner-Key
+        in: header
+        description: '''Partner-Key'' identifying a partner that performs current
+          request.'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MultiBetRequestB2BSpecialBetRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/MultiBetRequestB2BSpecialBetRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/MultiBetRequestB2BSpecialBetRequest'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MultiBetResponseB2BSpecialBetResponse'
+      x-codegen-request-body-name: request
+  /b2b/v4/bets/direct:
+    post: 
+      summary: Place direct straight bet.
+      operationId: V4B2BBets_Direct
+      parameters:
+      - name: X-Partner-Key
+        in: header
+        description: '''Partner-Key'' identifying a partner that performs current
+          request.'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlaceDirectBetRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/PlaceDirectBetRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PlaceDirectBetRequest'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlaceDirectBetResponse'
+        400:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlaceDirectBetResponse400'
+      x-codegen-request-body-name: request
+  /b2b/v4/bets/direct/special:
+    post: 
+      summary: Place direct special bet.
+      operationId: V4B2BBets_DirectSpecial
+      parameters:
+      - name: X-Partner-Key
+        in: header
+        description: '''Partner-Key'' identifying a partner that performs current
+          request.'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlaceDirectSpecialBetRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/PlaceDirectSpecialBetRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PlaceDirectSpecialBetRequest'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlaceDirectSpecialBetResponse'
+        400:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlaceDirectBetResponse400'
+      x-codegen-request-body-name: request
+  /b2b/v4/bets/manual:
+    post: 
+      summary: Places a manual bet using supplied PlaceManualBetRequest structure
+        as input
+      description: Inserts new bet transaction and processes it
+      operationId: V4B2BBets_Place
+      parameters:
+      - name: X-Partner-Key
+        in: header
+        description: '''Partner-Key'' identifying a partner that performs current
+          request.'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: A request structure used to place manual bet.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlaceManualBetRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/PlaceManualBetRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PlaceManualBetRequest'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlaceManualBetResponse'
+        400:
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlaceManualBetResponse400'
+      x-codegen-request-body-name: manualBetRequest
+  /b2b/v4/bets:
+    get: 
+      summary: Returns running and settled bets. Bets are grouped by type.
+      operationId: V4B2BBets_GetBetsByType
+      parameters:
+      - name: clientId
+        in: query
+        description: The id of the player that the bet is being placed on behalf of.
+        required: true
+        schema:
+          type: string
+      - name: betlist
+        in: query
+        description: 'Type of bet list to return. Not needed when betids is submitted.
+          => [ SETTLED, RUNNING, ALL ] '
+        schema:
+          type: string
+          enum:
+          - SETTLED
+          - RUNNING
+          - ALL
+      - name: betStatuses
+        in: query
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: fromRecord
+        in: query
+        description: Defines a record to start result list from
+        schema:
+          type: string
+      - name: pageSize
+        in: query
+        description: Defines size of a requested page
+        schema:
+          type: string
+      - name: sortDir
+        in: query
+        description: Defines the sort order<br />  ASC  - ascending<br />  DESC -
+          descending
+        schema:
+          type: string
+      - name: betType
+        in: query
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: provideTotal
+        in: query
+        schema:
+          type: string
+      - name: fromDate
+        in: query
+        description: Start date of the requested period. <br />Required when betlist
+          parameter is submitted.<br />Difference between fromDate and toDdate can't
+          be more than 30 days.<br />Expected format is ISO8601 - can be set to just
+          date or date and time.
+        schema:
+          type: string
+      - name: toDate
+        in: query
+        description: End date of the requested period. <br />Required when betlist
+          parameter is submitted. <br />Expected format is ISO8601 - can be set to
+          just date or date and time. <br />toDate value is exclusive, meaning it
+          cannot be equal to fromDate.
+        schema:
+          type: string
+      - name: betids
+        in: query
+        description: A comma separated list of bet ids. <br />When betids is submitted,
+          no other parameter is necessary. <br />Maximum is 100 ids. <br />Works for
+          all non settled bets and all bets settled in the last 30 days.
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int64
+      - name: uniqueRequestIds
+        in: query
+        description: A comma separated list of Unique Ids to query eralier placed
+          bets.<br />If specified, is treated with highest priority, all other parameters
+          are ignored.<br />Maximum is 100 ids.
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: X-Partner-Key
+        in: header
+        description: '''Partner-Key'' identifying a partner that performs current
+          request.'
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetBetsByTypeResponseV2'
+  /b2b/v4/bets/stream:
+    get: 
+      summary: Retrieves Stream of bets status change.
+      operationId: V4B2BBets_GetStream
+      parameters:
+      - name: since
+        in: query
+        description: Minimum value accepted is 0.
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Maximum number of items to return. Cannot exceed 1000.
+        schema:
+          type: string
+      - name: X-Partner-Key
+        in: header
+        description: '''Partner-Key'' identifying a partner that performs current
+          request.'
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetBetsResponse'
+  /b2b/v4/bets/cancel:
+    post: 
+      operationId: V4B2BBets_CancelBet
+      parameters:
+      - name: X-Partner-Key
+        in: header
+        description: '''Partner-Key'' identifying a partner that performs current
+          request.'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CancelBetRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/CancelBetRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CancelBetRequest'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CancelBetResponse'
+      x-codegen-request-body-name: cancelBetRequest
+components:
+  schemas:
+    MultipleStraightBetRequest:
+      type: object
+      properties:
+        bets:
+          type: array
+          description: Bets to be placed in the system.
+          items:
+            $ref: '#/components/schemas/B2BStraightBet'
+      description: ""
+    B2BStraightBet:
+      type: object
+      properties:
+        externalRef:
+          type: string
+          description: Bet reference identifier.
+        sourceId:
+          type: string
+          description: Player identifier.
+        sourceIP:
+          type: string
+          description: Player's IP address
+        ext:
+          type: object
+          additionalProperties:
+            type: string
+          description: Additional information as an Array of Key-Value pairs. (Specific
+            instructions will be provided per partner)
+        oddsFormat:
+          type: string
+          description: Bet is processed with this odds format.
+        uniqueRequestId:
+          type: string
+          description: This is a Unique ID for PlaceBet requests. This is to support
+            idempotent requests.
+        acceptBetterLine:
+          type: string
+          description: Whether or not to accept a bet when there is a line change
+            in favor of the client.
+        stake:
+          type: string
+          description: Wagered amount in Client's currency.
+        winRiskStake:
+          type: string
+          description: Whether the stake amount is risk or win amount.
+        lineId:
+          type: string
+          description: Line identification.
+        altLineId:
+          type: string
+          description: Alternate line identification.
+        pitcher1MustStart:
+          type: string
+          description: Baseball only. Refers to the pitcher for Team1. This applicable
+            only for MONEYLINE bet type, for all other bet types this has to be TRUE.
+        pitcher2MustStart:
+          type: string
+          description: Baseball only. Refers to the pitcher for Team2. This applicable
+            only for MONEYLINE bet type, for all other bet types this has to be TRUE.
+        externalCustomerId:
+          type: string
+        fillType:
+          type: string
+          description: Type of the stake in regards of limit.
+        limitPrice:
+          type: string
+          description: The worst price the client is willing to accept.
+        sportId:
+          type: string
+        eventId:
+          type: string
+        periodNumber:
+          type: string
+        betType:
+          type: string
+        team:
+          type: string
+        side:
+          type: string
+      description: ""
+    StraightBetResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Status of the request.
+        errorCode:
+          type: string
+          description: 'When Status is PROCESSED_WITH_ERROR, provides a code indicating
+            the specific problem. => [ ALL_BETTING_CLOSED = Betting is not allowed
+            at this moment. This may happen during system maintenance, ALL_LIVE_BETTING_CLOSED
+            = Live betting is not allowed at this moment. This may happen during system
+            maintenance, ABOVE_EVENT_MAX = Bet cannot be placed because client exceeded
+            allowed maximum of risk on a line, ABOVE_MAX_BET_AMOUNT = Stake is above
+            allowed maximum amount, BELOW_MIN_BET_AMOUNT = Stake is below allowed
+            minimum amount, BLOCKED_BETTING = Customer is an agent, BLOCKED_CLIENT
+            = Client is no longer active, INSUFFICIENT_FUNDS = Bet is submitted by
+            a client with insufficient funds, INVALID_COUNTRY = Client country is
+            not allowed for betting, INVALID_EVENT = Invalid eventid, INVALID_ODDS_FORMAT
+            = If a bet was submitted with the odds format that is not allowed for
+            the client, LINE_CHANGED = Bet is submitted on a line that has changed,
+            LISTED_PITCHERS_SELECTION_ERROR = If bet was submitted with pitcher1MustStart
+            and/or pitcher2MustStart parameters in Place Bet request with values that
+            are not allowed., OFFLINE_EVENT = Bet is submitted on a event that is
+            offline or the submitted line is not offered at the moment due to points/handicap
+            change or the submitted bet type is just not offered at the moment., PAST_CUTOFFTIME
+            = Bet is submitted on a game after the betting cutoff time, RED_CARDS_CHANGED
+            = Bet is submitted on a live soccer event with changed red card count,
+            SCORE_CHANGED = Bet is submitted on a live soccer event with changed score,
+            TIME_RESTRICTION = Bet is submitted within too short of a period from
+            the same bet previously placed by a client, DUPLICATED_REQUEST,
+            INCOMPLETE_CUSTOMER_BETTING_PROFILE, INVALID_CUSTOMER_PROFILE, LIMITS_CONFIGURATION_ISSUE,
+            RESPONSIBLE_BETTING_LOSS_LIMIT_EXCEEDED, RESPONSIBLE_BETTING_RISK_LIMIT_EXCEEDED,
+            RESUBMIT_REQUEST, SYSTEM_ERROR_3, WAGERING_SUSPENDED, INVALID_PARTNER,
+            INVALID_SOURCEID, INVALID_SOURCEIP, PARTNER_INTEGRATION_STRATEGY_IS_INVALID,
+            PARTNER_PROFILE_IS_NOT_FOUND, PARTNER_SOURCE_IP_IS_INVALID, PLAYER_COMMISSION_AMOUNT_IS_INVALID,
+            PORTAL_COMMISSION_AMOUNT_IS_INVALID, SOURCEID_TOO_LONG, PARTNER_PERCENT_BOOK_IS_INVALID,
+            PARTNER_PERCENT_BOOK_IS_MISSING, LICENCE_RESTRICTION_LIVE_BETTING_BLOCKED,
+            LIMIT_PRICE_IS_WORST_THAN_CURRENT, BETTORID_TOO_LONG, GROUPINGA_TOO_LONG,
+            GROUPINGB_TOO_LONG, GROUPINGC_TOO_LONG, GROUPINGD_TOO_LONG ] '
+          enum:
+          - ALL_BETTING_CLOSED
+          - ALL_LIVE_BETTING_CLOSED
+          - ABOVE_EVENT_MAXswagger: '2.0'
 info:
   version: 1.0.0
   title: Pinnacle - Bets API Reference
@@ -558,7 +1179,7 @@ definitions:
           RED_CARDS_CHANGED = Bet is submitted on a live soccer event with changed red card count,  
           SCORE_CHANGED = Bet is submitted on a live soccer event with changed score,  
           TIME_RESTRICTION = Bet is submitted within too short of a period from the same bet previously placed by a client,  
-          DUPLICATE_UNIQUE_REQUEST_ID = Request with the same uniqueRequestId was already processed. Please set the new value if you still want the request to be processed,  
+          DUPLICATED_REQUEST = Request with the same uniqueRequestId was already processed. Please set the new value if you still want the request to be processed,  
           INCOMPLETE_CUSTOMER_BETTING_PROFILE = System configuration issue,  
           INVALID_CUSTOMER_PROFILE = System configuration issue,  
           LIMITS_CONFIGURATION_ISSUE = System configuration issue,  
@@ -585,7 +1206,7 @@ definitions:
           - RED_CARDS_CHANGED
           - SCORE_CHANGED
           - TIME_RESTRICTION
-          - DUPLICATE_UNIQUE_REQUEST_ID
+          - DUPLICATED_REQUEST
           - INCOMPLETE_CUSTOMER_BETTING_PROFILE
           - INVALID_CUSTOMER_PROFILE
           - LIMITS_CONFIGURATION_ISSUE
@@ -1244,7 +1865,7 @@ definitions:
           RESPONSIBLE_BETTING_LOSS_LIMIT_EXCEEDED = Client has reached his total loss limit,  
           RESPONSIBLE_BETTING_RISK_LIMIT_EXCEEDED = Client has reached his total risk limit,  
           INVALID_REQUEST = Request has invalid parameters,  
-          DUPLICATE_UNIQUE_REQUEST_ID = Request with the same uniqueRequestId was already processed. Please set the new value if you still want the request to be processed,  
+          DUPLICATED_REQUEST = Request with the same uniqueRequestId was already processed. Please set the new value if you still want the request to be processed,  
           SYSTEM_ERROR_3 = Unexpected error 
         enum:
           - ABOVE_MAX_BET_AMOUNT
@@ -1263,7 +1884,7 @@ definitions:
           - RESPONSIBLE_BETTING_RISK_LIMIT_EXCEEDED
           - RESPONSIBLE_BETTING_LOSS_LIMIT_EXCEEDED
           - INVALID_REQUEST
-          - DUPLICATE_UNIQUE_REQUEST_ID
+          - DUPLICATED_REQUEST
           - SYSTEM_ERROR_3
       betId:
         type: integer
@@ -1787,7 +2408,7 @@ definitions:
           SYSTEM_ERROR_3 = System error,  
           TOO_FEW_LEGS = Legs count is below Min Picks specified in the Teaser Specifications,  
           TOO_MANY_LEGS = Legs count is above Max Picks specified in the Teaser Specifications,
-          DUPLICATE_UNIQUE_REQUEST_ID = Request with the same uniqueRequestId was already processed. Please set the new value if you still want the request to be processed,  
+          DUPLICATED_REQUEST = Request with the same uniqueRequestId was already processed. Please set the new value if you still want the request to be processed,  
           RESPONSIBLE_BETTING_LOSS_LIMIT_EXCEEDED = Client has reached his total loss limit,  
           RESPONSIBLE_BETTING_RISK_LIMIT_EXCEEDED = Client has reached his total risk limit
 
@@ -1813,7 +2434,7 @@ definitions:
           - SYSTEM_ERROR_3
           - TOO_FEW_LEGS
           - TOO_MANY_LEGS
-          - DUPLICATE_UNIQUE_REQUEST_ID
+          - DUPLICATED_REQUEST
           - RESPONSIBLE_BETTING_LOSS_LIMIT_EXCEEDED
           - RESPONSIBLE_BETTING_RISK_LIMIT_EXCEEDED
       betId:
@@ -1989,7 +2610,7 @@ definitions:
            BLOCKED_BETTING = Betting is suspended for the client,  
            BLOCKED_CLIENT = Client is no longer active,  
            CONTEST_NOT_FOUND = Incorrect contest id provided or contest is no longer available,  
-           DUPLICATE_UNIQUE_REQUEST_ID = UniqueRequestId must be unique for each bet,  
+           DUPLICATED_REQUEST = UniqueRequestId must be unique for each bet,  
            INCOMPLETE_CUSTOMER_BETTING_PROFILE = Customer profile could not be loaded,   
            INSUFFICIENT_FUNDS = Bet is submitted by a client with insufficient funds,  
            INVALID_COUNTRY = Client country is not allowed for betting,  
@@ -2009,7 +2630,7 @@ definitions:
           - BLOCKED_BETTING
           - BLOCKED_CLIENT
           - CONTEST_NOT_FOUND
-          - DUPLICATE_UNIQUE_REQUEST_ID
+          - DUPLICATED_REQUEST
           - INCOMPLETE_CUSTOMER_BETTING_PROFILE
           - INSUFFICIENT_FUNDS
           - INVALID_COUNTRY
@@ -2537,3 +3158,2481 @@ definitions:
           - ALL_LIVE_BETTING_CLOSED
           - ALL_BETTING_CLOSED
     description: ''
+
+          - ABOVE_MAX_BET_AMOUNT
+          - BELOW_MIN_BET_AMOUNT
+          - BLOCKED_BETTING
+          - BLOCKED_CLIENT
+          - INSUFFICIENT_FUNDS
+          - INVALID_COUNTRY
+          - INVALID_EVENT
+          - INVALID_ODDS_FORMAT
+          - LINE_CHANGED
+          - LISTED_PITCHERS_SELECTION_ERROR
+          - OFFLINE_EVENT
+          - PAST_CUTOFFTIME
+          - RED_CARDS_CHANGED
+          - SCORE_CHANGED
+          - TIME_RESTRICTION
+          - DUPLICATED_REQUEST
+          - INCOMPLETE_CUSTOMER_BETTING_PROFILE
+          - INVALID_CUSTOMER_PROFILE
+          - LIMITS_CONFIGURATION_ISSUE
+          - RESPONSIBLE_BETTING_LOSS_LIMIT_EXCEEDED
+          - RESPONSIBLE_BETTING_RISK_LIMIT_EXCEEDED
+          - RESUBMIT_REQUEST
+          - SYSTEM_ERROR_3
+          - WAGERING_SUSPENDED
+          - INVALID_PARTNER
+          - INVALID_SOURCEID
+          - INVALID_SOURCEIP
+          - PARTNER_INTEGRATION_STRATEGY_IS_INVALID
+          - PARTNER_PROFILE_IS_NOT_FOUND
+          - PARTNER_SOURCE_IP_IS_INVALID
+          - PLAYER_COMMISSION_AMOUNT_IS_INVALID
+          - PORTAL_COMMISSION_AMOUNT_IS_INVALID
+          - SOURCEID_TOO_LONG
+          - PARTNER_PERCENT_BOOK_IS_INVALID
+          - PARTNER_PERCENT_BOOK_IS_MISSING
+          - LICENCE_RESTRICTION_LIVE_BETTING_BLOCKED
+          - LIMIT_PRICE_IS_WORST_THAN_CURRENT
+          - BETTORID_TOO_LONG
+          - GROUPINGA_TOO_LONG
+          - GROUPINGB_TOO_LONG
+          - GROUPINGC_TOO_LONG
+          - GROUPINGD_TOO_LONG
+        betId:
+          type: integer
+          description: Id of a newly created bet.
+          format: int64
+        uniqueRequestId:
+          type: string
+          description: Unique identifier provided in the request.
+        betterLineWasAccepted:
+          type: boolean
+          description: Whether or not to accept a bet when there is a line change
+            in favor of the client.
+        lineId:
+          type: integer
+          description: Line identification.
+          format: int64
+        altLineId:
+          type: integer
+          description: Alternate line identification.
+          format: int64
+        price:
+          type: number
+          description: Latest price.
+          format: double
+        minRiskStake:
+          type: number
+          description: Minimum bettable risk amount.
+          format: double
+        maxRiskStake:
+          type: number
+          description: Maximum bettable risk amount.
+          format: double
+        minWinStake:
+          type: number
+          description: Minimum bettable win amount.
+          format: double
+        maxWinStake:
+          type: number
+          description: Maximum bettable win amount.
+          format: double
+        straightBet:
+          $ref: '#/components/schemas/StraightBet'
+      description: ""
+    StraightBet:
+      required:
+      - betId
+      - betType
+      - cancellationReason
+      - oddsFormat
+      - placedAt
+      - risk
+      - updateSequence
+      - wagerNumber
+      - win
+      type: object
+      properties:
+        betId:
+          type: integer
+          description: Bet identification
+          format: int64
+        uniqueRequestId:
+          type: string
+          description: Unique Request Id
+        wagerNumber:
+          type: integer
+          description: Wager identification. All bets placed thru the API will have
+            value 1. Website supports multiple bets (wagers) placement in the same
+            bet slip. In that case the bet would have appropriate wager number.
+          format: int32
+        placedAt:
+          type: string
+          description: Date time when the bet was placed.
+        settledAt:
+          type: string
+          description: Date time when the bet was placed.
+        betStatus:
+          type: string
+          description: Bet Status.
+        betType:
+          type: string
+          description: 'Bet Type. => [ MONEYLINE, TEAM_TOTAL_POINTS, SPREAD, TOTAL_POINTS,
+            SPECIAL, PARLAY, TEASER, MANUAL ] '
+          enum:
+          - MONEYLINE
+          - TEAM_TOTAL_POINTS
+          - SPREAD
+          - TOTAL_POINTS
+          - SPECIAL
+          - PARLAY
+          - TEASER
+          - MANUAL
+        win:
+          type: number
+          description: Win amount.
+          format: double
+        risk:
+          type: number
+          description: Risk amount.
+          format: double
+        winLoss:
+          type: number
+          description: Win-Loss for settled bets.
+          format: double
+        oddsFormat:
+          type: string
+          description: 'Bet odds format. => [ AMERICAN = American odds format, DECIMAL
+            = Decimal (European) odds format, HONGKONG = Hong Kong odds format, INDONESIAN
+            = Indonesian odds format, MALAY = Malaysian odds format ] '
+          enum:
+          - AMERICAN
+          - DECIMAL
+          - HONGKONG
+          - INDONESIAN
+          - MALAY
+        customerCommission:
+          type: number
+          description: Client's commission on the bet.
+          format: double
+        cancellationReason:
+          $ref: '#/components/schemas/CancellationReason'
+        updateSequence:
+          type: integer
+          description: Update Sequence
+          format: int64
+        externalRef:
+          type: string
+          description: Update Sequence
+        sportId:
+          type: integer
+          description: ""
+          format: int32
+        sportName:
+          type: string
+          description: ""
+        leagueId:
+          type: integer
+          description: ""
+          format: int32
+        leagueName:
+          type: string
+          description: ""
+        eventId:
+          type: integer
+          description: ""
+          format: int32
+        handicap:
+          type: number
+          description: ""
+          format: double
+        price:
+          type: number
+          description: ""
+          format: double
+        teamName:
+          type: string
+          description: ""
+        side:
+          type: string
+          description: ' => [ OVER, UNDER ] '
+          enum:
+          - OVER
+          - UNDER
+        pitcher1:
+          type: string
+          description: ""
+        pitcher2:
+          type: string
+          description: ""
+        pitcher1MustStart:
+          type: string
+          description: ""
+        pitcher2MustStart:
+          type: string
+          description: ""
+        team1:
+          type: string
+          description: ""
+        team2:
+          type: string
+          description: ""
+        periodNumber:
+          type: integer
+          description: ""
+          format: int32
+        team1Score:
+          type: number
+          description: ""
+          format: double
+        team2Score:
+          type: number
+          description: ""
+          format: double
+        ftTeam1Score:
+          type: number
+          description: ""
+          format: double
+        ftTeam2Score:
+          type: number
+          description: ""
+          format: double
+        pTeam1Score:
+          type: number
+          description: ""
+          format: double
+        pTeam2Score:
+          type: number
+          description: ""
+          format: double
+        homeTeamType:
+          type: string
+          description: ' => [ Team1, Team2 ] '
+          enum:
+          - Team1
+          - Team2
+        isLive:
+          type: string
+          description: ""
+        eventStartTime:
+          type: string
+          description: ""
+        resultingUnit:
+          type: string
+          description: ""
+      description: ""
+    CancellationReason:
+      required:
+      - code
+      type: object
+      properties:
+        code:
+          type: string
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/KeyValuePairStringString'
+      description: ""
+    KeyValuePairStringString:
+      type: object
+      properties:
+        key:
+          type: string
+          readOnly: true
+        value:
+          type: string
+          readOnly: true
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    PlaceBetB2BResponseV2:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Status of the response.
+        errorCode:
+          type: string
+          description: 'If Status is PROCESSED_WITH_ERROR, errorCode will be in the
+            response. => [ ALL_BETTING_CLOSED = Betting is not allowed at this moment.
+            This may happen during system maintenance, ALL_LIVE_BETTING_CLOSED = Live
+            betting is not allowed at this moment. This may happen during system maintenance,
+            ABOVE_EVENT_MAX = Bet cannot be placed because client exceeded allowed
+            maximum of risk on a line, ABOVE_MAX_BET_AMOUNT = Stake is above allowed
+            maximum amount, BELOW_MIN_BET_AMOUNT = Stake is below allowed minimum
+            amount, BLOCKED_BETTING = Customer is an agent, BLOCKED_CLIENT = Client
+            is no longer active, INSUFFICIENT_FUNDS = Bet is submitted by a client
+            with insufficient funds, INVALID_COUNTRY = Client country is not allowed
+            for betting, INVALID_EVENT = Invalid eventid, INVALID_ODDS_FORMAT = If
+            a bet was submitted with the odds format that is not allowed for the client,
+            LINE_CHANGED = Bet is submitted on a line that has changed, LISTED_PITCHERS_SELECTION_ERROR
+            = If bet was submitted with pitcher1MustStart and/or pitcher2MustStart
+            parameters in Place Bet request with values that are not allowed., OFFLINE_EVENT
+            = Bet is submitted on a event that is offline or the submitted line is
+            not offered at the moment due to points/handicap change or the submitted
+            bet type is just not offered at the moment., PAST_CUTOFFTIME = Bet is
+            submitted on a game after the betting cutoff time, RED_CARDS_CHANGED =
+            Bet is submitted on a live soccer event with changed red card count, SCORE_CHANGED
+            = Bet is submitted on a live soccer event with changed score, TIME_RESTRICTION
+            = Bet is submitted within too short of a period from the same bet previously
+            placed by a client, DUPLICATED_REQUEST, INCOMPLETE_CUSTOMER_BETTING_PROFILE,
+            INVALID_CUSTOMER_PROFILE, LIMITS_CONFIGURATION_ISSUE, RESPONSIBLE_BETTING_LOSS_LIMIT_EXCEEDED,
+            RESPONSIBLE_BETTING_RISK_LIMIT_EXCEEDED, RESUBMIT_REQUEST, SYSTEM_ERROR_3,
+            WAGERING_SUSPENDED, INVALID_PARTNER, INVALID_SOURCEID, INVALID_SOURCEIP,
+            PARTNER_INTEGRATION_STRATEGY_IS_INVALID, PARTNER_PROFILE_IS_NOT_FOUND,
+            PARTNER_SOURCE_IP_IS_INVALID, PLAYER_COMMISSION_AMOUNT_IS_INVALID, PORTAL_COMMISSION_AMOUNT_IS_INVALID,
+            SOURCEID_TOO_LONG, PARTNER_PERCENT_BOOK_IS_INVALID, PARTNER_PERCENT_BOOK_IS_MISSING,
+            LICENCE_RESTRICTION_LIVE_BETTING_BLOCKED, LIMIT_PRICE_IS_WORST_THAN_CURRENT,
+            BETTORID_TOO_LONG, GROUPINGA_TOO_LONG, GROUPINGB_TOO_LONG, GROUPINGC_TOO_LONG,
+            GROUPINGD_TOO_LONG ] '
+          enum:
+          - ALL_BETTING_CLOSED
+          - ALL_LIVE_BETTING_CLOSED
+          - ABOVE_EVENT_MAX
+          - ABOVE_MAX_BET_AMOUNT
+          - BELOW_MIN_BET_AMOUNT
+          - BLOCKED_BETTING
+          - BLOCKED_CLIENT
+          - INSUFFICIENT_FUNDS
+          - INVALID_COUNTRY
+          - INVALID_EVENT
+          - INVALID_ODDS_FORMAT
+          - LINE_CHANGED
+          - LISTED_PITCHERS_SELECTION_ERROR
+          - OFFLINE_EVENT
+          - PAST_CUTOFFTIME
+          - RED_CARDS_CHANGED
+          - SCORE_CHANGED
+          - TIME_RESTRICTION
+          - DUPLICATED_REQUEST
+          - INCOMPLETE_CUSTOMER_BETTING_PROFILE
+          - INVALID_CUSTOMER_PROFILE
+          - LIMITS_CONFIGURATION_ISSUE
+          - RESPONSIBLE_BETTING_LOSS_LIMIT_EXCEEDED
+          - RESPONSIBLE_BETTING_RISK_LIMIT_EXCEEDED
+          - RESUBMIT_REQUEST
+          - SYSTEM_ERROR_3
+          - WAGERING_SUSPENDED
+          - INVALID_PARTNER
+          - INVALID_SOURCEID
+          - INVALID_SOURCEIP
+          - PARTNER_INTEGRATION_STRATEGY_IS_INVALID
+          - PARTNER_PROFILE_IS_NOT_FOUND
+          - PARTNER_SOURCE_IP_IS_INVALID
+          - PLAYER_COMMISSION_AMOUNT_IS_INVALID
+          - PORTAL_COMMISSION_AMOUNT_IS_INVALID
+          - SOURCEID_TOO_LONG
+          - PARTNER_PERCENT_BOOK_IS_INVALID
+          - PARTNER_PERCENT_BOOK_IS_MISSING
+          - LICENCE_RESTRICTION_LIVE_BETTING_BLOCKED
+          - LIMIT_PRICE_IS_WORST_THAN_CURRENT
+          - BETTORID_TOO_LONG
+          - GROUPINGA_TOO_LONG
+          - GROUPINGB_TOO_LONG
+          - GROUPINGC_TOO_LONG
+          - GROUPINGD_TOO_LONG
+        uniqueRequestId:
+          type: string
+          description: Echo of the uniqueRequestId from the request.
+        lineId:
+          type: integer
+          description: ""
+          format: int64
+        altLineId:
+          type: integer
+          description: ""
+          format: int64
+        price:
+          type: number
+          description: For accepted bets, this will have the price at which the wager
+            is accepted
+          format: double
+        minRiskStake:
+          type: number
+          description: ""
+          format: double
+        maxRiskStake:
+          type: number
+          description: ""
+          format: double
+        minWinStake:
+          type: number
+          description: ""
+          format: double
+        maxWinStake:
+          type: number
+          description: ""
+          format: double
+        straightBet:
+          $ref: '#/components/schemas/StraightBetV3'
+      description: "Note: Current type is used by Place straight bet V2 functionality\
+        \ only\r\n  if any re-use of the current type has been introduced, evaluate\
+        \ impact on StraightBet property\r\n  This property uses V3 api definition\r\
+        \n             \r\n  Read more below in StraightBet property comment"
+    StraightBetV3:
+      required:
+      - betId
+      - betType
+      - cancellationReason
+      - oddsFormat
+      - placedAt
+      - risk
+      - updateSequence
+      - wagerNumber
+      - win
+      type: object
+      properties:
+        betId:
+          type: integer
+          description: Bet identification
+          format: int64
+        uniqueRequestId:
+          type: string
+          description: Unique Request Id
+        wagerNumber:
+          type: integer
+          description: Wager identification. All bets placed thru the API will have
+            value 1. Website supports multiple bets (wagers) placement in the same
+            bet slip. In that case the bet would have appropriate wager number.
+          format: int32
+        placedAt:
+          type: string
+          description: Date time when the bet was placed.
+        settledAt:
+          type: string
+          description: Date time when the bet was placed.
+        betStatus:
+          type: string
+          description: Bet Status.
+        betStatus2:
+          type: string
+          description: ' => [ ACCEPTED = Bet was accepted, CANCELLED = Bet is cancelled
+            as per Pinnacle betting rules, LOST = The bet is settled as lose, PENDING_ACCEPTANCE
+            = This status is reserved only for live bets. If a live bet is placed
+            during danger zone or live delay is applied, it will be in PENDING_ACCEPTANCE
+            , otherwise in ACCEPTED status. From this status bet can go to ACCEPTED
+            or REJECTED status, REFUNDED = When an event is cancelled or when the
+            bet is settled as push, the bet will have REFUNDED status, NOT_ACCEPTED
+            = Bet was rejected. Bet can be rejected only if it was previously in PENDING_ACCEPTANCE
+            status, WON = The bet is settled as won, HALF_WON_HALF_PUSHED, HALF_LOST_HALF_PUSHED,
+            PUSHED ] '
+          enum:
+          - ACCEPTED
+          - CANCELLED
+          - LOST
+          - PENDING_ACCEPTANCE
+          - REFUNDED
+          - NOT_ACCEPTED
+          - WON
+          - HALF_WON_HALF_PUSHED
+          - HALF_LOST_HALF_PUSHED
+          - PUSHED
+        betType:
+          type: string
+          description: 'Bet Type. => [ MONEYLINE, TEAM_TOTAL_POINTS, SPREAD, TOTAL_POINTS,
+            SPECIAL, PARLAY, TEASER, MANUAL ] '
+          enum:
+          - MONEYLINE
+          - TEAM_TOTAL_POINTS
+          - SPREAD
+          - TOTAL_POINTS
+          - SPECIAL
+          - PARLAY
+          - TEASER
+          - MANUAL
+        win:
+          type: number
+          description: Win amount.
+          format: double
+        risk:
+          type: number
+          description: Risk amount.
+          format: double
+        winLoss:
+          type: number
+          description: Win-Loss for settled bets.
+          format: double
+        oddsFormat:
+          type: string
+          description: 'Bet odds format. => [ AMERICAN = American odds format, DECIMAL
+            = Decimal (European) odds format, HONGKONG = Hong Kong odds format, INDONESIAN
+            = Indonesian odds format, MALAY = Malaysian odds format ] '
+          enum:
+          - AMERICAN
+          - DECIMAL
+          - HONGKONG
+          - INDONESIAN
+          - MALAY
+        customerCommission:
+          type: number
+          description: Client's commission on the bet.
+          format: double
+        cancellationReason:
+          $ref: '#/components/schemas/CancellationReason'
+        updateSequence:
+          type: integer
+          description: Update Sequence
+          format: int64
+        externalRef:
+          type: string
+          description: Update Sequence
+        sportId:
+          type: integer
+          description: ""
+          format: int32
+        sportName:
+          type: string
+          description: ""
+        leagueId:
+          type: integer
+          description: ""
+          format: int32
+        leagueName:
+          type: string
+          description: ""
+        eventId:
+          type: integer
+          description: ""
+          format: int32
+        handicap:
+          type: number
+          description: ""
+          format: double
+        price:
+          type: number
+          description: ""
+          format: double
+        teamName:
+          type: string
+          description: ""
+        side:
+          type: string
+          description: ' => [ OVER, UNDER ] '
+          enum:
+          - OVER
+          - UNDER
+        pitcher1MustStart:
+          type: boolean
+          description: ""
+        pitcher1:
+          type: string
+          description: ""
+        pitcher2MustStart:
+          type: boolean
+          description: ""
+        pitcher2:
+          type: string
+          description: ""
+        team1:
+          type: string
+          description: ""
+        team2:
+          type: string
+          description: ""
+        periodNumber:
+          type: integer
+          description: ""
+          format: int32
+        team1Score:
+          type: number
+          description: ""
+          format: double
+        team2Score:
+          type: number
+          description: ""
+          format: double
+        ftTeam1Score:
+          type: number
+          description: ""
+          format: double
+        ftTeam2Score:
+          type: number
+          description: ""
+          format: double
+        isLive:
+          type: boolean
+          description: ""
+        pTeam1Score:
+          type: number
+          description: ""
+          format: double
+        pTeam2Score:
+          type: number
+          description: ""
+          format: double
+        homeTeamType:
+          type: string
+          description: ' => [ Team1, Team2 ] '
+          enum:
+          - Team1
+          - Team2
+        eventStartTime:
+          type: string
+          description: ""
+        resultingUnit:
+          type: string
+          description: ""
+    ErrorResponseWithErrorId:
+      type: object
+      properties:
+        ref:
+          type: string
+        code:
+          type: string
+        message:
+          type: string
+    B2BParlayBet:
+      type: object
+      properties:
+        externalRef:
+          type: string
+          description: Bet reference id.
+        sourceId:
+          type: string
+          description: Player id.
+        sourceIP:
+          type: string
+          description: Player's IP address.
+        ext:
+          type: object
+          additionalProperties:
+            type: string
+          description: ""
+        uniqueRequestId:
+          type: string
+          description: This unique id of the place bet requests. This is to support
+            idempotent requests.
+        acceptBetterLine:
+          type: string
+          description: Whether or not to accept a bet when there is a line change
+            in favor of the client.
+        riskAmount:
+          type: string
+          description: 'Wagered amount in Client''s currency. It is always risk amount
+            when placing Parlay bets NOTE: If round robin options is used this amount
+            will apply for all parlays so actual amount wagered will be riskAmount
+            X number of Parlays.'
+        oddsFormat:
+          type: string
+          description: Bet is processed with this odds format.
+        externalCustomerId:
+          type: string
+          description: ""
+        legs:
+          type: array
+          description: Collection of parlay legs (format described below).
+          items:
+            $ref: '#/components/schemas/ParlayLegRequest'
+        roundRobinOptions:
+          type: array
+          description: '[Parlay, TwoLegRoundRobin, ThreeLegRoundRobin, FourLegRoundRobin,
+            FiveLegRoundRobin, SixLegRoundRobin, SevenLegRoundRobin, EightLegRoundRobin]'
+          items:
+            type: string
+      description: ""
+    ParlayLegRequest:
+      type: object
+      properties:
+        uniqueLegId:
+          type: string
+          description: Unique id of the leg. It's used to identify and match legs
+            in the response.
+        lineId:
+          type: string
+          description: Line identification.
+        altLineId:
+          type: string
+          description: Alternate line identification.
+        pitcher1MustStart:
+          type: string
+          description: Baseball only. Refers to the pitcher for Team1.  This applicable
+            only for MONEYLINE bet type, for all other bet types this has to be TRUE.
+        pitcher2MustStart:
+          type: string
+          description: Baseball only. Refers to the pitcher for Team2. This applicable
+            only for MONEYLINE bet type, for all other bet types this has to be TRUE.
+        sportId:
+          type: string
+          description: Sport identification.
+        eventId:
+          type: string
+          description: Event identification.
+        periodNumber:
+          type: string
+          description: 'This represents the period of the match. For example, for
+            soccer we have: 0 -  Game, 1 - 1st Half and 2 - 2nd Half'
+        legBetType:
+          type: string
+          description: Only SPREAD, MONEYLINE and TOTAL_POINTS are supported.
+        team:
+          type: string
+          description: Chosen team type. This is needed only for SPREAD and MONEYLINE
+            bet types.
+        side:
+          type: string
+          description: Chosen side. This is needed only for TOTAL_POINTS bet type.
+      description: ""
+    B2BPlaceParlayBetResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Status of the request.
+        errorCode:
+          type: string
+          description: 'When Status is PROCESSED_WITH_ERROR, provides a code indicating
+            the specific problem. => [ ABOVE_MAX_BET_AMOUNT = Stake is above allowed
+            maximum amount, ALL_BETTING_CLOSED = Betting is not allowed at this moment,
+            BELOW_MIN_BET_AMOUNT = Stake is below allowed minimum amount, BLOCKED_BETTING
+            = Customer is an agent, BLOCKED_CLIENT = Client is no longer active, INSUFFICIENT_FUNDS
+            = Bet is submitted by a client with insufficient funds, INVALID_COUNTRY
+            = Client country is not allowed for betting, INVALID_LEGS = One or more
+            legs are invalid, INVALID_ODDS_FORMAT = If a bet was submitted with the
+            odds format that is not allowed for the client, INVALID_ROUND_ROBIN_OPTIONS
+            = Round robin options are invalid (i.e. does not match with number of
+            legs), ROUND_ROBIN_DISALLOWED = Round robin is disallowed for one of the
+            leagues, TOO_MANY_LEGS = Maximum of 10 legs can be specified., TOO_FEW_LEGS
+            = At least 2 legs are required for Parlay., RESPONSIBLE_BETTING_RISK_LIMIT_EXCEEDED,
+            RESPONSIBLE_BETTING_LOSS_LIMIT_EXCEEDED, INVALID_REQUEST, DUPLICATED_REQUEST,
+            PARTNER_PERCENT_BOOK_IS_INVALID, PARTNER_PERCENT_BOOK_IS_MISSING, PORTAL_COMMISSION_AMOUNT_IS_INVALID,
+            PLAYER_COMMISSION_AMOUNT_IS_INVALID, INCOMPLETE_CUSTOMER_BETTING_PROFILE,
+            INVALID_CUSTOMER_PROFILE, SOURCEID_TOO_LONG, BETTORID_TOO_LONG, GROUPINGA_TOO_LONG,
+            GROUPINGB_TOO_LONG, GROUPINGC_TOO_LONG, GROUPINGD_TOO_LONG ] '
+          enum:
+          - ABOVE_MAX_BET_AMOUNT
+          - ALL_BETTING_CLOSED
+          - BELOW_MIN_BET_AMOUNT
+          - BLOCKED_BETTING
+          - BLOCKED_CLIENT
+          - INSUFFICIENT_FUNDS
+          - INVALID_COUNTRY
+          - INVALID_LEGS
+          - INVALID_ODDS_FORMAT
+          - INVALID_ROUND_ROBIN_OPTIONS
+          - ROUND_ROBIN_DISALLOWED
+          - TOO_MANY_LEGS
+          - TOO_FEW_LEGS
+          - RESPONSIBLE_BETTING_RISK_LIMIT_EXCEEDED
+          - RESPONSIBLE_BETTING_LOSS_LIMIT_EXCEEDED
+          - INVALID_REQUEST
+          - DUPLICATED_REQUEST
+          - PARTNER_PERCENT_BOOK_IS_INVALID
+          - PARTNER_PERCENT_BOOK_IS_MISSING
+          - PORTAL_COMMISSION_AMOUNT_IS_INVALID
+          - PLAYER_COMMISSION_AMOUNT_IS_INVALID
+          - INCOMPLETE_CUSTOMER_BETTING_PROFILE
+          - INVALID_CUSTOMER_PROFILE
+          - SOURCEID_TOO_LONG
+          - BETTORID_TOO_LONG
+          - GROUPINGA_TOO_LONG
+          - GROUPINGB_TOO_LONG
+          - GROUPINGC_TOO_LONG
+          - GROUPINGD_TOO_LONG
+        betId:
+          type: integer
+          description: Id of a newly created bet.
+          format: int64
+        uniqueRequestId:
+          type: string
+          description: Unique identifier provided in the request.
+        roundRobinOptionWithOdds:
+          type: array
+          description: Provides array with all acceptable Round Robin options with
+            parlay odds for that option.
+          items:
+            $ref: '#/components/schemas/RoundRobinOptionWithOdds'
+        maxRiskStake:
+          type: number
+          description: Maximum stake amount
+          format: double
+        minRiskStake:
+          type: number
+          description: Minimum stake amount
+          format: double
+        validLegs:
+          type: array
+          description: Collection of valid legs (format described below). Can be empty
+            if no valid legs found.
+          items:
+            $ref: '#/components/schemas/ParlayLegResponse'
+        invalidLegs:
+          type: array
+          description: The collection of legs that resulted in error (format described
+            below). Can be empty if no invalid legs found.
+          items:
+            $ref: '#/components/schemas/ParlayLegResponse'
+        parlayBet:
+          $ref: '#/components/schemas/ParlayBetV3'
+      description: ""
+    RoundRobinOptionWithOdds:
+      type: object
+      properties:
+        roundRobinOption:
+          type: string
+          description: = [Parlay, TwoLegRoundRobin, ThreeLegRoundRobin, FourLegRoundRobin,
+            FiveLegRoundRobin, SixLegRoundRobin, SevenLegRoundRobin, EightLegRoundRobin]
+        odds:
+          type: number
+          description: Parlay odds for this option.
+          format: double
+        unroundedDecimalOdds:
+          type: number
+          description: Unrounded parlay odds in decimal format to be used for calculations
+            only
+          format: double
+      description: ""
+    ParlayLegResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Status of the request.
+        errorCode:
+          type: string
+          description: 'When Status is PROCESSED_WITH_ERROR, provides a code indicating
+            the specific problem. => [ CANNOT_PARLAY_LIVE_GAME = The wager is placed
+            on Live game, CORRELATED = The leg is correlated with another one, EVENT_NO_LONGER_AVAILABLE_FOR_BETTING
+            = The event is no longer offered for Parlays, EVENT_NOT_OFFERED_FOR_PARLAY
+            = The event is not offered for Parlays, INVALID_EVENT = Live betting is
+            not allowed at this moment, INVALID_LEG_BET_TYPE = Leg bet type is not
+            accepted for Parlays, Accepted values are: SPREAD, MONEYLINE, TOTAL_POINTS.,
+            INVALID_PARLAY_BET = The leg did not validated due to error on Parlay
+            Bet. Check the error PlaceParlayBet response for error details, LINE_CHANGED
+            = Bet is submitted on a line that has changed, LINE_DOES_NOT_BELONG_TO_EVENT
+            = LineId does not match the EventId specified in the request, LISTED_PITCHERS_SELECTION_ERROR
+            = If bet was submitted with pitcher1MustStart and/or pitcher2MustStart
+            parameters with values that are not allowed, ODDS_NO_LONGER_OFFERED_FOR_PARLAY_1
+            = Due to line change odds are not offered for Parlay anymore, ODDS_NO_LONGER_OFFERED_FOR_PARLAY_2
+            = Due to line change odds are not offered for Parlay anymore, ODDS_NO_LONGER_OFFERED_FOR_PARLAY_3
+            = Due to line change odds are not offered for Parlay anymore, OFFLINE_EVENT
+            = Bet is submitted on an event that is offline or with incorrect lineId,
+            PAST_CUTOFFTIME = Bet is submitted on a game after the betting cutoff
+            time, SYSTEM_ERROR_1 = Unexpected error or System error, SYSTEM_ERROR_2
+            = Unexpected error or System error, SYSTEM_ERROR_3 = Unexpected error
+            or System error, LINE_IS_NOT_AVAILABLE = Line is not available for the
+            specified Parlay Leg., RESUBMIT_REQUEST = Unable to process the request
+            but the request itself is valid. ] '
+          enum:
+          - CANNOT_PARLAY_LIVE_GAME
+          - CORRELATED
+          - EVENT_NO_LONGER_AVAILABLE_FOR_BETTING
+          - EVENT_NOT_OFFERED_FOR_PARLAY
+          - INVALID_EVENT
+          - INVALID_LEG_BET_TYPE
+          - INVALID_PARLAY_BET
+          - LINE_CHANGED
+          - LINE_DOES_NOT_BELONG_TO_EVENT
+          - LISTED_PITCHERS_SELECTION_ERROR
+          - ODDS_NO_LONGER_OFFERED_FOR_PARLAY_1
+          - ODDS_NO_LONGER_OFFERED_FOR_PARLAY_2
+          - ODDS_NO_LONGER_OFFERED_FOR_PARLAY_3
+          - OFFLINE_EVENT
+          - PAST_CUTOFFTIME
+          - SYSTEM_ERROR_1
+          - SYSTEM_ERROR_2
+          - SYSTEM_ERROR_3
+          - LINE_IS_NOT_AVAILABLE
+          - RESUBMIT_REQUEST
+        legId:
+          type: string
+          description: Echo of the legId from the request.
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        lineId:
+          type: integer
+          description: Line identification that bet was placed on.
+          format: int64
+        altLineId:
+          type: integer
+          description: If Bet was placed on Alternate Line the Id of that line will
+            be returned.
+          format: int64
+        price:
+          type: number
+          description: Price that the bet was placed on.
+          format: double
+        correlatedLegs:
+          type: array
+          description: If errorCode is CORRELATED will contain legIds of all correlated
+            legs.
+          items:
+            type: string
+            format: uuid
+            example: 00000000-0000-0000-0000-000000000000
+      description: ""
+    ParlayBetV3:
+      required:
+      - betId
+      - betType
+      - cancellationReason
+      - legs
+      - oddsFormat
+      - placedAt
+      - risk
+      - updateSequence
+      - wagerNumber
+      - win
+      type: object
+      properties:
+        betId:
+          type: integer
+          description: Bet identification
+          format: int64
+        uniqueRequestId:
+          type: string
+          description: Unique Request Id
+        wagerNumber:
+          type: integer
+          description: Wager identification. All bets placed thru the API will have
+            value 1. Website supports multiple bets (wagers) placement in the same
+            bet slip. In that case the bet would have appropriate wager number.
+          format: int32
+        placedAt:
+          type: string
+          description: Date time when the bet was placed.
+        settledAt:
+          type: string
+          description: Date time when the bet was placed.
+        betStatus:
+          type: string
+          description: Bet Status.
+        betStatus2:
+          type: string
+          description: ' => [ ACCEPTED = Bet was accepted, CANCELLED = Bet is cancelled
+            as per Pinnacle betting rules, LOST = The bet is settled as lose, PENDING_ACCEPTANCE
+            = This status is reserved only for live bets. If a live bet is placed
+            during danger zone or live delay is applied, it will be in PENDING_ACCEPTANCE
+            , otherwise in ACCEPTED status. From this status bet can go to ACCEPTED
+            or REJECTED status, REFUNDED = When an event is cancelled or when the
+            bet is settled as push, the bet will have REFUNDED status, NOT_ACCEPTED
+            = Bet was rejected. Bet can be rejected only if it was previously in PENDING_ACCEPTANCE
+            status, WON = The bet is settled as won, PARTIAL_WON, PARTIAL_LOST, PUSHED
+            ] '
+          enum:
+          - ACCEPTED
+          - CANCELLED
+          - LOST
+          - PENDING_ACCEPTANCE
+          - REFUNDED
+          - NOT_ACCEPTED
+          - WON
+          - PARTIAL_WON
+          - PARTIAL_LOST
+          - PUSHED
+        betType:
+          type: string
+          description: 'Bet Type. => [ MONEYLINE, TEAM_TOTAL_POINTS, SPREAD, TOTAL_POINTS,
+            SPECIAL, PARLAY, TEASER, MANUAL ] '
+          enum:
+          - MONEYLINE
+          - TEAM_TOTAL_POINTS
+          - SPREAD
+          - TOTAL_POINTS
+          - SPECIAL
+          - PARLAY
+          - TEASER
+          - MANUAL
+        win:
+          type: number
+          description: Win amount.
+          format: double
+        risk:
+          type: number
+          description: Risk amount.
+          format: double
+        winLoss:
+          type: number
+          description: Win-Loss for settled bets.
+          format: double
+        oddsFormat:
+          type: string
+          description: 'Bet odds format. => [ AMERICAN = American odds format, DECIMAL
+            = Decimal (European) odds format, HONGKONG = Hong Kong odds format, INDONESIAN
+            = Indonesian odds format, MALAY = Malaysian odds format ] '
+          enum:
+          - AMERICAN
+          - DECIMAL
+          - HONGKONG
+          - INDONESIAN
+          - MALAY
+        customerCommission:
+          type: number
+          description: Client's commission on the bet.
+          format: double
+        cancellationReason:
+          $ref: '#/components/schemas/CancellationReason'
+        updateSequence:
+          type: integer
+          description: Update Sequence
+          format: int64
+        externalRef:
+          type: string
+          description: Update Sequence
+        legs:
+          type: array
+          description: ""
+          items:
+            $ref: '#/components/schemas/IParlayLeg'
+        price:
+          type: number
+          description: ""
+          format: double
+        finalPrice:
+          type: number
+          description: ""
+          format: double
+      description: ""
+    IParlayLeg:
+      type: object
+    B2BTeaserBetRequest:
+      type: object
+      properties:
+        bets:
+          type: array
+          items:
+            $ref: '#/components/schemas/B2BTeaserBet'
+      description: ""
+    B2BTeaserBet:
+      type: object
+      properties:
+        externalRef:
+          type: string
+        sourceId:
+          type: string
+        sourceIP:
+          type: string
+        ext:
+          type: object
+          additionalProperties:
+            type: string
+        uniqueRequestId:
+          type: string
+          description: Client generated GUID for uniquely identifying the bet.
+        teaserId:
+          type: integer
+          description: "Unique identifier.\r\nTeaser details can be retrieved from\
+            \ a call to Get Teaser Groups endpoint."
+          format: int32
+        oddsFormat:
+          type: string
+          description: Format the odds are returned in.
+        winRiskStake:
+          type: string
+          description: Whether the stake amount is risk or win amount.
+        stake:
+          type: string
+          description: Amount of the wager in the client's currency.
+        legs:
+          type: array
+          description: Collection of legs.
+          items:
+            $ref: '#/components/schemas/TeaserBetLeg'
+    TeaserBetLeg:
+      type: object
+      properties:
+        legId:
+          type: string
+          description: Client generated GUID for uniquely identifying the leg.
+        betType:
+          type: string
+          description: Type of bet.
+        lineId:
+          type: string
+          description: Unique identifier.
+        altLineId:
+          type: string
+          description: '**TODO: SHOULD THIS PROPERTY BE REMOVED?**'
+        eventId:
+          type: integer
+          description: Unique identifier.
+          format: int32
+        team:
+          type: string
+          description: Team being bet on for a spread line.
+        side:
+          type: string
+          description: Side of a total line being bet on.
+      description: ""
+    B2BTeaserBetResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Status of the request.
+        betId:
+          type: integer
+          description: Id of a newly created bet.
+          format: int64
+        uniqueRequestId:
+          type: string
+          description: Unique identifier provided in the request.
+        price:
+          type: number
+          description: Price for the bet.
+          format: double
+        riskAmount:
+          type: number
+          description: Amount wagered..
+          format: double
+        winAmount:
+          type: number
+          description: Potential winnings.
+          format: double
+        winRiskStake:
+          type: string
+          description: Whether the stake amount is risk or win amount.
+        minStakeAmount:
+          type: number
+          description: '**TODO: SHOULD THIS PROPERTY BE REMOVED?**'
+          format: double
+        maxStakeAmount:
+          type: number
+          description: '**TODO: SHOULD THIS PROPERTY BE REMOVED?**'
+          format: double
+        invalidLegs:
+          type: array
+          description: A collection of invalid legs, if any.
+          items:
+            $ref: '#/components/schemas/PlaceTeaserBetLegResponse'
+        validLegs:
+          type: array
+          description: A collection of valid legs, if any.
+          items:
+            $ref: '#/components/schemas/PlaceTeaserBetLegResponse'
+        teaserBet:
+          $ref: '#/components/schemas/TeaserBet'
+      description: ""
+    PlaceTeaserBetLegResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Status of the request.
+        errorCode:
+          type: string
+          description: 'When Status is PROCESSED_WITH_ERROR, provides a code indicating
+            the specific problem. => [ CANNOT_TEASER_LIVE_GAME = Teaser is not allowed
+            on a live game, CHECK_TEASER_ERROR = The teaser is invalid, check the
+            teaser error for more details, INVALID_EVENT = The game is not found in
+            the system, INVALID_LEG_BET = The wager is not verified, INVALID_LEG_BET_TYPE
+            = Wager type is not "teasable", can be either Spread or Total, LINE_CHANGED
+            = Wager is placed on a line that has changed, LINE_DOES_NOT_BELONG_TO_EVENT
+            = There was no game found for the wager, OFFLINE_EVENT = EITHER the game
+            is offline OR there was no game found for the wager, PAST_CUTOFFTIME =
+            Wager is placed on a game after the cutoff time, POINTS_ARE_NOT_ADJUSTED
+            = The teaser points were not adjusted, SYSTEM_ERROR_1 = System error,
+            SYSTEM_ERROR_2 = System error, WAGER_DATA_MISSING = Wager is denied due
+            to insufficient information available for validation, LINE_IS_NOT_AVAILABLE
+            = Line is not available for the specified Teaser Leg., SAME_SELECTION_DISALLOWED
+            = Same leg selection is disallowed., RESUBMIT_REQUEST = Unable to process
+            the request but the request itself is valid. ] '
+          enum:
+          - CANNOT_TEASER_LIVE_GAME
+          - CHECK_TEASER_ERROR
+          - INVALID_EVENT
+          - INVALID_LEG_BET
+          - INVALID_LEG_BET_TYPE
+          - LINE_CHANGED
+          - LINE_DOES_NOT_BELONG_TO_EVENT
+          - OFFLINE_EVENT
+          - PAST_CUTOFFTIME
+          - POINTS_ARE_NOT_ADJUSTED
+          - SYSTEM_ERROR_1
+          - SYSTEM_ERROR_2
+          - WAGER_DATA_MISSING
+          - LINE_IS_NOT_AVAILABLE
+          - SAME_SELECTION_DISALLOWED
+          - RESUBMIT_REQUEST
+        legId:
+          type: string
+          description: Echo of the legId from the request.
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        lineId:
+          type: integer
+          description: Line identification that bet was placed on.
+          format: int64
+        points:
+          type: number
+          description: Number of points.
+          format: double
+      description: ""
+    TeaserBet:
+      required:
+      - betId
+      - betType
+      - cancellationReason
+      - isSameEventOnly
+      - legs
+      - maxPicks
+      - minPicks
+      - oddsFormat
+      - placedAt
+      - risk
+      - teaserId
+      - teaserName
+      - updateSequence
+      - wagerNumber
+      - win
+      type: object
+      properties:
+        betId:
+          type: integer
+          description: Bet identification
+          format: int64
+        uniqueRequestId:
+          type: string
+          description: Unique Request Id
+        wagerNumber:
+          type: integer
+          description: Wager identification. All bets placed thru the API will have
+            value 1. Website supports multiple bets (wagers) placement in the same
+            bet slip. In that case the bet would have appropriate wager number.
+          format: int32
+        placedAt:
+          type: string
+          description: Date time when the bet was placed.
+        settledAt:
+          type: string
+          description: Date time when the bet was placed.
+        betStatus:
+          type: string
+          description: Bet Status.
+        betType:
+          type: string
+          description: 'Bet Type. => [ MONEYLINE, TEAM_TOTAL_POINTS, SPREAD, TOTAL_POINTS,
+            SPECIAL, PARLAY, TEASER, MANUAL ] '
+          enum:
+          - MONEYLINE
+          - TEAM_TOTAL_POINTS
+          - SPREAD
+          - TOTAL_POINTS
+          - SPECIAL
+          - PARLAY
+          - TEASER
+          - MANUAL
+        win:
+          type: number
+          description: Win amount.
+          format: double
+        risk:
+          type: number
+          description: Risk amount.
+          format: double
+        winLoss:
+          type: number
+          description: Win-Loss for settled bets.
+          format: double
+        oddsFormat:
+          type: string
+          description: 'Bet odds format. => [ AMERICAN = American odds format, DECIMAL
+            = Decimal (European) odds format, HONGKONG = Hong Kong odds format, INDONESIAN
+            = Indonesian odds format, MALAY = Malaysian odds format ] '
+          enum:
+          - AMERICAN
+          - DECIMAL
+          - HONGKONG
+          - INDONESIAN
+          - MALAY
+        customerCommission:
+          type: number
+          description: Client's commission on the bet.
+          format: double
+        cancellationReason:
+          $ref: '#/components/schemas/CancellationReason'
+        updateSequence:
+          type: integer
+          description: Update Sequence
+          format: int64
+        externalRef:
+          type: string
+          description: Update Sequence
+        teaserName:
+          type: string
+          description: ""
+        isSameEventOnly:
+          type: boolean
+          description: ""
+        minPicks:
+          type: number
+          description: ""
+          format: double
+        maxPicks:
+          type: number
+          description: ""
+          format: double
+        legs:
+          type: array
+          description: ""
+          items:
+            $ref: '#/components/schemas/TeaserLeg'
+        price:
+          type: number
+          description: ""
+          format: double
+        finalPrice:
+          type: number
+          description: ""
+          format: double
+        teaserId:
+          type: integer
+          description: ""
+          format: int32
+        teaserGroupId:
+          type: integer
+          description: ""
+          format: int32
+      description: ""
+    TeaserLeg:
+      type: object
+      properties:
+        sportId:
+          type: integer
+          description: ""
+          format: int32
+        sportName:
+          type: string
+          description: ""
+        legBetType:
+          type: string
+          description: 'Teaser leg type. => [ SPREAD, TOTAL_POINTS ] '
+          enum:
+          - SPREAD
+          - TOTAL_POINTS
+        legBetStatus:
+          type: string
+          description: ' => [ ACCEPTED = The leg is accepted, CANCELLED = The leg
+            is canceled- the stake on this leg will be transferred to the next one.
+            In this case the leg will be ignored when calculating the winLoss, LOSE
+            = The leg is a loss or a push-lose. When Push-lose happens, the half of
+            the stake on the leg will be pushed to the next leg, and the other half
+            will be a lose. This can happen only when the leg is placed on a quarter
+            points handicap, PUSH = The leg is a push - the stake on this leg will
+            be transferred to the next one. In this case the leg will be ignored when
+            calculating the winLoss, REFUNDED = The leg is refunded - the stake on
+            this leg will be transferred to the next one. In this case the leg will
+            be ignored when calculating the winLoss, REJECTED = The leg is rejected
+            - the stake on this leg will be transferred to the next one. In this case
+            the leg will be ignored when calculating the winLoss, WON = The leg is
+            a won or a push-won. When Push-won happens, the half of the stake on the
+            leg will be pushed to the next leg, and the other half is won. This can
+            happen only when the leg is placed on a quarter points handicap ] '
+          enum:
+          - ACCEPTED
+          - CANCELLED
+          - LOSE
+          - PUSH
+          - REFUNDED
+          - REJECTED
+          - WON
+        leagueId:
+          type: integer
+          description: ""
+          format: int32
+        leagueName:
+          type: string
+          description: ""
+        eventId:
+          type: integer
+          description: ""
+          format: int32
+        eventStartTime:
+          type: string
+          description: ""
+        handicap:
+          type: number
+          description: ""
+          format: double
+        teaserGroupPoints:
+          type: number
+          description: ""
+          format: double
+        teamName:
+          type: string
+          description: ""
+        side:
+          type: string
+          description: 'Side type. => [ OVER, UNDER ] '
+          enum:
+          - OVER
+          - UNDER
+        team1:
+          type: string
+          description: ""
+        team2:
+          type: string
+          description: ""
+        homeTeamType:
+          type: string
+          description: ' => [ Team1, Team2 ] '
+          enum:
+          - Team1
+          - Team2
+        periodNumber:
+          type: integer
+          description: ""
+          format: int32
+        resultingUnit:
+          type: string
+          description: ""
+      description: ""
+    MultiBetRequestB2BSpecialBetRequest:
+      type: object
+      properties:
+        bets:
+          type: array
+          description: The individual bets.
+          items:
+            $ref: '#/components/schemas/B2BSpecialBetRequest'
+      description: ""
+    B2BSpecialBetRequest:
+      type: object
+      properties:
+        externalRef:
+          type: string
+          description: Bet reference id.
+        sourceId:
+          type: string
+          description: Player id.
+        sourceIP:
+          type: string
+          description: Player's IP address.
+        ext:
+          type: object
+          additionalProperties:
+            type: string
+          description: ""
+        uniqueRequestId:
+          type: string
+          description: This unique id of the place bet requests. This is to support
+            idempotent requests.
+        acceptBetterLine:
+          type: string
+          description: Whether or not to accept a bet when there is a line change
+            in favor of the client.
+        oddsFormat:
+          type: string
+          description: Bet is processed with this odds format..
+        stake:
+          type: string
+          description: Whether the stake amount is risk or win amount.
+        winRiskStake:
+          type: string
+          description: Wagered amount in Client's currency.
+        lineId:
+          type: string
+          description: Line identification.
+        specialId:
+          type: string
+          description: Special identification.
+        contestantId:
+          type: string
+          description: Contestant identification.
+      description: ""
+    MultiBetResponseB2BSpecialBetResponse:
+      type: object
+      properties:
+        bets:
+          type: array
+          description: The individual bets.
+          items:
+            $ref: '#/components/schemas/B2BSpecialBetResponse'
+      description: ""
+    B2BSpecialBetResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Status of the request.
+        errorCode:
+          type: string
+          description: 'When Status is PROCESSED_WITH_ERROR, provides a code indicating
+            the specific problem. => [ ALL_BETTING_CLOSED = Betting is not allowed
+            at this moment. This may happen during system maintenance., ABOVE_MAX_BET_AMOUNT
+            = Stake is above allowed maximum amount, BELOW_MIN_BET_AMOUNT = Stake
+            is below allowed minimum amount, BLOCKED_BETTING = Customer is an agent,
+            BLOCKED_CLIENT = Client is no longer active, CONTEST_FUNCTIONALITY_IS_DISABLED
+            = Contest functionality is disabled, CONTEST_NOT_FOUND = Incorrect contest
+            id provided or contest is no longer available, DUPLICATED_REQUEST
+            = UniqueRequestId must be inque for each bet, INCOMPLETE_CUSTOMER_BETTING_PROFILE
+            = Customer profile could not be loaded, please contact CSD, INSUFFICIENT_FUNDS
+            = Bet is submitted by a client with insufficient funds, INVALID_COUNTRY
+            = Client country is not allowed for betting, INVALID_REQUEST = Special
+            bet request is not valid, LINE_CHANGED = Bet is submitted on a line that
+            has changed, PAST_CUTOFFTIME = Bet is submitted on a game after the betting
+            cutoff time, RESPONSIBLE_BETTING_LOSS_LIMIT_EXCEEDED = Self-imposed loss
+            limit exceeded, RESPONSIBLE_BETTING_RISK_LIMIT_EXCEEDED = Self-imposed
+            risk limit exceeded, RESUBMIT_REQUEST = The ticket hast to be resubmitted,
+            SYSTEM_ERROR_1 = Unexpected error or System error, SYSTEM_ERROR_2 = Unexpected
+            error or System error, SYSTEM_ERROR_3 = Unexpected error or System error,
+            UNIQUE_REQUEST_ID_REQUIRED = UniqueRequestId is missing, WAGERING_SUSPENDED
+            = The customer wagering is suspended, CUSTOMER_TYPE_DOES_NOT_MATCH_PARTNER,
+            INVALID_CUSTOMER_PROFILE, INVALID_WAGER, INVALID_WAGER_TYPE, INVALID_PARTNER,
+            INVALID_SOURCEID, INVALID_SOURCEIP, PARTNER_INTEGRATION_STRATEGY_IS_INVALID,
+            PARTNER_PERCENT_BOOK_IS_INVALID, PARTNER_PERCENT_BOOK_IS_MISSING, PARTNER_PROFILE_IS_NOT_FOUND,
+            PLAYER_COMMISSION_AMOUNT_IS_INVALID, PORTAL_COMMISSION_AMOUNT_IS_INVALID,
+            SOURCEID_TOO_LONG, BETTORID_TOO_LONG, GROUPINGA_TOO_LONG, GROUPINGB_TOO_LONG,
+            GROUPINGC_TOO_LONG, GROUPINGD_TOO_LONG ] '
+          enum:
+          - ALL_BETTING_CLOSED
+          - ABOVE_MAX_BET_AMOUNT
+          - BELOW_MIN_BET_AMOUNT
+          - BLOCKED_BETTING
+          - BLOCKED_CLIENT
+          - CONTEST_FUNCTIONALITY_IS_DISABLED
+          - CONTEST_NOT_FOUND
+          - DUPLICATED_REQUEST
+          - INCOMPLETE_CUSTOMER_BETTING_PROFILE
+          - INSUFFICIENT_FUNDS
+          - INVALID_COUNTRY
+          - INVALID_REQUEST
+          - LINE_CHANGED
+          - PAST_CUTOFFTIME
+          - RESPONSIBLE_BETTING_LOSS_LIMIT_EXCEEDED
+          - RESPONSIBLE_BETTING_RISK_LIMIT_EXCEEDED
+          - RESUBMIT_REQUEST
+          - SYSTEM_ERROR_1
+          - SYSTEM_ERROR_2
+          - SYSTEM_ERROR_3
+          - UNIQUE_REQUEST_ID_REQUIRED
+          - WAGERING_SUSPENDED
+          - CUSTOMER_TYPE_DOES_NOT_MATCH_PARTNER
+          - INVALID_CUSTOMER_PROFILE
+          - INVALID_WAGER
+          - INVALID_WAGER_TYPE
+          - INVALID_PARTNER
+          - INVALID_SOURCEID
+          - INVALID_SOURCEIP
+          - PARTNER_INTEGRATION_STRATEGY_IS_INVALID
+          - PARTNER_PERCENT_BOOK_IS_INVALID
+          - PARTNER_PERCENT_BOOK_IS_MISSING
+          - PARTNER_PROFILE_IS_NOT_FOUND
+          - PLAYER_COMMISSION_AMOUNT_IS_INVALID
+          - PORTAL_COMMISSION_AMOUNT_IS_INVALID
+          - SOURCEID_TOO_LONG
+          - BETTORID_TOO_LONG
+          - GROUPINGA_TOO_LONG
+          - GROUPINGB_TOO_LONG
+          - GROUPINGC_TOO_LONG
+          - GROUPINGD_TOO_LONG
+        betId:
+          type: integer
+          description: Id of a newly created bet.
+          format: int64
+        uniqueRequestId:
+          type: string
+          description: Unique identifier provided in the request.
+        betterLineWasAccepted:
+          type: boolean
+          description: "Whether or not the bet was accepted on the line that changed\
+            \ in favor of client.\r\nThis can be true only if acceptBetterLine in\
+            \ the Place Bet request is set to TRUE."
+        maxStake:
+          type: number
+          description: Max Stake Amount
+          format: double
+        minStake:
+          type: number
+          description: Min Stake Amount
+          format: double
+        price:
+          type: number
+          description: Price
+          format: double
+        win:
+          type: number
+          description: Win Amount
+          format: double
+        risk:
+          type: number
+          description: Risk Amount
+          format: double
+        winRiskStake:
+          type: string
+          description: Win Or Risk
+        lineId:
+          type: integer
+          description: Line identification.
+          format: int64
+        gameIsLiveDelayed:
+          type: boolean
+          description: ""
+        inDangerZone:
+          type: boolean
+          description: ""
+        specialBet:
+          $ref: '#/components/schemas/SpecialBet'
+      description: ""
+    SpecialBet:
+      required:
+      - betId
+      - betType
+      - cancellationReason
+      - contestantId
+      - contestantName
+      - leagueId
+      - leagueName
+      - oddsFormat
+      - placedAt
+      - price
+      - risk
+      - specialId
+      - specialName
+      - sportId
+      - sportName
+      - updateSequence
+      - wagerNumber
+      - win
+      type: object
+      properties:
+        betId:
+          type: integer
+          description: Bet identification
+          format: int64
+        uniqueRequestId:
+          type: string
+          description: Unique Request Id
+        wagerNumber:
+          type: integer
+          description: Wager identification. All bets placed thru the API will have
+            value 1. Website supports multiple bets (wagers) placement in the same
+            bet slip. In that case the bet would have appropriate wager number.
+          format: int32
+        placedAt:
+          type: string
+          description: Date time when the bet was placed.
+        settledAt:
+          type: string
+          description: Date time when the bet was placed.
+        betStatus:
+          type: string
+          description: Bet Status.
+        betType:
+          type: string
+          description: 'Bet Type. => [ MONEYLINE, TEAM_TOTAL_POINTS, SPREAD, TOTAL_POINTS,
+            SPECIAL, PARLAY, TEASER, MANUAL ] '
+          enum:
+          - MONEYLINE
+          - TEAM_TOTAL_POINTS
+          - SPREAD
+          - TOTAL_POINTS
+          - SPECIAL
+          - PARLAY
+          - TEASER
+          - MANUAL
+        win:
+          type: number
+          description: Win amount.
+          format: double
+        risk:
+          type: number
+          description: Risk amount.
+          format: double
+        winLoss:
+          type: number
+          description: Win-Loss for settled bets.
+          format: double
+        oddsFormat:
+          type: string
+          description: 'Bet odds format. => [ AMERICAN = American odds format, DECIMAL
+            = Decimal (European) odds format, HONGKONG = Hong Kong odds format, INDONESIAN
+            = Indonesian odds format, MALAY = Malaysian odds format ] '
+          enum:
+          - AMERICAN
+          - DECIMAL
+          - HONGKONG
+          - INDONESIAN
+          - MALAY
+        customerCommission:
+          type: number
+          description: Client's commission on the bet.
+          format: double
+        cancellationReason:
+          $ref: '#/components/schemas/CancellationReason'
+        updateSequence:
+          type: integer
+          description: Update Sequence
+          format: int64
+        externalRef:
+          type: string
+          description: Update Sequence
+        specialId:
+          type: integer
+          description: ""
+          format: int32
+        specialName:
+          type: string
+          description: ""
+        contestantId:
+          type: integer
+          description: ""
+          format: int32
+        contestantName:
+          type: string
+          description: ""
+        price:
+          type: number
+          description: ""
+          format: double
+        handicap:
+          type: number
+          description: ""
+          format: double
+        units:
+          type: string
+          description: ""
+        sportId:
+          type: integer
+          description: ""
+          format: int32
+        sportName:
+          type: string
+          description: ""
+        leagueId:
+          type: integer
+          description: ""
+          format: int32
+        leagueName:
+          type: string
+          description: ""
+        eventId:
+          type: integer
+          description: ""
+          format: int32
+        periodNumber:
+          type: integer
+          description: ""
+          format: int32
+        team1:
+          type: string
+          description: ""
+        team2:
+          type: string
+          description: ""
+        homeTeamType:
+          type: string
+          description: ' => [ Team1, Team2 ] '
+          enum:
+          - Team1
+          - Team2
+        isLive:
+          type: string
+          description: ""
+        eventStartTime:
+          type: string
+        resultingUnit:
+          type: string
+          description: ""
+      description: ""
+    PlaceManualBetRequest:
+      description: ""
+      required:
+        - uniqueRequestId
+        - clientId
+        - risk
+        - win
+        - description
+        - userId
+      type: object
+      properties: 
+        uniqueRequestId:
+          format: uuid
+          description: Unique id of the requests. This is to support idempotent requests
+          type: string
+          example: e169ee0f-361b-4668-a8eb-7db2b3cafa7f
+        risk:
+          format: double
+          description: Risk amount of the bet.
+          type: number
+        win:
+          format: double
+          description: Win amount of the bet.
+          type: number
+        description:
+          description: "Free text provided by the API client to describe current
+            transaction.\r
+            Description will be extended to include provided
+            Reference information - ticketNo and WagerNo"
+          type: string
+        userId:
+          description: Employee who created a bet, for example 'John James'
+          type: string
+        betId:
+          format: int64
+          description: If provided is used to check if bet exists and belongs to the
+            current. It's stored as a reference.
+          type: number
+        wagerNumber:
+          format: int32
+          description: If betId is provided, it must be provided as well.
+          type: integer
+        externalRef:
+          description: Client reference to the manual bet.
+          type: string
+        ext:
+          $ref: "#/components/schemas/PartnerExtension"
+    PartnerExtension:
+      description: ""
+      required:
+        - sourceId
+        - sourceIP
+        - percentBook
+        - appId
+      type: object
+      properties:
+        sourceId:
+          description: Partner's customer id
+          type: string
+        sourceIP:
+          description: Partner's customer IP address
+          type: string
+        percentBook:
+          format: int32
+          description: "Values range: 1..100"
+          type: integer
+        appId:
+          description: Application  (short description)
+          type: string
+          example: packman
+        portalCommissionAmount:
+          format: double
+          description: Portal Commission (>=0)
+          type: number
+        playerCommissionAmount:
+          format: double
+          description: Player Commission (>=0)
+          type: number
+    PlaceManualBetResponse:
+      description: ""
+      required:
+        - status
+        - betId
+        - uniqueRequestId
+      type: object
+      properties:
+        status:
+          description: Defines processing result
+          type: string
+          enum:
+            - ACCEPTED
+            - PROCESSED_WITH_ERROR
+        errorCode:
+          description: If Status is PROCESSED_WITH_ERROR, errorCode will be in the response.
+          type: string
+          example: null
+        betId:
+          format: int64
+          description: The bet ID of the new bet. May be zeroed on failure.
+          type: number
+          example: 1427875877
+        uniqueRequestId:
+          format: uuid
+          description: "Echo of the uniqueRequestId from the request.\r
+            if was not provided, a new value is generated.\r
+            May be zeroed on failure."
+          type: string
+          example: 00000000-0000-0000-0000-000000000000
+    PlaceManualBetResponse400:
+      required:
+      - betId
+      - status
+      - uniqueRequestId
+      type: object
+      properties:
+        status:
+          type: string
+          description: Defines processing result - ACCEPTED or PROCESSED_WITH_ERROR
+        errorCode:
+          type: string
+          description: If Status is PROCESSED_WITH_ERROR, errorCode will be in the
+            response.
+        betId:
+          type: number
+          description: The bet ID of the new bet. May be zeroed on failure.
+          format: int64
+        uniqueRequestId:
+          type: string
+          description: "Echo of the uniqueRequestId from the request.\r\nif was not\
+            \ provided, a new value is generated.\r\nMay be zeroed on failure."
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+      description: ""
+    GetBetsByTypeResponseV2:
+      type: object
+      properties:
+        parlayBets:
+          type: array
+          description: A collection of placed parlay bets.
+          items:
+            $ref: '#/components/schemas/ParlayBetV2'
+        straightBets:
+          type: array
+          description: A collection of placed straight bets.
+          items:
+            $ref: '#/components/schemas/StraightBet'
+        teaserBets:
+          type: array
+          description: A collection of placed teaser bets.
+          items:
+            $ref: '#/components/schemas/TeaserBet'
+        specialBets:
+          type: array
+          description: A collection of placed special bets.
+          items:
+            $ref: '#/components/schemas/SpecialBet'
+        manualBets:
+          type: array
+          description: A collection of placed manual bets.
+          items:
+            $ref: '#/components/schemas/ManualBet'
+      description: ""
+    ParlayBetV2:
+      required:
+      - betId
+      - betType
+      - cancellationReason
+      - legs
+      - oddsFormat
+      - placedAt
+      - risk
+      - updateSequence
+      - wagerNumber
+      - win
+      type: object
+      properties:
+        betId:
+          type: integer
+          description: Bet identification
+          format: int64
+        uniqueRequestId:
+          type: string
+          description: Unique Request Id
+        wagerNumber:
+          type: integer
+          description: Wager identification. All bets placed thru the API will have
+            value 1. Website supports multiple bets (wagers) placement in the same
+            bet slip. In that case the bet would have appropriate wager number.
+          format: int32
+        placedAt:
+          type: string
+          description: Date time when the bet was placed.
+        settledAt:
+          type: string
+          description: Date time when the bet was placed.
+        betStatus:
+          type: string
+          description: Bet Status.
+        betType:
+          type: string
+          description: 'Bet Type. => [ MONEYLINE, TEAM_TOTAL_POINTS, SPREAD, TOTAL_POINTS,
+            SPECIAL, PARLAY, TEASER, MANUAL ] '
+          enum:
+          - MONEYLINE
+          - TEAM_TOTAL_POINTS
+          - SPREAD
+          - TOTAL_POINTS
+          - SPECIAL
+          - PARLAY
+          - TEASER
+          - MANUAL
+        win:
+          type: number
+          description: Win amount.
+          format: double
+        risk:
+          type: number
+          description: Risk amount.
+          format: double
+        winLoss:
+          type: number
+          description: Win-Loss for settled bets.
+          format: double
+        oddsFormat:
+          type: string
+          description: 'Bet odds format. => [ AMERICAN = American odds format, DECIMAL
+            = Decimal (European) odds format, HONGKONG = Hong Kong odds format, INDONESIAN
+            = Indonesian odds format, MALAY = Malaysian odds format ] '
+          enum:
+          - AMERICAN
+          - DECIMAL
+          - HONGKONG
+          - INDONESIAN
+          - MALAY
+        customerCommission:
+          type: number
+          description: Client's commission on the bet.
+          format: double
+        cancellationReason:
+          $ref: '#/components/schemas/CancellationReason'
+        updateSequence:
+          type: integer
+          description: Update Sequence
+          format: int64
+        externalRef:
+          type: string
+          description: Update Sequence
+        legs:
+          type: array
+          description: ""
+          items:
+            $ref: '#/components/schemas/IParlayLeg'
+        price:
+          type: number
+          description: ""
+          format: double
+        finalPrice:
+          type: number
+          description: ""
+          format: double
+      description: ""
+    ManualBet:
+      required:
+      - betId
+      - betType
+      - cancellationReason
+      - description
+      - oddsFormat
+      - placedAt
+      - risk
+      - updateSequence
+      - wagerNumber
+      - win
+      type: object
+      properties:
+        betId:
+          type: integer
+          description: Bet identification
+          format: int64
+        uniqueRequestId:
+          type: string
+          description: Unique Request Id
+        wagerNumber:
+          type: integer
+          description: Wager identification. All bets placed thru the API will have
+            value 1. Website supports multiple bets (wagers) placement in the same
+            bet slip. In that case the bet would have appropriate wager number.
+          format: int32
+        placedAt:
+          type: string
+          description: Date time when the bet was placed.
+        settledAt:
+          type: string
+          description: Date time when the bet was placed.
+        betStatus:
+          type: string
+          description: Bet Status.
+        betType:
+          type: string
+          description: 'Bet Type. => [ MONEYLINE, TEAM_TOTAL_POINTS, SPREAD, TOTAL_POINTS,
+            SPECIAL, PARLAY, TEASER, MANUAL ] '
+          enum:
+          - MONEYLINE
+          - TEAM_TOTAL_POINTS
+          - SPREAD
+          - TOTAL_POINTS
+          - SPECIAL
+          - PARLAY
+          - TEASER
+          - MANUAL
+        win:
+          type: number
+          description: Win amount.
+          format: double
+        risk:
+          type: number
+          description: Risk amount.
+          format: double
+        winLoss:
+          type: number
+          description: Win-Loss for settled bets.
+          format: double
+        oddsFormat:
+          type: string
+          description: 'Bet odds format. => [ AMERICAN = American odds format, DECIMAL
+            = Decimal (European) odds format, HONGKONG = Hong Kong odds format, INDONESIAN
+            = Indonesian odds format, MALAY = Malaysian odds format ] '
+          enum:
+          - AMERICAN
+          - DECIMAL
+          - HONGKONG
+          - INDONESIAN
+          - MALAY
+        customerCommission:
+          type: number
+          description: Client's commission on the bet.
+          format: double
+        cancellationReason:
+          $ref: '#/components/schemas/CancellationReason'
+        updateSequence:
+          type: integer
+          description: Update Sequence
+          format: int64
+        externalRef:
+          type: string
+          description: Update Sequence
+        description:
+          type: string
+          description: Manual Bet Description.
+        referenceBetId:
+          type: object
+          description: ReferenceTicketNumber provided by Query service.
+          format: int64
+      description: ""
+    BaseBet:
+      required:
+      - betId
+      - betType
+      - cancellationReason
+      - oddsFormat
+      - placedAt
+      - risk
+      - updateSequence
+      - wagerNumber
+      - win
+      type: object
+      properties:
+        betId:
+          type: integer
+          description: Bet identification
+          format: int64
+        uniqueRequestId:
+          type: string
+          description: Unique Request Id
+        wagerNumber:
+          type: integer
+          description: Wager identification. All bets placed thru the API will have
+            value 1. Website supports multiple bets (wagers) placement in the same
+            bet slip. In that case the bet would have appropriate wager number.
+          format: int32
+        placedAt:
+          type: string
+          description: Date time when the bet was placed.
+        settledAt:
+          type: string
+          description: Date time when the bet was placed.
+        betStatus:
+          type: string
+          description: Bet Status.
+        betType:
+          type: string
+          description: 'Bet Type. => [ MONEYLINE, TEAM_TOTAL_POINTS, SPREAD, TOTAL_POINTS,
+            SPECIAL, PARLAY, TEASER, MANUAL ] '
+          enum:
+          - MONEYLINE
+          - TEAM_TOTAL_POINTS
+          - SPREAD
+          - TOTAL_POINTS
+          - SPECIAL
+          - PARLAY
+          - TEASER
+          - MANUAL
+        win:
+          type: number
+          description: Win amount.
+          format: double
+        risk:
+          type: number
+          description: Risk amount.
+          format: double
+        winLoss:
+          type: number
+          description: Win-Loss for settled bets.
+          format: double
+        oddsFormat:
+          type: string
+          description: 'Bet odds format. => [ AMERICAN = American odds format, DECIMAL
+            = Decimal (European) odds format, HONGKONG = Hong Kong odds format, INDONESIAN
+            = Indonesian odds format, MALAY = Malaysian odds format ] '
+          enum:
+          - AMERICAN
+          - DECIMAL
+          - HONGKONG
+          - INDONESIAN
+          - MALAY
+        customerCommission:
+          type: number
+          description: Client's commission on the bet.
+          format: double
+        cancellationReason:
+          $ref: '#/components/schemas/CancellationReason'
+        updateSequence:
+          type: integer
+          description: Update Sequence
+          format: int64
+        externalRef:
+          type: string
+          description: Update Sequence
+      description: ""
+    GetBetsResponse:
+      type: object
+      properties:
+        bets:
+          type: array
+          description: A collection of placed bets.
+          items:
+            $ref: '#/components/schemas/BaseBet'
+      description: ""
+    CancelBetRequest:
+      required:
+      - betId
+      - cancellationCode
+      - wagerNumber
+      type: object
+      properties:
+        betId:
+          type: integer
+          description: ""
+          format: int32
+        wagerNumber:
+          type: integer
+          description: ""
+          format: int32
+        itemNumber:
+          type: integer
+          description: ""
+          format: int32
+        cancellationCode:
+          type: string
+          description: ""
+        username:
+          type: string
+          description: ""
+      description: ""
+    CancelBetResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        errorCode:
+          type: string
+          description: If Status is PROCESSED_WITH_ERROR, errorCode will be in the
+            response.
+    PlaceDirectBetRequest:
+      required:
+      - betType
+      - bettorsOddsFormat
+      - eventId
+      - ext
+      - externalRef
+      - periodNumber
+      - priceAmerican
+      - risk
+      - sportId
+      - win
+      type: object
+      properties:
+        externalRef:
+          type: string
+          description: Bet reference identifier.
+        uniqueRequestId:
+          type: string
+          description: This is a Unique ID (GUID) of the request
+        risk:
+          type: number
+          description: Risk amount of the bet
+          format: double
+        win:
+          type: number
+          description: Win amount of the bet
+          format: double
+        priceAmerican:
+          type: integer
+          description: Win amount of the bet
+          format: int32
+        bettorsOddsFormat:
+          type: string
+          description: Bettor's Odds Format
+        sportId:
+          type: integer
+          description: Sport identification.
+          format: int32
+        eventId:
+          type: integer
+          description: Event identification.
+          format: int32
+        periodNumber:
+          type: integer
+          description: 'This represents the period of the match. For example, for
+            soccer we have: 0 - Game,  1 - 1st &amp; Half 2 - 2nd Half'
+          format: int32
+        betType:
+          type: string
+          description: Bet Type. = [SPREAD,MONEYLINE,TOTAL_POINTS,TEAM_TOTAL_POINTS]
+        team:
+          type: string
+          description: Chosen team type. This is needed only for SPREAD, MONEYLINE
+            and TEAM_TOTAL_POINTS bet types. = [TEAM1,TEAM2,DRAW]
+        side:
+          type: string
+          description: Chosen side. This is needed only for TOTAL_POINTS and TEAM_TOTAL_POINTS
+            bet type. = [OVER,UNDER]
+        points:
+          type: number
+          description: Points for TOTAL_POINTS and TEAM_TOTAL_POINTS and Handicap
+            for SPREAD
+          format: double
+        team1Score:
+          type: number
+          description: "Team 1 score, for live bets only."
+          format: double
+        team2Score:
+          type: number
+          description: "Team 2 score, for live bets only."
+          format: double
+        ext:
+          type: object
+          additionalProperties:
+            type: string
+          description: Additional information as an Array of Key-Value pairs. (Specific
+            instructions will be provided per partner)
+      description: ""
+    PlaceDirectBetResponse:
+      required:
+      - betId
+      - status
+      - uniqueRequestId
+      type: object
+      properties:
+        status:
+          type: string
+          description: Defines processing result - ACCEPTED or PROCESSED_WITH_ERROR
+        errorCode:
+          type: string
+          description: If Status is PROCESSED_WITH_ERROR, errorCode will be in the
+            response.
+        betId:
+          type: integer
+          description: The bet ID of the new bet. May be zeroed on failure.
+          format: int64
+        externalRef:
+          type: string
+          description: Echo of the ExternalRef from the request.
+        uniqueRequestId:
+          type: string
+          description: "Echo of the uniqueRequestId from the request.\r\nif was not\
+            \ provided, a new value is generated.\r\nMay be zeroed on failure."
+      description: ""
+    PlaceDirectBetResponse400:
+      required:
+      - betId
+      - status
+      - uniqueRequestId
+      type: object
+      properties:
+        status:
+          type: string
+          description: Defines processing result - ACCEPTED or PROCESSED_WITH_ERROR
+        errorCode:
+          type: string
+          description: If Status is PROCESSED_WITH_ERROR, errorCode will be in the
+            response.
+        betId:
+          type: integer
+          description: The bet ID of the new bet. May be zeroed on failure.
+          format: int64
+        externalRef:
+          type: string
+          description: Echo of the ExternalRef from the request.
+        uniqueRequestId:
+          type: string
+          description: "Echo of the uniqueRequestId from the request.\r\nif was not\
+            \ provided, a new value is generated.\r\nMay be zeroed on failure."
+      description: ""
+    PlaceDirectSpecialBetRequest:
+      required:
+      - bettorsOddsFormat
+      - contestantId
+      - ext
+      - externalRef
+      - priceAmerican
+      - risk
+      - specialId
+      - win
+      type: object
+      properties:
+        externalRef:
+          type: string
+          description: Bet reference identifier.
+        uniqueRequestId:
+          type: string
+          description: This is a Unique ID (GUID) of the request
+        risk:
+          type: number
+          description: Risk amount of the bet
+          format: double
+        win:
+          type: number
+          description: Win amount of the bet
+          format: double
+        priceAmerican:
+          type: integer
+          description: Win amount of the bet
+          format: int32
+        bettorsOddsFormat:
+          type: string
+          description: Bettor's Odds Format
+        specialId:
+          type: integer
+          description: Special identification.
+          format: int32
+        contestantId:
+          type: integer
+          description: Contestant identification.
+          format: int32
+        ext:
+          type: object
+          additionalProperties:
+            type: string
+          description: Additional information as an Array of Key-Value pairs. (Specific
+            instructions will be provided per partner)
+      description: ""
+    PlaceDirectSpecialBetResponse:
+      required:
+      - betId
+      - status
+      - uniqueRequestId
+      type: object
+      properties:
+        status:
+          type: string
+          description: Defines processing result - ACCEPTED or PROCESSED_WITH_ERROR
+        errorCode:
+          type: string
+          description: If Status is PROCESSED_WITH_ERROR, errorCode will be in the
+            response.
+        betId:
+          type: integer
+          description: The bet ID of the new bet. May be zeroed on failure.
+          format: int64
+        externalRef:
+          type: string
+          description: Echo of the ExternalRef from the request.
+        uniqueRequestId:
+          type: string
+          description: "Echo of the uniqueRequestId from the request.\r\nif was not\
+            \ provided, a new value is generated.\r\nMay be zeroed on failure."
+      description: ""
+@pinnacleapi
+Comment
+ 
+Leave a comment
+ 
+Footer
+© 2024 GitHub, Inc.
+Footer navigation
+Terms
+Privacy
+Security
+Status
+Docs
+Contact
+Manage cookies
+Do not share my personal information
+B2BBetsAPI.yaml
