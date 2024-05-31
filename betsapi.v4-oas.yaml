@@ -714,7 +714,7 @@ components:
             \ = Bet is submitted on a live soccer event with changed red card count,\
             \  \nSCORE_CHANGED = Bet is submitted on a live soccer event with changed\
             \ score,  \nTIME_RESTRICTION = Bet is submitted within too short of a\
-            \ period from the same bet previously placed by a client,  \nDUPLICATE_UNIQUE_REQUEST_ID\
+            \ period from the same bet previously placed by a client,  \nDUPLICATED_REQUEST\
             \ = Request with the same uniqueRequestId was already processed. Please\
             \ set the new value if you still want the request to be processed,  \n\
             INCOMPLETE_CUSTOMER_BETTING_PROFILE = System configuration issue,  \n\
@@ -745,7 +745,7 @@ components:
           - RED_CARDS_CHANGED
           - SCORE_CHANGED
           - TIME_RESTRICTION
-          - DUPLICATE_UNIQUE_REQUEST_ID
+          - DUPLICATED_REQUEST
           - INCOMPLETE_CUSTOMER_BETTING_PROFILE
           - INVALID_CUSTOMER_PROFILE
           - LIMITS_CONFIGURATION_ISSUE
@@ -1180,7 +1180,7 @@ components:
             \  \nTOO_FEW_LEGS = At least 2 legs are required for Parlay,  \nRESPONSIBLE_BETTING_LOSS_LIMIT_EXCEEDED\
             \ = Client has reached his total loss limit,  \nRESPONSIBLE_BETTING_RISK_LIMIT_EXCEEDED\
             \ = Client has reached his total risk limit,  \nINVALID_REQUEST = Request\
-            \ has invalid parameters,  \nDUPLICATE_UNIQUE_REQUEST_ID = Request with\
+            \ has invalid parameters,  \nDUPLICATED_REQUEST = Request with\
             \ the same uniqueRequestId was already processed. Please set the new value\
             \ if you still want the request to be processed,  \nSYSTEM_ERROR_3 = Unexpected\
             \ error \n"
@@ -1203,7 +1203,7 @@ components:
           - RESPONSIBLE_BETTING_RISK_LIMIT_EXCEEDED
           - RESPONSIBLE_BETTING_LOSS_LIMIT_EXCEEDED
           - INVALID_REQUEST
-          - DUPLICATE_UNIQUE_REQUEST_ID
+          - DUPLICATED_REQUEST
           - SYSTEM_ERROR_3
         betId:
           type: integer
@@ -1690,7 +1690,7 @@ components:
             \ = System error,  \nSYSTEM_ERROR_3 = System error,  \nTOO_FEW_LEGS =\
             \ Legs count is below Min Picks specified in the Teaser Specifications,\
             \  \nTOO_MANY_LEGS = Legs count is above Max Picks specified in the Teaser\
-            \ Specifications,\nDUPLICATE_UNIQUE_REQUEST_ID = Request with the same\
+            \ Specifications,\nDUPLICATED_REQUEST = Request with the same\
             \ uniqueRequestId was already processed. Please set the new value if you\
             \ still want the request to be processed,  \nRESPONSIBLE_BETTING_LOSS_LIMIT_EXCEEDED\
             \ = Client has reached his total loss limit,  \nRESPONSIBLE_BETTING_RISK_LIMIT_EXCEEDED\
@@ -1717,7 +1717,7 @@ components:
           - SYSTEM_ERROR_3
           - TOO_FEW_LEGS
           - TOO_MANY_LEGS
-          - DUPLICATE_UNIQUE_REQUEST_ID
+          - DUPLICATED_REQUEST
           - RESPONSIBLE_BETTING_LOSS_LIMIT_EXCEEDED
           - RESPONSIBLE_BETTING_RISK_LIMIT_EXCEEDED
         betId:
@@ -1889,7 +1889,7 @@ components:
             \ Stake is below allowed minimum amount,  \n BLOCKED_BETTING = Betting\
             \ is suspended for the client,  \n BLOCKED_CLIENT = Client is no longer\
             \ active,  \n CONTEST_NOT_FOUND = Incorrect contest id provided or contest\
-            \ is no longer available,  \n DUPLICATE_UNIQUE_REQUEST_ID = UniqueRequestId\
+            \ is no longer available,  \n DUPLICATED_REQUEST = UniqueRequestId\
             \ must be unique for each bet,  \n INCOMPLETE_CUSTOMER_BETTING_PROFILE\
             \ = Customer profile could not be loaded,   \n INSUFFICIENT_FUNDS = Bet\
             \ is submitted by a client with insufficient funds,  \n INVALID_COUNTRY\
@@ -1910,7 +1910,7 @@ components:
           - BLOCKED_BETTING
           - BLOCKED_CLIENT
           - CONTEST_NOT_FOUND
-          - DUPLICATE_UNIQUE_REQUEST_ID
+          - DUPLICATED_REQUEST
           - INCOMPLETE_CUSTOMER_BETTING_PROFILE
           - INSUFFICIENT_FUNDS
           - INVALID_COUNTRY
