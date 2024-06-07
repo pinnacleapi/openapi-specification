@@ -1989,7 +1989,7 @@ definitions:
            BLOCKED_BETTING = Betting is suspended for the client,  
            BLOCKED_CLIENT = Client is no longer active,  
            CONTEST_NOT_FOUND = Incorrect contest id provided or contest is no longer available,  
-           DUPLICATED_REQUEST = UniqueRequestId must be unique for each bet,  
+           DUPLICATE_UNIQUE_REQUEST_ID = UniqueRequestId must be unique for each bet,  
            INCOMPLETE_CUSTOMER_BETTING_PROFILE = Customer profile could not be loaded,   
            INSUFFICIENT_FUNDS = Bet is submitted by a client with insufficient funds,  
            INVALID_COUNTRY = Client country is not allowed for betting,  
@@ -2009,7 +2009,7 @@ definitions:
           - BLOCKED_BETTING
           - BLOCKED_CLIENT
           - CONTEST_NOT_FOUND
-          - DUPLICATED_REQUEST
+          - DUPLICATE_UNIQUE_REQUEST_ID
           - INCOMPLETE_CUSTOMER_BETTING_PROFILE
           - INSUFFICIENT_FUNDS
           - INVALID_COUNTRY
