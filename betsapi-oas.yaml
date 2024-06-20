@@ -565,7 +565,8 @@ definitions:
           RESPONSIBLE_BETTING_LOSS_LIMIT_EXCEEDED = Client has reached his total loss limit,  
           RESPONSIBLE_BETTING_RISK_LIMIT_EXCEEDED = Client has reached his total risk limit,  
           SYSTEM_ERROR_3 = Unexpected error,  
-          LICENCE_RESTRICTION_LIVE_BETTING_BLOCKED - Live betting blocked due to licence restrictions
+          LICENCE_RESTRICTION_LIVE_BETTING_BLOCKED - Live betting blocked due to licence restrictions,
+          BETTING_SUSPENDED - Due to anomalous market circumstances bets are not currently being accepted on this line. Try again with next LineId.
         enum:
           - ALL_BETTING_CLOSED
           - ALL_LIVE_BETTING_CLOSED
@@ -593,6 +594,7 @@ definitions:
           - RESPONSIBLE_BETTING_RISK_LIMIT_EXCEEDED
           - SYSTEM_ERROR_3
           - LICENCE_RESTRICTION_LIVE_BETTING_BLOCKED
+          - BETTING_SUSPENDED
       uniqueRequestId:
         type: string
         example: D5CC50E4-284D-4D50-8D49-429BDC4F2A4
@@ -1362,7 +1364,8 @@ definitions:
             SYSTEM_ERROR_1 = Unexpected error,  
             SYSTEM_ERROR_2 = Unexpected error,  
             SYSTEM_ERROR_3 = Unexpected error,  
-            LINE_IS_NOT_AVAILABLE = Line is not available for the specified Parlay Leg.
+            LINE_IS_NOT_AVAILABLE = Line is not available for the specified Parlay Leg,
+            BETTING_SUSPENDED - Due to anomalous market circumstances bets are not currently being accepted on this line. Try again with next LineId.
             
         enum:
           - CANNOT_PARLAY_LIVE_GAME
@@ -1384,6 +1387,7 @@ definitions:
           - SYSTEM_ERROR_2
           - SYSTEM_ERROR_3
           - LINE_IS_NOT_AVAILABLE
+          - BETTING_SUSPENDED
       legId:
         type: string
         format: uuid
@@ -1876,7 +1880,8 @@ definitions:
           SYSTEM_ERROR_1 = System error,  
           SYSTEM_ERROR_2 = System error,  
           WAGER_DATA_MISSING = Wager is denied due to insufficient information available for validation,  
-          LINE_IS_NOT_AVAILABLE = Line is not available for the specified Teaser Leg.
+          LINE_IS_NOT_AVAILABLE = Line is not available for the specified Teaser Leg,
+          BETTING_SUSPENDED - Due to anomalous market circumstances bets are not currently being accepted on this line. Try again with next LineId.
         enum:
           - CANNOT_TEASER_LIVE_GAME
           - CHECK_TEASER_ERROR
@@ -1892,6 +1897,7 @@ definitions:
           - SYSTEM_ERROR_2
           - WAGER_DATA_MISSING
           - LINE_IS_NOT_AVAILABLE
+          - BETTING_SUSPENDED
       legId:
         type: string
         format: uuid
@@ -2001,7 +2007,8 @@ definitions:
            SYSTEM_ERROR_1 = Unexpected error,  
            SYSTEM_ERROR_2 = Unexpected error,  
            UNIQUE_REQUEST_ID_REQUIRED = UniqueRequestId is missing,  
-           INVALID_CUSTOMER_PROFILE
+           INVALID_CUSTOMER_PROFILE,
+           BETTING_SUSPENDED - Due to anomalous market circumstances bets are not currently being accepted on this line. Try again with next LineId.
         enum:
           - ALL_BETTING_CLOSED
           - ABOVE_MAX_BET_AMOUNT
@@ -2022,6 +2029,7 @@ definitions:
           - SYSTEM_ERROR_2
           - UNIQUE_REQUEST_ID_REQUIRED
           - INVALID_CUSTOMER_PROFILE
+          - BETTING_SUSPENDED
       betId:
         type: integer
         format: int64
