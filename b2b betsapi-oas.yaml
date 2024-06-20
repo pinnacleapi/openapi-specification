@@ -301,12 +301,6 @@ components:
           format: int64
           description: Alternate line identification that bet was placed on.          
           example: 87456166512
-        pitcher1MustStart:
-          type: boolean  
-          description: Baseball only. Refers to the pitcher for Team1. This applicable only for MONEYLINE bet type, for all other bet types this has to be TRUE.
-        pitcher2MustStart:
-          type: boolean  
-          description: Baseball only. Refers to the pitcher for Team2. This applicable only for MONEYLINE bet type, for all other bet types this has to be TRUE.   
         fillType:
           type: string
           enum: 
@@ -386,7 +380,6 @@ components:
             - LIMITS_CONFIGURATION_ISSUE
             - LIMIT_PRICE_IS_WORST_THAN_CURRENT
             - LINE_CHANGED
-            - LISTED_PITCHERS_SELECTION_ERROR
             - OFFLINE_EVENT
             - PARTNER_PROFILE_IS_NOT_FOUND
             - PARTNER_SOURCE_IP_IS_INVALID
@@ -560,26 +553,6 @@ components:
           enum:
             - OVER
             - UNDER
-        pitcher1:
-          type: string
-          example: null
-          nullable: true
-          description: 'Pitcher name of team1. Only for bets on baseball.'
-        pitcher2:
-          type: string
-          example: null
-          nullable: true
-          description: 'Pitcher name of team2. Only for bets on baseball.'
-        pitcher1MustStart:
-          type: boolean
-          example: false
-          description: 'Baseball only. Refers to the pitcher for Team1.  This applicable only for MONEYLINE bet type, for all other bet types this has to be TRUE.'  
-          nullable: true
-        pitcher2MustStart:
-          type: boolean
-          example: false
-          description: 'Baseball only. Refers to the pitcher for Team2.  This applicable only for MONEYLINE bet type, for all other bet types this has to be TRUE.'  
-          nullable: true  
         team1:
           type: string
           example: Crvena Zvezda
@@ -998,14 +971,6 @@ components:
           example: null
           nullable: true
           description: Alternate line identification.
-        pitcher1MustStart:
-          type: boolean
-          example: false
-          description: 'Baseball only. Refers to the pitcher for Team1.  This applicable only for MONEYLINE bet type, for all other bet types this has to be TRUE.'
-        pitcher2MustStart:
-          type: boolean
-          example: false
-          description: 'Baseball only. Refers to the pitcher for Team2. This applicable only for MONEYLINE bet type, for all other bet types this has to be TRUE.'
         sportId:
           type: integer
           format: int32
@@ -1137,7 +1102,6 @@ components:
             - LINE_CHANGED
             - LINE_DOES_NOT_BELONG_TO_EVENT
             - LINE_IS_NOT_AVAILABLE
-            - LISTED_PITCHERS_SELECTION_ERROR
             - ODDS_NO_LONGER_OFFERED_FOR_PARLAY_1
             - ODDS_NO_LONGER_OFFERED_FOR_PARLAY_2
             - ODDS_NO_LONGER_OFFERED_FOR_PARLAY_3
@@ -1412,24 +1376,6 @@ components:
           enum:
             - OVER
             - UNDER
-        pitcher1:
-          type: string
-          example: null
-          nullable: true
-          description: ''
-        pitcher2:
-          type: string
-          example: null
-          nullable: true
-          description: ''
-        pitcher1MustStart:
-          type: boolean
-          example: false
-          description: ''
-        pitcher2MustStart:
-          type: boolean
-          example: false
-          description: ''
         team1:
           type: string
           description: Wellington Phoenix

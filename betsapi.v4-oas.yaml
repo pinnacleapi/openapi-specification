@@ -589,14 +589,6 @@ components:
           description: Alternate line identification.
           format: int64
           nullable: true
-        pitcher1MustStart:
-          type: boolean
-          description: Baseball only. Refers to the pitcher for Team1. This applicable
-            only for MONEYLINE bet type, for all other bet types this has to be TRUE.
-        pitcher2MustStart:
-          type: boolean
-          description: Baseball only. Refers to the pitcher for Team2. This applicable
-            only for MONEYLINE bet type, for all other bet types this has to be TRUE.
         fillType:
           type: string
           description: "NORMAL - bet will be placed on specified stake.  \nFILLANDKILL\
@@ -704,9 +696,7 @@ components:
             \ funds,  \nINVALID_COUNTRY = Client country is not allowed for betting,\
             \  \nINVALID_EVENT = Invalid eventid,  \nINVALID_ODDS_FORMAT = If a bet\
             \ was submitted with the odds format that is not allowed for the client,\
-            \  \nLINE_CHANGED = Bet is submitted on a line that has changed,  \nLISTED_PITCHERS_SELECTION_ERROR\
-            \ = If bet was submitted with pitcher1MustStart and/or pitcher2MustStart\
-            \ parameters in Place Bet request with values that are not allowed,  \n\
+            \  \nLINE_CHANGED = Bet is submitted on a line that has changed,  \n\
             OFFLINE_EVENT = Bet is submitted on an event that is offline or the submitted\
             \ line is not offered at the moment due to points/handicap change or the\
             \ submitted bet type is just not offered at the moment,  \nPAST_CUTOFFTIME\
@@ -922,28 +912,6 @@ components:
           enum:
           - OVER
           - UNDER
-        pitcher1:
-          type: string
-          description: Pitcher name of team1. Only for bets on baseball.
-          nullable: true
-          example: null
-        pitcher2:
-          type: string
-          description: Pitcher name of team2. Only for bets on baseball.
-          nullable: true
-          example: null
-        pitcher1MustStart:
-          type: boolean
-          description: Baseball only. Refers to the pitcher for Team1.  This applicable
-            only for MONEYLINE bet type, for all other bet types this has to be TRUE.
-          nullable: true
-          example: false
-        pitcher2MustStart:
-          type: boolean
-          description: Baseball only. Refers to the pitcher for Team2.  This applicable
-            only for MONEYLINE bet type, for all other bet types this has to be TRUE.
-          nullable: true
-          example: false
         team1:
           type: string
           description: ""
@@ -1105,16 +1073,6 @@ components:
           description: Alternate line identification.
           format: int64
           nullable: true
-        pitcher1MustStart:
-          type: boolean
-          description: Baseball only. Refers to the pitcher for Team1.  This applicable
-            only for MONEYLINE bet type, for all other bet types this has to be TRUE.
-          example: false
-        pitcher2MustStart:
-          type: boolean
-          description: Baseball only. Refers to the pitcher for Team2. This applicable
-            only for MONEYLINE bet type, for all other bet types this has to be TRUE.
-          example: false
         sportId:
           type: integer
           description: Sport identification.
@@ -1319,7 +1277,6 @@ components:
           - INVALID_PARLAY_BET
           - LINE_CHANGED
           - LINE_DOES_NOT_BELONG_TO_EVENT
-          - LISTED_PITCHERS_SELECTION_ERROR
           - ODDS_NO_LONGER_OFFERED_FOR_PARLAY_1
           - ODDS_NO_LONGER_OFFERED_FOR_PARLAY_2
           - ODDS_NO_LONGER_OFFERED_FOR_PARLAY_3
@@ -1549,24 +1506,6 @@ components:
           enum:
           - OVER
           - UNDER
-        pitcher1:
-          type: string
-          description: ""
-          nullable: true
-          example: null
-        pitcher2:
-          type: string
-          description: ""
-          nullable: true
-          example: null
-        pitcher1MustStart:
-          type: boolean
-          description: ""
-          example: false
-        pitcher2MustStart:
-          type: boolean
-          description: ""
-          example: false
         team1:
           type: string
           description: Wellington Phoenix
