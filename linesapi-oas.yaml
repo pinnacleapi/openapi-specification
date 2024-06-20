@@ -1725,12 +1725,6 @@ components:
             - 0
             - 1
             - 2
-        homePitcher:
-          type: string
-          description: Home team pitcher. Only for Baseball.
-        awayPitcher:
-          type: string
-          description: Away team pitcher. Only for Baseball.
         status:
           type: string
           description:  |
