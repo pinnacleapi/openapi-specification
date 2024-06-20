@@ -723,7 +723,8 @@ components:
             \ = Client has reached his total loss limit,  \nRESPONSIBLE_BETTING_RISK_LIMIT_EXCEEDED\
             \ = Client has reached his total risk limit,  \nSYSTEM_ERROR_3 = Unexpected\
             \ error,  \nLICENCE_RESTRICTION_LIVE_BETTING_BLOCKED - Live betting blocked\
-            \ due to licence restrictions\n"
+            \ due to licence restrictions, \nBETTING_SUSPENDED - Due to anomalous market circumstances bets\
+            \ are not currently being accepted on this line. Try again with next LineId.\n"
           nullable: true
           example: null
           enum:
@@ -753,6 +754,7 @@ components:
           - RESPONSIBLE_BETTING_RISK_LIMIT_EXCEEDED
           - SYSTEM_ERROR_3
           - LICENCE_RESTRICTION_LIVE_BETTING_BLOCKED
+          - BETTING_SUSPENDED
         uniqueRequestId:
           type: string
           description: Echo of the uniqueRequestId from the request.
@@ -1303,7 +1305,8 @@ components:
             \ time,   \nSYSTEM_ERROR_1 = Unexpected error,  \nSYSTEM_ERROR_2 = Unexpected\
             \ error,  \nSYSTEM_ERROR_3 = Unexpected error,  \nLINE_IS_NOT_AVAILABLE\
             \ = Line is not available for the specified Parlay Leg,  \nPERIOD_IS_DISALLOWED_FOR_SAME_GAME_PARLAY\
-            \ = Period is not allowed to be parlayed on a same event.\n"
+            \ = Period is not allowed to be parlayed on a same event, \nBETTING_SUSPENDED - Due to anomalous market circumstances bets\
+            \ are not currently being accepted on this line. Try again with next LineId.\n"
           nullable: true
           example: null
           enum:
@@ -1327,6 +1330,7 @@ components:
           - SYSTEM_ERROR_3
           - LINE_IS_NOT_AVAILABLE
           - PERIOD_IS_DISALLOWED_FOR_SAME_GAME_PARLAY
+          - BETTING_SUSPENDED
         legId:
           type: string
           description: Echo of the legId from the request.
@@ -1774,10 +1778,8 @@ components:
             \ = System error,  \nWAGER_DATA_MISSING = Wager is denied due to insufficient\
             \ information available for validation,  \nLINE_IS_NOT_AVAILABLE = Line\
             \ is not available for the specified Teaser Leg, \nTEASER_IS_NOT_ENABLED = Teaser is\
-            \ not available for the specified leg.\n
-            
-            
-            "
+            \ not available for the specified leg, \nBETTING_SUSPENDED - Due to anomalous market circumstances bets\
+            \ are not currently being accepted on this line. Try again with next LineId.\n"
           enum:
           - CANNOT_TEASER_LIVE_GAME
           - CHECK_TEASER_ERROR
@@ -1794,6 +1796,7 @@ components:
           - WAGER_DATA_MISSING
           - LINE_IS_NOT_AVAILABLE
           - TEASER_IS_NOT_ENABLED
+          - BETTING_SUSPENDED
         legId:
           type: string
           description: Echo of the legId from the request.
@@ -1900,7 +1903,9 @@ components:
             \ = Self-imposed loss limit exceeded,  \n RESPONSIBLE_BETTING_RISK_LIMIT_EXCEEDED\
             \ = Self-imposed risk limit exceeded, \n SYSTEM_ERROR_1 = Unexpected error,\
             \  \n SYSTEM_ERROR_2 = Unexpected error,  \n UNIQUE_REQUEST_ID_REQUIRED\
-            \ = UniqueRequestId is missing,  \n INVALID_CUSTOMER_PROFILE\n"
+            \ = UniqueRequestId is missing,  \n INVALID_CUSTOMER_PROFILE = System configuration\
+            \ issue, \nBETTING_SUSPENDED - Due to anomalous market circumstances bets\
+            \ are not currently being accepted on this line. Try again with next LineId.\n"
           nullable: true
           example: null
           enum:
@@ -1923,6 +1928,7 @@ components:
           - SYSTEM_ERROR_2
           - UNIQUE_REQUEST_ID_REQUIRED
           - INVALID_CUSTOMER_PROFILE
+          - BETTING_SUSPENDED
         betId:
           type: integer
           description: Bet identifier. Populated in case of accepted bet.
