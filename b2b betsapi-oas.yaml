@@ -397,7 +397,8 @@ components:
             - RESUBMIT_REQUEST
             - SCORE_CHANGED
             - SOURCEID_TOO_LONG
-            - TIME_RESTRICTION            
+            - TIME_RESTRICTION     
+            - BETTING_SUSPENDED    
         betId:
           type: integer
           format: int64
@@ -756,6 +757,7 @@ components:
             - SYSTEM_ERROR_1
             - SYSTEM_ERROR_2
             - UNIQUE_REQUEST_ID_REQUIRED
+            - BETTING_SUSPENDED
         betId:
           type: integer
           format: int64
@@ -1144,6 +1146,7 @@ components:
             - SYSTEM_ERROR_1
             - SYSTEM_ERROR_2
             - SYSTEM_ERROR_3
+            - BETTING_SUSPENDED
         legId:
           type: string
           format: uuid
@@ -1652,6 +1655,7 @@ components:
             - SYSTEM_ERROR_1
             - SYSTEM_ERROR_2
             - WAGER_DATA_MISSING
+            - BETTING_SUSPENDED
         legId:
           type: string
           format: uuid
