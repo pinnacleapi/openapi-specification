@@ -1399,6 +1399,7 @@ paths:
                 $ref: '#/components/schemas/ExtendedErrorResponse'
   /v1/inrunning:
     get:
+      deprecated: true
       tags:
         - Others
       summary: Get In-Running - v1
