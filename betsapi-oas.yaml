@@ -1132,11 +1132,12 @@ definitions:
       legBetType:
         type: string
         example: MONELYLINE
-        description: 'Only SPREAD, MONEYLINE and TOTAL_POINTS are supported.'
+        description: 'Only SPREAD, MONEYLINE, TOTAL_POINTS and TEAM_TOTAL_POINTS are supported.'
         enum:
           - MONEYLINE
           - SPREAD
           - TOTAL_POINTS
+          - TEAM_TOTAL_POINTS
       team:
         type: string
         example: TEAM1
@@ -1501,6 +1502,7 @@ definitions:
           - MONEYLINE
           - SPREAD
           - TOTAL_POINTS
+          - TEAM_TOTAL_POINTS
       legBetStatus:
         type: string
         description: | 
