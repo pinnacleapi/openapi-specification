@@ -2712,9 +2712,8 @@ components:
               type: array
               description: Container for Away team's total points.
               items:
-                $ref: '#/components/schemas/OddsTeamTotal
+                $ref: '#/components/schemas/OddsTeamTotal'
         
-          $ref: '#/components/schemas/OddsTeamTotals'
         awayScore:
           type: number
           format: double
