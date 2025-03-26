@@ -586,15 +586,15 @@ paths:
               schema:
                 $ref: '#/components/schemas/ExtendedErrorResponse'
       deprecated: false
-  /v1/odds:
+  /v2/odds:
     get:
       tags:
         - Odds
-      summary: Get Straight Odds - v1
+      summary: Get Straight Odds - v2
       description: >-
         Returns straight odds for all non-settled events. Please note that it is  possible that the event is in Get Fixtures response but not in Get Odds.
         This happens when the odds are not currently available for wagering.
-      operationId: Odds_Straight_V1_Get
+      operationId: Odds_Straight_V2_Get
       parameters:
         - name: sportId
           in: query
@@ -2697,10 +2697,23 @@ components:
           $ref: '#/components/schemas/OddsMoneyline'
         totals:
           type: array
-          description: Container for team total points.
+          description: Container for total points.
           items:
             $ref: '#/components/schemas/OddsTotal'
         teamTotal:
+          type: object
+          properties:
+            home:
+              type: array
+              description: Container for Home team's total points.
+              items:
+                $ref: '#/components/schemas/OddsTeamTotal'
+            away:
+              type: array
+              description: Container for Away team's total points.
+              items:
+                $ref: '#/components/schemas/OddsTeamTotal
+        
           $ref: '#/components/schemas/OddsTeamTotals'
         awayScore:
           type: number
@@ -2781,16 +2794,13 @@ components:
           format: double
           nullable: true
           description: Maximum bet volume. Present only on alternative lines, if set it overides `maxTotal` market limit.  
-    OddsTeamTotals:
-      type: object
-      properties:
-        home:
-          $ref: '#/components/schemas/OddsTeamTotal'
-        away:
-          $ref: '#/components/schemas/OddsTeamTotal'
     OddsTeamTotal:
       type: object
       properties:
+        altLineId:
+          type: integer
+          format: int64
+          description: This is present only if it’s alternative line.
         points:
           type: number
           format: double
