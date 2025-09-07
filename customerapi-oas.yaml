@@ -56,7 +56,7 @@ paths:
           description: InternalServerError
           schema:
             $ref: '#/definitions/ExtendedErrorResponse'
-      deprecated: false
+      deprecated: true
 securityDefinitions:
   basicAuth:
     type: basic
